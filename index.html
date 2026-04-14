@@ -1658,10 +1658,16 @@
     API_KEY: 'GS@2026',
 
 
-    // ── API via Netlify Function proxy (resolve CORS) ──
+    // ── API via Cloudflare Worker (resolve CORS definitivamente) ──
     _api(url) {
+      // Substitua WORKER_URL pela URL do seu Cloudflare Worker
+      // Ex: https://gs-app-proxy.SEU-USUARIO.workers.dev
+      const WORKER_URL = 'https://shiny-feather-8fbd.juridico-d48.workers.dev';
+      
+      // Extrair só os parâmetros da URL original
       const params = url.includes('?') ? url.split('?')[1] : '';
-      const finalUrl = '/api/proxy' + (params ? '?' + params : '');
+      const finalUrl = WORKER_URL + (params ? '?' + params : '');
+      
       return fetch(finalUrl)
         .then(r => r.json())
         .catch(e => { throw new Error('Erro ao conectar: ' + e.message); });
