@@ -311,6 +311,9 @@
     .brief-status-badge.roteiro   { background: rgba(196,169,107,0.15); color: var(--dourado-dk); }
     .brief-status-badge.gravar    { background: rgba(58,112,64,0.12); color: var(--verde); }
     .brief-status-badge.publicado { background: rgba(58,112,64,0.2); color: var(--verde); }
+    .sm-status-board { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; }
+    .sm-status-col { min-width:220px; flex:1; background:var(--off-white); border-radius:10px; padding:10px; border:1px solid var(--cinza-suave); }
+    .sm-status-col-header { font-size:.72rem; font-weight:700; font-family:sans-serif; color:var(--grafite-dk); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px solid var(--cinza-suave); }
 
     .brief-card-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
     .brief-arte-badge { background: rgba(139,94,60,0.1); color: var(--escrit-cor); border-radius: 8px; padding: 2px 8px; font-size: 0.68rem; font-family: sans-serif; font-weight: 700; }
@@ -1109,6 +1112,14 @@
             <div class="column-header">🎥 Para Gravar <span class="column-count" id="count-gravar">0</span></div>
             <div class="column-cards" id="col-gravar"></div>
           </div>
+          <div class="kanban-column" data-status="gravado">
+            <div class="column-header">📹 Gravado <span class="column-count" id="count-gravado">0</span></div>
+            <div class="column-cards" id="col-gravado"></div>
+          </div>
+          <div class="kanban-column" data-status="edicao">
+            <div class="column-header">✂️ Em Edição <span class="column-count" id="count-edicao">0</span></div>
+            <div class="column-cards" id="col-edicao"></div>
+          </div>
           <div class="kanban-column" data-status="publicado">
             <div class="column-header">✅ Publicado <span class="column-count" id="count-publicado">0</span></div>
             <div class="column-cards" id="col-publicado"></div>
@@ -1867,7 +1878,7 @@
     },
 
     renderKanban() {
-      const statuses = ['bruto','roteiro','gravar','publicado'];
+      const statuses = ['bruto','roteiro','gravar','gravado','edicao','publicado'];
       const filtered = this.currentFilter === 'all'
         ? this.data.ideas.filter(i => i.frente !== 'socias-gs')
         : this.currentFilter === 'socias-gs' ? []
@@ -1947,7 +1958,7 @@
       if (!idea) return;
       const statuses = [
         {key:'bruto',label:'📝 Ideia Bruta'},{key:'roteiro',label:'✍️ Em Roteiro'},
-        {key:'gravar',label:'🎥 Para Gravar'},{key:'publicado',label:'✅ Publicado'}
+        {key:'gravar',label:'🎥 Para Gravar'},{key:'gravado',label:'📹 Gravado'},{key:'edicao',label:'✂️ Em Edição'},{key:'publicado',label:'✅ Publicado'}
       ];
       const imgSection = idea.image ? `<img src="${idea.image}" style="max-width:100%;border-radius:8px;margin-bottom:12px;">` : '';
       const html = `
@@ -2139,7 +2150,7 @@
       this.currentIdeaId = id;
       const perfilLabels = {'escritorio-geral':'🏛️ Escritório Geral','socia-jenifer':'👤 Sócia Jenifer','socia-elizangela':'👤 Sócia Elizângela',''  :'—'};
       const tipoArteLabels = {'carrossel':'🖼️ Carrossel','reels':'🎬 Reels','story':'📱 Story','feed':'🖼️ Post Feed','video':'🎥 Vídeo','lives':'📡 Lives','destaques':'⭐ Destaques',''  :'-'};
-      const statusLabels = {bruto:'📝 Em Criação',roteiro:'✍️ Em Roteiro',gravar:'🎥 Para Produzir',publicado:'✅ Publicado'};
+      const statusLabels = {bruto:'📝 Em Criação',roteiro:'✍️ Em Roteiro',gravar:'🎥 Para Gravar',gravado:'📹 Gravado',edicao:'✂️ Em Edição',publicado:'✅ Publicado'};
       const field = (label, val) => val ? `<div class="brief-detail-field"><div class="brief-detail-label">${label}</div><div class="brief-detail-value">${val}</div></div>` : '';
       document.getElementById('brief-detail-content').innerHTML = `
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
@@ -2156,7 +2167,7 @@
         ${field('Hashtags', idea.hashtags)}
         ${idea.descricao ? field('Notas', idea.descricao) : ''}
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
-          ${['bruto','roteiro','gravar','publicado'].map(s => `
+          ${['bruto','roteiro','gravar','gravado','edicao','publicado'].map(s => `
             <button class="btn-brief-action status ${idea.status===s?'active':''}"
               style="${idea.status===s?'background:var(--escrit-cor);color:white;':''}"
               onclick="app.changeBriefStatus('${idea.id}','${s}')">
@@ -2408,8 +2419,8 @@
       set('sm-publicado',base.filter(i=>i.status==='publicado').length);
 
       const tipoArteLabels = {'carrossel':'🖼️ Carrossel','reels':'🎬 Reels','story':'📱 Story','feed':'🖼️ Post Feed','video':'🎥 Vídeo','lives':'📡 Lives','destaques':'⭐ Destaques'};
-      const statusLabel = {bruto:'Em Criação',roteiro:'Em Roteiro',gravar:'Para Produzir',publicado:'Publicado'};
-      const statusCls   = {bruto:'bruto',roteiro:'roteiro',gravar:'gravar',publicado:'publicado'};
+      const statusLabel = {bruto:'Em Criação',roteiro:'Em Roteiro',gravar:'Para Gravar',gravado:'Gravado',edicao:'Em Edição',publicado:'Publicado'};
+      const statusCls   = {bruto:'bruto',roteiro:'roteiro',gravar:'gravar',gravado:'gravado',edicao:'edicao',publicado:'publicado'};
 
       const buildCard = (i, perfilCls) => `
         <div class="brief-card ${perfilCls}" onclick="app.showBriefDetail('${i.id}')">
@@ -2439,29 +2450,52 @@
 
       const container = document.getElementById('sm-perfis-container');
       if (!container) return;
+
+      // Colunas do fluxo de produção
+      const smStatuses = [
+        {key:'gravar',   label:'🎥 Para Gravar'},
+        {key:'gravado',  label:'📹 Gravado'},
+        {key:'edicao',   label:'✂️ Em Edição'},
+        {key:'publicado',label:'✅ Publicado'}
+      ];
+
       container.innerHTML = perfis.map(p => {
         let cards = base.filter(i => {
           if (i.perfil === p.key) return true;
           if (!i.perfil && p.key==='escritorio-geral' && i.frente==='escritorio') return true;
           return false;
         });
+
+        // Mostrar colunas por status de produção
+        const colunas = smStatuses.map(s => {
+          const col = cards.filter(i => i.status === s.key);
+          return `<div class="sm-status-col">
+            <div class="sm-status-col-header">
+              ${s.label}
+              <span class="column-count">${col.length}</span>
+            </div>
+            ${col.length === 0
+              ? `<p style="color:var(--grafite);font-size:0.75rem;font-family:sans-serif;text-align:center;padding:10px;opacity:0.5;">Vazio</p>`
+              : col.map(i => buildCard(i, p.cls)).join('')
+            }
+          </div>`;
+        }).join('');
+
         return `<div class="perfil-section">
           <div class="perfil-section-header">
             <div style="display:flex;align-items:center;gap:10px;">
               <span class="perfil-section-title">${p.label}</span>
-              <span class="perfil-badge ${p.cls.includes('geral')?'escrit-geral':p.cls}">${cards.length} brief${cards.length!==1?'s':''}</span>
+              <span class="perfil-badge ${p.cls.includes('geral')?'escrit-geral':p.cls}">${cards.length}</span>
             </div>
-            <button class="btn-primary" style="font-size:0.78rem;padding:6px 14px;background:var(--escrit-cor);" onclick="app.novoBriefSM('${p.addPerfil}')">+ Novo Brief</button>
+            <button class="btn-add-brief" onclick="app.novoBriefSM('${p.addPerfil}')">+ Brief</button>
           </div>
-          ${cards.length===0
-            ? `<div class="brief-empty">Nenhum brief criado ainda · clique em <strong>+ Novo Brief</strong></div>`
-            : `<div class="brief-cards-grid">${cards.map(i=>buildCard(i,p.cls)).join('')}</div>`}
+          <div class="sm-status-board">${colunas}</div>
         </div>`;
       }).join('');
     },
 
     _smNextStatus(id) {
-      const order = ['bruto','roteiro','gravar','publicado'];
+      const order = ['bruto','roteiro','gravar','gravado','edicao','publicado'];
       const idea = this.data.ideas.find(i => i.id===id);
       if (!idea) return;
       const idx = order.indexOf(idea.status);
