@@ -217,6 +217,11 @@
     }
     .prompts-section-title { font-size: 1.1rem; font-weight: 700; color: var(--grafite-dk); }
     .prompts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+    .prompt-card { cursor: grab; user-select: none; }
+    .prompt-card.dragging { opacity: 0.4; cursor: grabbing; }
+    .prompt-card.drag-over { border: 2px dashed var(--dourado) !important; background: var(--bege); }
+    .btn-edit-prompt { background:none; border:1px solid var(--cinza-suave); border-radius:6px; padding:4px 8px; font-size:0.72rem; cursor:pointer; color:var(--grafite); }
+    .btn-edit-prompt:hover { background:var(--bege); }
     .prompt-card {
       background: var(--branco); border-radius: var(--radius);
       padding: 16px; box-shadow: var(--shadow);
@@ -1559,16 +1564,17 @@
     <div id="modal-prompt" class="modal">
       <div class="modal-content modal-large">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-          <h2>📋 Novo Prompt</h2>
+          <h2 id="modal-prompt-title">📋 Novo Prompt</h2>
           <button class="btn-small-close" onclick="app.closeModal('modal-prompt')">✕</button>
         </div>
         <form id="form-prompt" onsubmit="app.savePrompt(event)">
           <input type="hidden" id="prompt-contexto">
+          <input type="hidden" id="prompt-edit-id">
           <input type="text" id="prompt-titulo" placeholder="Título do prompt" required>
           <label>Prompt completo</label>
           <textarea id="prompt-conteudo" placeholder="Cole ou escreva o prompt aqui..." required style="min-height:160px;font-family:monospace;font-size:0.85rem;"></textarea>
           <div class="modal-buttons">
-            <button type="submit" class="btn-primary">Salvar Prompt</button>
+            <button type="submit" id="prompt-submit-btn" class="btn-primary">Salvar Prompt</button>
             <button type="button" class="btn-secondary" onclick="app.closeModal('modal-prompt')">Cancelar</button>
           </div>
         </form>
@@ -2621,12 +2627,18 @@
       const lista = this.data.prompts.filter(p=>p.contexto===contexto);
       if (lista.length===0) { el.innerHTML = `<div class="prompt-empty">Nenhum prompt ainda. Clique em "+ Novo Prompt" para criar! 📋</div>`; return; }
       const cls = contexto==='assessoria' ? 'escrit' : 'social';
-      el.innerHTML = lista.map(p => `
-        <div class="prompt-card ${cls}">
-          <div class="prompt-title">${p.titulo}</div>
+      el.innerHTML = lista.map((p,idx) => `
+        <div class="prompt-card ${cls}" draggable="true"
+          data-id="${p.id}" data-ctx="${contexto}" data-elid="${elId}"
+          ondragstart="app._promptDragStart(event)"
+          ondragover="app._promptDragOver(event)"
+          ondragleave="app._promptDragLeave(event)"
+          ondrop="app._promptDrop(event,'${contexto}','${elId}')">
+          <div class="prompt-title">☰ ${p.titulo}</div>
           <div class="prompt-preview">${p.conteudo}</div>
           <div class="prompt-actions">
-            <button class="btn-copy" onclick="app.copiarPrompt('${p.id}')">📋 Copiar Prompt</button>
+            <button class="btn-copy" onclick="app.copiarPrompt('${p.id}')">📋 Copiar</button>
+            <button class="btn-edit-prompt" onclick="app.editarPrompt('${p.id}','${contexto}','${elId}')">✏️ Editar</button>
             <button class="btn-del-prompt" onclick="app.deletarPrompt('${p.id}','${contexto}','${elId}')">🗑️</button>
           </div>
         </div>`).join('');
@@ -2634,20 +2646,46 @@
 
     abrirModalPrompt(contexto) {
       document.getElementById('prompt-contexto').value = contexto;
+      document.getElementById('prompt-edit-id').value = '';
       document.getElementById('prompt-titulo').value = '';
       document.getElementById('prompt-conteudo').value = '';
+      document.getElementById('modal-prompt-title').textContent = '📋 Novo Prompt';
+      document.getElementById('prompt-submit-btn').textContent = 'Salvar Prompt';
+      this.openModal('modal-prompt');
+    },
+
+    editarPrompt(id, contexto, elId) {
+      const p = this.data.prompts.find(p=>p.id===id);
+      if (!p) return;
+      document.getElementById('prompt-contexto').value = contexto;
+      document.getElementById('prompt-edit-id').value = id;
+      document.getElementById('prompt-titulo').value = p.titulo;
+      document.getElementById('prompt-conteudo').value = p.conteudo;
+      document.getElementById('modal-prompt-title').textContent = '✏️ Editar Prompt';
+      document.getElementById('prompt-submit-btn').textContent = 'Atualizar Prompt';
       this.openModal('modal-prompt');
     },
 
     savePrompt(e) {
       e.preventDefault();
       const contexto = document.getElementById('prompt-contexto').value;
+      const editId   = document.getElementById('prompt-edit-id').value;
+      const titulo   = document.getElementById('prompt-titulo').value.trim();
+      const conteudo = document.getElementById('prompt-conteudo').value.trim();
       if (!this.data.prompts) this.data.prompts = [];
-      this.data.prompts.push({ id: this.uid(), titulo: document.getElementById('prompt-titulo').value.trim(), conteudo: document.getElementById('prompt-conteudo').value.trim(), contexto, dataCriacao: this.formatDate(new Date()) });
-      this.save(); this.closeModal('modal-prompt');
       const elId = contexto==='assessoria' ? 'prompts-assessoria' : 'prompts-social-media';
+      if (editId) {
+        // Editar existente
+        const idx = this.data.prompts.findIndex(p=>p.id===editId);
+        if (idx>=0) { this.data.prompts[idx].titulo=titulo; this.data.prompts[idx].conteudo=conteudo; }
+        this.toast('✅ Prompt atualizado!');
+      } else {
+        // Novo prompt
+        this.data.prompts.push({ id:this.uid(), titulo, conteudo, contexto, dataCriacao:this.formatDate(new Date()) });
+        this.toast('📋 Prompt salvo!');
+      }
+      this.save(); this.closeModal('modal-prompt');
       this.renderPrompts(contexto, elId);
-      this.toast('📋 Prompt salvo!');
     },
 
     copiarPrompt(id) {
@@ -2659,6 +2697,34 @@
         document.execCommand('copy'); document.body.removeChild(ta);
         this.toast('✅ Prompt copiado!');
       });
+    },
+
+    // ── Drag & Drop Prompts ──
+    _promptDragStart(e) {
+      e.dataTransfer.setData('promptId', e.currentTarget.dataset.id);
+      e.currentTarget.classList.add('dragging');
+    },
+    _promptDragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('drag-over');
+    },
+    _promptDragLeave(e) {
+      e.currentTarget.classList.remove('drag-over');
+    },
+    _promptDrop(e, contexto, elId) {
+      e.preventDefault();
+      const fromId = e.dataTransfer.getData('promptId');
+      const toId   = e.currentTarget.dataset.id;
+      if (!fromId || fromId === toId) { e.currentTarget.classList.remove('drag-over'); return; }
+      const lista = this.data.prompts;
+      const fromIdx = lista.findIndex(p=>p.id===fromId);
+      const toIdx   = lista.findIndex(p=>p.id===toId);
+      if (fromIdx<0||toIdx<0) return;
+      const [moved] = lista.splice(fromIdx,1);
+      lista.splice(toIdx,0,moved);
+      this.data.prompts = lista;
+      this.save();
+      this.renderPrompts(contexto, elId);
     },
 
     deletarPrompt(id, contexto, elId) {
