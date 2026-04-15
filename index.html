@@ -1774,26 +1774,21 @@
     },
 
     _saveSection(secao, dados) {
-      const url = this.API_URL + '?acao=saveSection&key=' + encodeURIComponent(this.API_KEY)
-        + '&secao=' + secao
-        + '&dados=' + encodeURIComponent(JSON.stringify(dados));
-      
-      // Se URL grande, usar POST
-      if (url.length > 2000) {
-        const WORKER_URL = 'https://shiny-feather-8fbd.juridico-d48.workers.dev';
-        fetch(WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ acao: 'saveSection', key: this.API_KEY, secao, dados: JSON.stringify(dados) })
+      // SEMPRE usar POST pelo Worker — nunca GET para salvar
+      const WORKER_URL = 'https://shiny-feather-8fbd.juridico-d48.workers.dev';
+      fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          acao: 'saveSection',
+          key: this.API_KEY,
+          secao: secao,
+          dados: JSON.stringify(dados)
         })
-        .then(r => r.json())
-        .then(d => { if (d && d.success) this._mostrarSincStatus('💾 Salvo!'); })
-        .catch(() => this._mostrarSincStatus('📴 Salvo localmente'));
-      } else {
-        this._api(url)
-        .then(d => { if (d && d.success) this._mostrarSincStatus('💾 Salvo!'); })
-        .catch(() => this._mostrarSincStatus('📴 Salvo localmente'));
-      }
+      })
+      .then(r => r.json())
+      .then(d => { if (d && d.success) this._mostrarSincStatus('💾 Salvo!'); })
+      .catch(() => this._mostrarSincStatus('📴 Salvo localmente'));
     },
 
     refresh() {
