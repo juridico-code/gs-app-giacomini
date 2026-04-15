@@ -1675,16 +1675,25 @@
     API_KEY: 'GS@2026',
 
 
-    // ── API via Cloudflare Worker (resolve CORS definitivamente) ──
+    // ── API via Cloudflare Worker (resolve CORS) ──
     _api(url) {
-      // Substitua WORKER_URL pela URL do seu Cloudflare Worker
-      // Ex: https://gs-app-proxy.SEU-USUARIO.workers.dev
       const WORKER_URL = 'https://shiny-feather-8fbd.juridico-d48.workers.dev';
-      
-      // Extrair só os parâmetros da URL original
       const params = url.includes('?') ? url.split('?')[1] : '';
       const finalUrl = WORKER_URL + (params ? '?' + params : '');
-      
+
+      // Se URL muito longa (>2000 chars), usar POST para evitar truncamento
+      if (finalUrl.length > 2000) {
+        const paramObj = {};
+        new URLSearchParams(params).forEach((v, k) => { paramObj[k] = v; });
+        return fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(paramObj)
+        })
+        .then(r => r.json())
+        .catch(e => { throw new Error('Erro ao conectar: ' + e.message); });
+      }
+
       return fetch(finalUrl)
         .then(r => r.json())
         .catch(e => { throw new Error('Erro ao conectar: ' + e.message); });
