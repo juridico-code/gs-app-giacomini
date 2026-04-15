@@ -1691,24 +1691,39 @@
     },
 
     loadData() {
-      // 1. Carrega localStorage imediatamente (resposta instantânea)
+      // 1. Carrega localStorage para resposta imediata
       try {
         const saved = localStorage.getItem('gs-app-v1');
-        if (saved) {
-          this.data = { ...this.data, ...JSON.parse(saved) };
-        }
+        if (saved) this.data = { ...this.data, ...JSON.parse(saved) };
       } catch(e) {}
-
-      // Renderiza com dados locais primeiro
       this.refresh();
 
-      // 2. Busca dados frescos da API (Google Apps Script)
+      // 2. Busca dados do GAS — GAS é a fonte de verdade
       if (this.API_URL) {
         this._mostrarSincStatus('🔄 Sincronizando...');
         this._api(`${this.API_URL}?acao=getAllData&key=${this.API_KEY}`)
           .then(d => {
             if (d && !d.error) {
-              this.data = { ...this.data, ...d };
+              // Merge inteligente: usar o maior conjunto de dados
+              const merged = {};
+              const arrays = ['ideas','habits','dreams','courses','scripts','prompts','rascunhos'];
+              arrays.forEach(k => {
+                const local = this.data[k] || [];
+                const remote = d[k] || [];
+                // Usar o que tiver mais dados
+                merged[k] = remote.length >= local.length ? remote : local;
+              });
+              // Tasks: merge por data
+              const localTasks = this.data.tasks || {};
+              const remoteTasks = d.tasks || {};
+              const allDates = new Set([...Object.keys(localTasks), ...Object.keys(remoteTasks)]);
+              merged.tasks = {};
+              allDates.forEach(date => {
+                const lt = localTasks[date] || [];
+                const rt = remoteTasks[date] || [];
+                merged.tasks[date] = rt.length >= lt.length ? rt : lt;
+              });
+              this.data = { ...this.data, ...merged };
               this.saveLocal();
               this.refresh();
               this._mostrarSincStatus('✅ Sincronizado');
