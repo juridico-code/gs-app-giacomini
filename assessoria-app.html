@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📄 Assessoria — Transcrições & Slides</title>
+  <style>
+    :root {
+      --dourado:     #C4A96B;
+      --dourado-dk:  #A0673A;
+      --bege:        #F2EDE8;
+      --bege-card:   #FAFAF7;
+      --cinza:       #D4D0CB;
+      --grafite:     #6B6868;
+      --grafite-dk:  #2A2827;
+      --preto:       #0f0f0f;
+      --branco:      #FFFFFF;
+      --escrit-cor:  #8B5E3C;
+      --escrit-dk:   #5C3A1E;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bege);
+      color: var(--grafite-dk);
+      min-height: 100vh;
+      font-size: 15px;
+    }
+
+    /* ═══ TOPNAV ═══ */
+    .topnav {
+      background: var(--preto);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      height: 54px;
+      gap: 4px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .topnav-logo {
+      color: var(--dourado);
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-right: 12px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .topnav-link {
+      color: rgba(255,255,255,0.65);
+      background: transparent;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-family: sans-serif;
+      font-weight: 600;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .topnav-link:hover { background: rgba(196,169,107,0.15); color: var(--dourado); }
+    .topnav-link.active { background: rgba(196,169,107,0.2); color: var(--dourado); }
+
+    .topnav-escrit { color: rgba(140,170,210,0.85); }
+    .topnav-escrit:hover, .topnav-escrit.active { background: rgba(58,90,138,0.25); color: #a0c0e0; }
+
+    /* ═══ CONTAINER ═══ */
+    .app-container { max-width: 1400px; margin: 0 auto; padding: 28px 24px; }
+    main { background: var(--bege); }
+
+    /* ═══ HEADER ═══ */
+    .colab-header {
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #2a1408 0%, #4a2610 100%);
+      color: #f0dcc0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .colab-header h1 { font-size: 1.6rem; color: inherit; }
+    .colab-header p { font-size: 0.88rem; opacity: 0.8; margin-top: 4px; }
+
+    /* ═══ TABS ═══ */
+    .agenda-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--branco);
+      border-radius: 12px;
+      padding: 6px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      flex-wrap: wrap;
+    }
+
+    .agenda-tab {
+      padding: 8px 18px;
+      border: none;
+      background: transparent;
+      color: var(--grafite);
+      cursor: pointer;
+      border-radius: 8px;
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .agenda-tab:hover { background: var(--bege); }
+    .agenda-tab.active { background: var(--dourado); color: var(--branco); }
+
+    .agenda-tab-content { display: none; }
+    .agenda-tab-content.active { display: block; }
+
+    /* ═══ CARD ═══ */
+    .assessoria-pauta {
+      background: var(--branco);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+
+    /* ═══ FORM ELEMENTS ═══ */
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--cinza);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--escrit-cor);
+    }
+
+    textarea {
+      font-family: monospace;
+      font-size: 0.85rem;
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    input[type="file"] { display: none; }
+
+    /* ═══ BUTTONS ═══ */
+    .btn-primary {
+      background: var(--escrit-cor);
+      color: var(--branco);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-family: sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover { background: var(--escrit-dk); transform: translateY(-1px); }
+
+    .btn-file-label {
+      display: inline-block;
+      background: var(--dourado);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-family: sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+
+    .btn-file-label:hover { background: var(--dourado-dk); }
+
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 0.72rem;
+      background: var(--bege);
+      border: 1px solid var(--cinza);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+
+    .btn-small:hover { border-color: var(--escrit-cor); color: var(--escrit-cor); }
+    .btn-small.danger { border-color: #C0442A; }
+    .btn-small.danger:hover { background: #C0442A; color: white; }
+
+    /* ═══ ITEMS ═══ */
+    .assess-item {
+      background: #fafafa;
+      padding: 15px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border-left: 4px solid var(--escrit-cor);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .assess-item-info { flex: 1; min-width: 200px; }
+    .assess-item-title { font-weight: bold; color: var(--escrit-cor); margin-bottom: 5px; }
+    .assess-item-meta { font-size: 0.72rem; color: #999; }
+    .assess-item-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .empty-state {
+      color: var(--grafite);
+      font-family: sans-serif;
+      padding: 12px;
+      text-align: center;
+    }
+
+    /* ═══ MODAL ═══ */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-content {
+      background: var(--branco);
+      border-radius: 8px;
+      width: 95vw;
+      height: 95vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--escrit-cor);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .modal-timer {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 10;
+    }
+
+    .modal-slide {
+      flex: 1;
+      overflow: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f0;
+    }
+
+    .modal-controls {
+      background: var(--grafite-dk);
+      color: white;
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .modal-controls button {
+      background: var(--escrit-cor);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: sans-serif;
+    }
+
+    .modal-controls button:hover { background: var(--escrit-dk); }
+
+    /* ═══ TOAST ═══ */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--grafite-dk);
+      color: var(--branco);
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-family: sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      pointer-events: none;
+      border-left: 4px solid var(--dourado);
+    }
+
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 768px) {
+      .app-container { padding: 14px 12px; }
+      .colab-header { padding: 16px; }
+      .colab-header h1 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- TOPNAV -->
+  <nav class="topnav">
+    <span class="topnav-logo">📄 Assessoria</span>
+    <button class="topnav-link active" onclick="app.goTo('transcricoes')">📄 Transcrições</button>
+    <button class="topnav-link" onclick="app.goTo('slides')">🎬 Slides</button>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="app-container">
+
+      <!-- HEADER -->
+      <div class="colab-header">
+        <div>
+          <h1>📄 Transcrições & Slides</h1>
+          <p>Armazene transcrições de vídeos e apresente slides em fullscreen</p>
+        </div>
+      </div>
+
+      <!-- TRANSCRIÇÕES -->
+      <section id="transcricoes" class="screen active">
+        <div class="agenda-tabs">
+          <button class="agenda-tab active" onclick="app.switchTab('transcricoes')">📄 Transcrições</button>
+          <button class="agenda-tab" onclick="app.switchTab('slides')">🎬 Slides</button>
+        </div>
+
+        <div id="tab-transcricoes" class="agenda-tab-content active">
+          <div class="assessoria-pauta">
+            <strong style="display:block;font-size:1rem;margin-bottom:12px;">📄 Cole a Transcrição</strong>
+            <input type="text" id="transc-autor" placeholder="Seu nome (opcional)">
+            <textarea id="transc-texto" placeholder="Cole a transcrição da vídeoconferência aqui..."></textarea>
+            <button class="btn-primary" onclick="app.salvarTranscricao()">💾 Salvar Transcrição</button>
+          </div>
+          <div id="transc-lista"></div>
+        </div>
+
+        <!-- SLIDES -->
+        <div id="tab-slides" class="agenda-tab-content">
+          <div class="assessoria-pauta">
+            <strong style="display:block;font-size:1rem;margin-bottom:12px;">🎬 Upload de Slides</strong>
+            <p style="font-size:0.82rem;color:var(--grafite);font-family:sans-serif;margin-bottom:12px;">PowerPoint ou PDF gerado na IA</p>
+            <label for="slide-file" class="btn-file-label">📁 Selecionar arquivo</label>
+            <input type="file" id="slide-file" accept=".pptx,.pdf" onchange="app.handleSlideFile(event)">
+            <span id="slide-file-label" style="font-size:0.82rem;color:var(--grafite);margin-left:0;display:block;margin-bottom:12px;"></span>
+            <input type="text" id="slide-titulo" placeholder="Título da apresentação">
+            <input type="text" id="slide-autor" placeholder="Seu nome (opcional)">
+            <button class="btn-primary" onclick="app.salvarSlide()">💾 Salvar Slide</button>
+          </div>
+          <div id="transc-slides-lista"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- APRESENTADOR FULLSCREEN -->
+  <div id="apresentador-modal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="app.fecharApresentador()">✕ Fechar</button>
+      <div class="modal-timer"><span id="timer-apresentador">00:00</span></div>
+      <div class="modal-slide" id="slide-container"></div>
+      <div class="modal-controls">
+        <button onclick="app.slideAnterior()">⬅ Anterior</button>
+        <button onclick="app.proximoSlide()">Próximo ➡</button>
+        <button style="background:var(--dourado);" onclick="app.toggleTimer()">⏱ Timer</button>
+        <button style="background:var(--dourado);" onclick="app.toggleZoom()">🔍 Zoom</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <!-- SCRIPT -->
+  <script>
+    const app = {
+      data: {
+        transcricoes: [],
+        slides: []
+      },
+
+      timerInterval: null,
+      timerSeconds: 0,
+      isZoomed: false,
+      slideBase64: null,
+      currentScreen: 'transcricoes',
+
+      init() {
+        this.loadData();
+        this.renderTranscricoes();
+        this.renderSlides();
+      },
+
+      loadData() {
+        const saved = localStorage.getItem('assessoria-app-v1');
+        if (saved) this.data = JSON.parse(saved);
+      },
+
+      saveData() {
+        localStorage.setItem('assessoria-app-v1', JSON.stringify(this.data));
+      },
+
+      goTo(screen) {
+        document.querySelectorAll('.topnav-link').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        this.currentScreen = screen;
+      },
+
+      switchTab(tab) {
+        document.querySelectorAll('.agenda-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.agenda-tab-content').forEach(c => c.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById('tab-' + tab).classList.add('active');
+      },
+
+      // ── TRANSCRIÇÕES ──
+      salvarTranscricao() {
+        const texto = document.getElementById('transc-texto').value.trim();
+        const autor = document.getElementById('transc-autor').value.trim() || 'Anônimo';
+        if (!texto) { this.toast('✏️ Cole a transcrição'); return; }
+        this.data.transcricoes.push({
+          id: this.uid(),
+          texto,
+          autor,
+          data: this.formatDate(new Date())
+        });
+        document.getElementById('transc-texto').value = '';
+        document.getElementById('transc-autor').value = '';
+        this.renderTranscricoes();
+        this.toast('✅ Transcrição salva!');
+        this.saveData();
+      },
+
+      renderTranscricoes() {
+        const el = document.getElementById('transc-lista');
+        if (this.data.transcricoes.length === 0) {
+          el.innerHTML = '<p class="empty-state">Nenhuma transcrição</p>';
+          return;
+        }
+        el.innerHTML = this.data.transcricoes.map(t => `
+          <div class="assess-item">
+            <div class="assess-item-info">
+              <div class="assess-item-title">📄 Transcrição</div>
+              <div class="assess-item-meta">Por: ${t.autor} | ${t.data}</div>
+              <div style="margin-top:10px;padding:10px;background:#f0f0f0;border-radius:4px;max-height:80px;overflow-y:auto;font-size:0.9rem;">
+                ${t.texto.substring(0, 200)}${t.texto.length > 200 ? '...' : ''}
+              </div>
+            </div>
+            <div class="assess-item-actions">
+              <button class="btn-small" onclick="app.copiarLink('${t.id}')">🔗 Link</button>
+              <button class="btn-small danger" onclick="app.deletarTransc('${t.id}')">🗑</button>
+            </div>
+          </div>`).join('');
+      },
+
+      copiarLink(id) {
+        const link = window.location.href.split('?')[0] + '?transc=' + id;
+        navigator.clipboard.writeText(link).then(() => this.toast('✅ Link copiado!')).catch(() => {
+          const ta = document.createElement('textarea');
+          ta.value = link;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          this.toast('✅ Link copiado!');
+        });
+      },
+
+      deletarTransc(id) {
+        if (!confirm('Deletar?')) return;
+        this.data.transcricoes = this.data.transcricoes.filter(t => t.id !== id);
+        this.renderTranscricoes();
+        this.saveData();
+      },
+
+      // ── SLIDES ──
+      handleSlideFile(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          this.slideBase64 = ev.target.result;
+          document.getElementById('slide-file-label').textContent = '✅ ' + file.name;
+        };
+        reader.readAsDataURL(file);
+      },
+
+      salvarSlide() {
+        const titulo = document.getElementById('slide-titulo').value.trim();
+        const autor = document.getElementById('slide-autor').value.trim() || 'Anônimo';
+        if (!titulo || !this.slideBase64) { this.toast('⚠️ Título e arquivo obrigatórios'); return; }
+        this.data.slides.push({
+          id: this.uid(),
+          titulo,
+          autor,
+          data: this.formatDate(new Date()),
+          conteudo: this.slideBase64
+        });
+        document.getElementById('slide-titulo').value = '';
+        document.getElementById('slide-autor').value = '';
+        document.getElementById('slide-file').value = '';
+        document.getElementById('slide-file-label').textContent = '';
+        this.slideBase64 = null;
+        this.renderSlides();
+        this.toast('✅ Slide salvo!');
+        this.saveData();
+      },
+
+      renderSlides() {
+        const el = document.getElementById('transc-slides-lista');
+        if (this.data.slides.length === 0) {
+          el.innerHTML = '<p class="empty-state">Nenhum slide</p>';
+          return;
+        }
+        el.innerHTML = this.data.slides.map(s => `
+          <div class="assess-item">
+            <div class="assess-item-info">
+              <div class="assess-item-title">🎬 ${s.titulo}</div>
+              <div class="assess-item-meta">Por: ${s.autor} | ${s.data}</div>
+            </div>
+            <div class="assess-item-actions">
+              <button class="btn-small" onclick="app.abrirSlide('${s.id}')">▶ Apresentar</button>
+              <button class="btn-small danger" onclick="app.deletarSlide('${s.id}')">🗑</button>
+            </div>
+          </div>`).join('');
+      },
+
+      abrirSlide(id) {
+        const slide = this.data.slides.find(s => s.id === id);
+        if (!slide) return;
+        this.timerSeconds = 0;
+        document.getElementById('apresentador-modal').classList.add('open');
+        document.getElementById('slide-container').innerHTML = `<iframe src="${slide.conteudo}" style="width:100%;height:100%;border:none;"></iframe>`;
+      },
+
+      fecharApresentador() {
+        document.getElementById('apresentador-modal').classList.remove('open');
+        if (this.timerInterval) clearInterval(this.timerInterval);
+        this.timerSeconds = 0;
+        document.getElementById('timer-apresentador').textContent = '00:00';
+      },
+
+      toggleTimer() {
+        if (this.timerInterval) {
+          clearInterval(this.timerInterval);
+          this.timerInterval = null;
+        } else {
+          this.timerInterval = setInterval(() => {
+            this.timerSeconds++;
+            const m = Math.floor(this.timerSeconds / 60);
+            const s = this.timerSeconds % 60;
+            document.getElementById('timer-apresentador').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+          }, 1000);
+        }
+      },
+
+      toggleZoom() {
+        const el = document.getElementById('slide-container');
+        el.style.transform = el.style.transform === 'scale(1.2)' ? 'scale(1)' : 'scale(1.2)';
+      },
+
+      slideAnterior() { console.log('anterior'); },
+      proximoSlide() { console.log('proximo'); },
+
+      deletarSlide(id) {
+        if (!confirm('Deletar?')) return;
+        this.data.slides = this.data.slides.filter(s => s.id !== id);
+        this.renderSlides();
+        this.saveData();
+      },
+
+      // ── UTILITÁRIOS ──
+      uid() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 5); },
+      formatDate(d) { return new Date(d).toLocaleDateString('pt-BR'); },
+      
+      toast(msg) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 3000);
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => app.init());
+  </script>
+</body>
+</html>
