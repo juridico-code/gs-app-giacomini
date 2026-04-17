@@ -217,11 +217,6 @@
     }
     .prompts-section-title { font-size: 1.1rem; font-weight: 700; color: var(--grafite-dk); }
     .prompts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-    .prompt-card { cursor: grab; user-select: none; }
-    .prompt-card.dragging { opacity: 0.4; cursor: grabbing; }
-    .prompt-card.drag-over { border: 2px dashed var(--dourado) !important; background: var(--bege); }
-    .btn-edit-prompt { background:none; border:1px solid var(--cinza-suave); border-radius:6px; padding:4px 8px; font-size:0.72rem; cursor:pointer; color:var(--grafite); }
-    .btn-edit-prompt:hover { background:var(--bege); }
     .prompt-card {
       background: var(--branco); border-radius: var(--radius);
       padding: 16px; box-shadow: var(--shadow);
@@ -316,9 +311,6 @@
     .brief-status-badge.roteiro   { background: rgba(196,169,107,0.15); color: var(--dourado-dk); }
     .brief-status-badge.gravar    { background: rgba(58,112,64,0.12); color: var(--verde); }
     .brief-status-badge.publicado { background: rgba(58,112,64,0.2); color: var(--verde); }
-    .sm-status-board { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; }
-    .sm-status-col { min-width:220px; flex:1; background:var(--off-white); border-radius:10px; padding:10px; border:1px solid var(--cinza-suave); }
-    .sm-status-col-header { font-size:.72rem; font-weight:700; font-family:sans-serif; color:var(--grafite-dk); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px solid var(--cinza-suave); }
 
     .brief-card-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
     .brief-arte-badge { background: rgba(139,94,60,0.1); color: var(--escrit-cor); border-radius: 8px; padding: 2px 8px; font-size: 0.68rem; font-family: sans-serif; font-weight: 700; }
@@ -1117,14 +1109,6 @@
             <div class="column-header">🎥 Para Gravar <span class="column-count" id="count-gravar">0</span></div>
             <div class="column-cards" id="col-gravar"></div>
           </div>
-          <div class="kanban-column" data-status="gravado">
-            <div class="column-header">📹 Gravado <span class="column-count" id="count-gravado">0</span></div>
-            <div class="column-cards" id="col-gravado"></div>
-          </div>
-          <div class="kanban-column" data-status="edicao">
-            <div class="column-header">✂️ Em Edição <span class="column-count" id="count-edicao">0</span></div>
-            <div class="column-cards" id="col-edicao"></div>
-          </div>
           <div class="kanban-column" data-status="publicado">
             <div class="column-header">✅ Publicado <span class="column-count" id="count-publicado">0</span></div>
             <div class="column-cards" id="col-publicado"></div>
@@ -1564,17 +1548,16 @@
     <div id="modal-prompt" class="modal">
       <div class="modal-content modal-large">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-          <h2 id="modal-prompt-title">📋 Novo Prompt</h2>
+          <h2>📋 Novo Prompt</h2>
           <button class="btn-small-close" onclick="app.closeModal('modal-prompt')">✕</button>
         </div>
         <form id="form-prompt" onsubmit="app.savePrompt(event)">
           <input type="hidden" id="prompt-contexto">
-          <input type="hidden" id="prompt-edit-id">
           <input type="text" id="prompt-titulo" placeholder="Título do prompt" required>
           <label>Prompt completo</label>
           <textarea id="prompt-conteudo" placeholder="Cole ou escreva o prompt aqui..." required style="min-height:160px;font-family:monospace;font-size:0.85rem;"></textarea>
           <div class="modal-buttons">
-            <button type="submit" id="prompt-submit-btn" class="btn-primary">Salvar Prompt</button>
+            <button type="submit" class="btn-primary">Salvar Prompt</button>
             <button type="button" class="btn-secondary" onclick="app.closeModal('modal-prompt')">Cancelar</button>
           </div>
         </form>
@@ -1674,22 +1657,6 @@
     API_URL: 'https://script.google.com/macros/s/AKfycby-R6gNkzagnipv66eT6FPl_ZiIOfmJbCuck1jACapwGvR6etBAJUQpSTjW6RbetKc1vg/exec',
     API_KEY: 'GS@2026',
 
-
-    // ── API via Cloudflare Worker (resolve CORS definitivamente) ──
-    _api(url) {
-      // Substitua WORKER_URL pela URL do seu Cloudflare Worker
-      // Ex: https://gs-app-proxy.SEU-USUARIO.workers.dev
-      const WORKER_URL = 'https://shiny-feather-8fbd.juridico-d48.workers.dev';
-      
-      // Extrair só os parâmetros da URL original
-      const params = url.includes('?') ? url.split('?')[1] : '';
-      const finalUrl = WORKER_URL + (params ? '?' + params : '');
-      
-      return fetch(finalUrl)
-        .then(r => r.json())
-        .catch(e => { throw new Error('Erro ao conectar: ' + e.message); });
-    },
-
     loadData() {
       // 1. Carrega localStorage imediatamente (resposta instantânea)
       try {
@@ -1705,7 +1672,8 @@
       // 2. Busca dados frescos da API (Google Apps Script)
       if (this.API_URL) {
         this._mostrarSincStatus('🔄 Sincronizando...');
-        this._api(`${this.API_URL}?acao=getAllData&key=${this.API_KEY}`)
+        fetch(`${this.API_URL}?acao=getAllData&key=${this.API_KEY}`)
+          .then(r => r.json())
           .then(d => {
             if (d && !d.error) {
               this.data = { ...this.data, ...d };
@@ -1739,10 +1707,18 @@
       this.saveLocal();
       // Envia para a API em background
       if (this.API_URL) {
-        const saveUrl = this.API_URL + '?acao=saveAllData&key=' + encodeURIComponent(this.API_KEY) + '&data=' + encodeURIComponent(JSON.stringify(this.data));
-        this._api(saveUrl)
+        fetch(this.API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            acao: 'saveAllData',
+            key: this.API_KEY,
+            data: this.data
+          })
+        })
+        .then(r => r.json())
         .then(d => {
-          if (d && d.success) this._mostrarSincStatus('💾 Salvo na planilha!');
+          if (d.success) this._mostrarSincStatus('💾 Salvo na planilha!');
         })
         .catch(() => this._mostrarSincStatus('📴 Salvo localmente'));
       }
@@ -1884,7 +1860,7 @@
     },
 
     renderKanban() {
-      const statuses = ['bruto','roteiro','gravar','gravado','edicao','publicado'];
+      const statuses = ['bruto','roteiro','gravar','publicado'];
       const filtered = this.currentFilter === 'all'
         ? this.data.ideas.filter(i => i.frente !== 'socias-gs')
         : this.currentFilter === 'socias-gs' ? []
@@ -1964,7 +1940,7 @@
       if (!idea) return;
       const statuses = [
         {key:'bruto',label:'📝 Ideia Bruta'},{key:'roteiro',label:'✍️ Em Roteiro'},
-        {key:'gravar',label:'🎥 Para Gravar'},{key:'gravado',label:'📹 Gravado'},{key:'edicao',label:'✂️ Em Edição'},{key:'publicado',label:'✅ Publicado'}
+        {key:'gravar',label:'🎥 Para Gravar'},{key:'publicado',label:'✅ Publicado'}
       ];
       const imgSection = idea.image ? `<img src="${idea.image}" style="max-width:100%;border-radius:8px;margin-bottom:12px;">` : '';
       const html = `
@@ -2156,7 +2132,7 @@
       this.currentIdeaId = id;
       const perfilLabels = {'escritorio-geral':'🏛️ Escritório Geral','socia-jenifer':'👤 Sócia Jenifer','socia-elizangela':'👤 Sócia Elizângela',''  :'—'};
       const tipoArteLabels = {'carrossel':'🖼️ Carrossel','reels':'🎬 Reels','story':'📱 Story','feed':'🖼️ Post Feed','video':'🎥 Vídeo','lives':'📡 Lives','destaques':'⭐ Destaques',''  :'-'};
-      const statusLabels = {bruto:'📝 Em Criação',roteiro:'✍️ Em Roteiro',gravar:'🎥 Para Gravar',gravado:'📹 Gravado',edicao:'✂️ Em Edição',publicado:'✅ Publicado'};
+      const statusLabels = {bruto:'📝 Em Criação',roteiro:'✍️ Em Roteiro',gravar:'🎥 Para Produzir',publicado:'✅ Publicado'};
       const field = (label, val) => val ? `<div class="brief-detail-field"><div class="brief-detail-label">${label}</div><div class="brief-detail-value">${val}</div></div>` : '';
       document.getElementById('brief-detail-content').innerHTML = `
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
@@ -2173,7 +2149,7 @@
         ${field('Hashtags', idea.hashtags)}
         ${idea.descricao ? field('Notas', idea.descricao) : ''}
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
-          ${['bruto','roteiro','gravar','gravado','edicao','publicado'].map(s => `
+          ${['bruto','roteiro','gravar','publicado'].map(s => `
             <button class="btn-brief-action status ${idea.status===s?'active':''}"
               style="${idea.status===s?'background:var(--escrit-cor);color:white;':''}"
               onclick="app.changeBriefStatus('${idea.id}','${s}')">
@@ -2425,8 +2401,8 @@
       set('sm-publicado',base.filter(i=>i.status==='publicado').length);
 
       const tipoArteLabels = {'carrossel':'🖼️ Carrossel','reels':'🎬 Reels','story':'📱 Story','feed':'🖼️ Post Feed','video':'🎥 Vídeo','lives':'📡 Lives','destaques':'⭐ Destaques'};
-      const statusLabel = {bruto:'Em Criação',roteiro:'Em Roteiro',gravar:'Para Gravar',gravado:'Gravado',edicao:'Em Edição',publicado:'Publicado'};
-      const statusCls   = {bruto:'bruto',roteiro:'roteiro',gravar:'gravar',gravado:'gravado',edicao:'edicao',publicado:'publicado'};
+      const statusLabel = {bruto:'Em Criação',roteiro:'Em Roteiro',gravar:'Para Produzir',publicado:'Publicado'};
+      const statusCls   = {bruto:'bruto',roteiro:'roteiro',gravar:'gravar',publicado:'publicado'};
 
       const buildCard = (i, perfilCls) => `
         <div class="brief-card ${perfilCls}" onclick="app.showBriefDetail('${i.id}')">
@@ -2456,52 +2432,29 @@
 
       const container = document.getElementById('sm-perfis-container');
       if (!container) return;
-
-      // Colunas do fluxo de produção
-      const smStatuses = [
-        {key:'gravar',   label:'🎥 Para Gravar'},
-        {key:'gravado',  label:'📹 Gravado'},
-        {key:'edicao',   label:'✂️ Em Edição'},
-        {key:'publicado',label:'✅ Publicado'}
-      ];
-
       container.innerHTML = perfis.map(p => {
         let cards = base.filter(i => {
           if (i.perfil === p.key) return true;
           if (!i.perfil && p.key==='escritorio-geral' && i.frente==='escritorio') return true;
           return false;
         });
-
-        // Mostrar colunas por status de produção
-        const colunas = smStatuses.map(s => {
-          const col = cards.filter(i => i.status === s.key);
-          return `<div class="sm-status-col">
-            <div class="sm-status-col-header">
-              ${s.label}
-              <span class="column-count">${col.length}</span>
-            </div>
-            ${col.length === 0
-              ? `<p style="color:var(--grafite);font-size:0.75rem;font-family:sans-serif;text-align:center;padding:10px;opacity:0.5;">Vazio</p>`
-              : col.map(i => buildCard(i, p.cls)).join('')
-            }
-          </div>`;
-        }).join('');
-
         return `<div class="perfil-section">
           <div class="perfil-section-header">
             <div style="display:flex;align-items:center;gap:10px;">
               <span class="perfil-section-title">${p.label}</span>
-              <span class="perfil-badge ${p.cls.includes('geral')?'escrit-geral':p.cls}">${cards.length}</span>
+              <span class="perfil-badge ${p.cls.includes('geral')?'escrit-geral':p.cls}">${cards.length} brief${cards.length!==1?'s':''}</span>
             </div>
-            <button class="btn-add-brief" onclick="app.novoBriefSM('${p.addPerfil}')">+ Brief</button>
+            <button class="btn-primary" style="font-size:0.78rem;padding:6px 14px;background:var(--escrit-cor);" onclick="app.novoBriefSM('${p.addPerfil}')">+ Novo Brief</button>
           </div>
-          <div class="sm-status-board">${colunas}</div>
+          ${cards.length===0
+            ? `<div class="brief-empty">Nenhum brief criado ainda · clique em <strong>+ Novo Brief</strong></div>`
+            : `<div class="brief-cards-grid">${cards.map(i=>buildCard(i,p.cls)).join('')}</div>`}
         </div>`;
       }).join('');
     },
 
     _smNextStatus(id) {
-      const order = ['bruto','roteiro','gravar','gravado','edicao','publicado'];
+      const order = ['bruto','roteiro','gravar','publicado'];
       const idea = this.data.ideas.find(i => i.id===id);
       if (!idea) return;
       const idx = order.indexOf(idea.status);
@@ -2627,18 +2580,12 @@
       const lista = this.data.prompts.filter(p=>p.contexto===contexto);
       if (lista.length===0) { el.innerHTML = `<div class="prompt-empty">Nenhum prompt ainda. Clique em "+ Novo Prompt" para criar! 📋</div>`; return; }
       const cls = contexto==='assessoria' ? 'escrit' : 'social';
-      el.innerHTML = lista.map((p,idx) => `
-        <div class="prompt-card ${cls}" draggable="true"
-          data-id="${p.id}" data-ctx="${contexto}" data-elid="${elId}"
-          ondragstart="app._promptDragStart(event)"
-          ondragover="app._promptDragOver(event)"
-          ondragleave="app._promptDragLeave(event)"
-          ondrop="app._promptDrop(event,'${contexto}','${elId}')">
-          <div class="prompt-title">☰ ${p.titulo}</div>
+      el.innerHTML = lista.map(p => `
+        <div class="prompt-card ${cls}">
+          <div class="prompt-title">${p.titulo}</div>
           <div class="prompt-preview">${p.conteudo}</div>
           <div class="prompt-actions">
-            <button class="btn-copy" onclick="app.copiarPrompt('${p.id}')">📋 Copiar</button>
-            <button class="btn-edit-prompt" onclick="app.editarPrompt('${p.id}','${contexto}','${elId}')">✏️ Editar</button>
+            <button class="btn-copy" onclick="app.copiarPrompt('${p.id}')">📋 Copiar Prompt</button>
             <button class="btn-del-prompt" onclick="app.deletarPrompt('${p.id}','${contexto}','${elId}')">🗑️</button>
           </div>
         </div>`).join('');
@@ -2646,46 +2593,20 @@
 
     abrirModalPrompt(contexto) {
       document.getElementById('prompt-contexto').value = contexto;
-      document.getElementById('prompt-edit-id').value = '';
       document.getElementById('prompt-titulo').value = '';
       document.getElementById('prompt-conteudo').value = '';
-      document.getElementById('modal-prompt-title').textContent = '📋 Novo Prompt';
-      document.getElementById('prompt-submit-btn').textContent = 'Salvar Prompt';
-      this.openModal('modal-prompt');
-    },
-
-    editarPrompt(id, contexto, elId) {
-      const p = this.data.prompts.find(p=>p.id===id);
-      if (!p) return;
-      document.getElementById('prompt-contexto').value = contexto;
-      document.getElementById('prompt-edit-id').value = id;
-      document.getElementById('prompt-titulo').value = p.titulo;
-      document.getElementById('prompt-conteudo').value = p.conteudo;
-      document.getElementById('modal-prompt-title').textContent = '✏️ Editar Prompt';
-      document.getElementById('prompt-submit-btn').textContent = 'Atualizar Prompt';
       this.openModal('modal-prompt');
     },
 
     savePrompt(e) {
       e.preventDefault();
       const contexto = document.getElementById('prompt-contexto').value;
-      const editId   = document.getElementById('prompt-edit-id').value;
-      const titulo   = document.getElementById('prompt-titulo').value.trim();
-      const conteudo = document.getElementById('prompt-conteudo').value.trim();
       if (!this.data.prompts) this.data.prompts = [];
-      const elId = contexto==='assessoria' ? 'prompts-assessoria' : 'prompts-social-media';
-      if (editId) {
-        // Editar existente
-        const idx = this.data.prompts.findIndex(p=>p.id===editId);
-        if (idx>=0) { this.data.prompts[idx].titulo=titulo; this.data.prompts[idx].conteudo=conteudo; }
-        this.toast('✅ Prompt atualizado!');
-      } else {
-        // Novo prompt
-        this.data.prompts.push({ id:this.uid(), titulo, conteudo, contexto, dataCriacao:this.formatDate(new Date()) });
-        this.toast('📋 Prompt salvo!');
-      }
+      this.data.prompts.push({ id: this.uid(), titulo: document.getElementById('prompt-titulo').value.trim(), conteudo: document.getElementById('prompt-conteudo').value.trim(), contexto, dataCriacao: this.formatDate(new Date()) });
       this.save(); this.closeModal('modal-prompt');
+      const elId = contexto==='assessoria' ? 'prompts-assessoria' : 'prompts-social-media';
       this.renderPrompts(contexto, elId);
+      this.toast('📋 Prompt salvo!');
     },
 
     copiarPrompt(id) {
@@ -2697,34 +2618,6 @@
         document.execCommand('copy'); document.body.removeChild(ta);
         this.toast('✅ Prompt copiado!');
       });
-    },
-
-    // ── Drag & Drop Prompts ──
-    _promptDragStart(e) {
-      e.dataTransfer.setData('promptId', e.currentTarget.dataset.id);
-      e.currentTarget.classList.add('dragging');
-    },
-    _promptDragOver(e) {
-      e.preventDefault();
-      e.currentTarget.classList.add('drag-over');
-    },
-    _promptDragLeave(e) {
-      e.currentTarget.classList.remove('drag-over');
-    },
-    _promptDrop(e, contexto, elId) {
-      e.preventDefault();
-      const fromId = e.dataTransfer.getData('promptId');
-      const toId   = e.currentTarget.dataset.id;
-      if (!fromId || fromId === toId) { e.currentTarget.classList.remove('drag-over'); return; }
-      const lista = this.data.prompts;
-      const fromIdx = lista.findIndex(p=>p.id===fromId);
-      const toIdx   = lista.findIndex(p=>p.id===toId);
-      if (fromIdx<0||toIdx<0) return;
-      const [moved] = lista.splice(fromIdx,1);
-      lista.splice(toIdx,0,moved);
-      this.data.prompts = lista;
-      this.save();
-      this.renderPrompts(contexto, elId);
     },
 
     deletarPrompt(id, contexto, elId) {
