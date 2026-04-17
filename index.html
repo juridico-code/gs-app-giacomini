@@ -1487,6 +1487,174 @@
 **PROCURE:**
 ```javascript
     });
+  });
+
+    // ════════════════════════════════════════════════════════════
+    // ──── TRANSCRIÇÕES & SLIDES
+    // ════════════════════════════════════════════════════════════
+
+    app.switchTranscTab = function(aba) {
+      document.querySelectorAll('#assessoria-transcrever .agenda-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('#assessoria-transcrever .agenda-tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('transc-' + aba).classList.add('active');
+    };
+
+    app.salvarTranscricao = function() {
+      const texto = document.getElementById('transc-texto').value.trim();
+      const autor = document.getElementById('transc-autor').value.trim() || 'Anônimo';
+      if (!texto) { app.toast('✏️ Cole a transcrição'); return; }
+      if (!app.data.transcricoes) app.data.transcricoes = [];
+      app.data.transcricoes.push({
+        id: app.uid(),
+        texto,
+        autor,
+        data: app.formatDate(new Date())
+      });
+      document.getElementById('transc-texto').value = '';
+      document.getElementById('transc-autor').value = '';
+      app.renderTranscricoes();
+      app.toast('✅ Transcrição salva!');
+      app.save();
+    };
+
+    app.renderTranscricoes = function() {
+      const el = document.getElementById('transc-lista');
+      if (!app.data.transcricoes || app.data.transcricoes.length === 0) {
+        el.innerHTML = '<p style="color:var(--grafite);font-family:sans-serif;padding:12px;">Nenhuma transcrição</p>';
+        return;
+      }
+      el.innerHTML = app.data.transcricoes.map(t => `
+        <div class="assess-item">
+          <div class="assess-item-info">
+            <div class="assess-item-title">📄 Transcrição</div>
+            <div class="assess-item-meta">Por: ${t.autor} | ${t.data}</div>
+            <div style="margin-top:10px;padding:10px;background:#f0f0f0;border-radius:4px;max-height:80px;overflow-y:auto;">
+              ${t.texto.substring(0, 200)}${t.texto.length > 200 ? '...' : ''}
+            </div>
+          </div>
+          <div class="assess-item-actions">
+            <button class="btn-small" onclick="app.copiarLinkTransc('${t.id}')">🔗 Link</button>
+            <button class="btn-small danger" onclick="app.deletarTransc('${t.id}')">🗑</button>
+          </div>
+        </div>`).join('');
+    };
+
+    app.copiarLinkTransc = function(id) {
+      const link = window.location.href.split('?')[0] + '?transc=' + id;
+      navigator.clipboard.writeText(link).then(() => app.toast('✅ Link copiado!')).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = link; document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); app.toast('✅ Link copiado!');
+      });
+    };
+
+    app.deletarTransc = function(id) {
+      if (!confirm('Deletar?')) return;
+      app.data.transcricoes = (app.data.transcricoes || []).filter(t => t.id !== id);
+      app.renderTranscricoes();
+      app.save();
+    };
+
+    app.handleSlideFile = function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        app.slideBase64 = ev.target.result;
+        document.getElementById('slide-file-label').textContent = '✅ ' + file.name;
+      };
+      reader.readAsDataURL(file);
+    };
+
+    app.salvarSlide = function() {
+      const titulo = document.getElementById('slide-titulo').value.trim();
+      const autor = document.getElementById('slide-autor').value.trim() || 'Anônimo';
+      if (!titulo || !app.slideBase64) { app.toast('⚠️ Título e arquivo obrigatórios'); return; }
+      if (!app.data.slides) app.data.slides = [];
+      app.data.slides.push({
+        id: app.uid(),
+        titulo,
+        autor,
+        data: app.formatDate(new Date()),
+        conteudo: app.slideBase64
+      });
+      document.getElementById('slide-titulo').value = '';
+      document.getElementById('slide-autor').value = '';
+      document.getElementById('slide-file').value = '';
+      document.getElementById('slide-file-label').textContent = '';
+      app.slideBase64 = null;
+      app.renderSlides();
+      app.toast('✅ Slide salvo!');
+      app.save();
+    };
+
+    app.renderSlides = function() {
+      const el = document.getElementById('transc-slides-lista');
+      if (!app.data.slides || app.data.slides.length === 0) {
+        el.innerHTML = '<p style="color:var(--grafite);font-family:sans-serif;padding:12px;">Nenhum slide</p>';
+        return;
+      }
+      el.innerHTML = app.data.slides.map(s => `
+        <div class="assess-item">
+          <div class="assess-item-info">
+            <div class="assess-item-title">🎬 ${s.titulo}</div>
+            <div class="assess-item-meta">Por: ${s.autor} | ${s.data}</div>
+          </div>
+          <div class="assess-item-actions">
+            <button class="btn-small" onclick="app.abrirSlide('${s.id}')">▶ Apresentar</button>
+            <button class="btn-small danger" onclick="app.deletarSlide('${s.id}')">🗑</button>
+          </div>
+        </div>`).join('');
+    };
+
+    app.abrirSlide = function(id) {
+      const slide = (app.data.slides || []).find(s => s.id === id);
+      if (!slide) return;
+      app.timerSeconds = 0;
+      document.getElementById('apresentador-fullscreen').classList.add('open');
+      document.getElementById('slide-container').innerHTML = '<iframe src="' + slide.conteudo + '" style="width:100%;height:100%;border:none;"></iframe>';
+    };
+
+    app.fecharApresentador = function() {
+      document.getElementById('apresentador-fullscreen').classList.remove('open');
+      if (app.timerInterval) clearInterval(app.timerInterval);
+      app.timerSeconds = 0;
+      document.getElementById('timer-apresentador').textContent = '00:00';
+    };
+
+    app.toggleTimer = function() {
+      if (app.timerInterval) {
+        clearInterval(app.timerInterval);
+        app.timerInterval = null;
+      } else {
+        app.timerInterval = setInterval(() => {
+          app.timerSeconds++;
+          const m = Math.floor(app.timerSeconds / 60);
+          const s = app.timerSeconds % 60;
+          document.getElementById('timer-apresentador').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+        }, 1000);
+      }
+    };
+
+    app.toggleZoom = function() {
+      const el = document.getElementById('slide-container');
+      el.style.transform = el.style.transform === 'scale(1.2)' ? 'scale(1)' : 'scale(1.2)';
+    };
+
+    app.slideAnterior = function() { console.log('prev'); };
+    app.proximoSlide = function() { console.log('next'); };
+
+    app.deletarSlide = function(id) {
+      if (!confirm('Deletar?')) return;
+      app.data.slides = (app.data.slides || []).filter(s => s.id !== id);
+      app.renderSlides();
+      app.save();
+    };
+
+    if (!app.data.transcricoes) app.data.transcricoes = [];
+    if (!app.data.slides) app.data.slides = [];
+  </script>
   </script>
 </html>
 ```
