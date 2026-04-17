@@ -220,7 +220,7 @@
     .prompt-card { cursor: grab; user-select: none; }
     .prompt-card.dragging { opacity: 0.4; cursor: grabbing; }
     .prompt-card.drag-over { border: 2px dashed var(--dourado) !important; background: var(--bege); }
-    .btn-edit-prompt { background:none; border:1px solid var(--cinza-suave); border-radius:6px; padding:4px 8px; font-size:0.72rem; cursor:pointer; color:var(--grafite); }
+    .btn-edit-prompt { background:none; border:1px solid var(--cinza); border-radius:6px; padding:4px 8px; font-size:0.72rem; cursor:pointer; color:var(--grafite); }
     .btn-edit-prompt:hover { background:var(--bege); }
     .prompt-card {
       background: var(--branco); border-radius: var(--radius);
@@ -317,8 +317,8 @@
     .brief-status-badge.gravar    { background: rgba(58,112,64,0.12); color: var(--verde); }
     .brief-status-badge.publicado { background: rgba(58,112,64,0.2); color: var(--verde); }
     .sm-status-board { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; }
-    .sm-status-col { min-width:220px; flex:1; background:var(--off-white); border-radius:10px; padding:10px; border:1px solid var(--cinza-suave); }
-    .sm-status-col-header { font-size:.72rem; font-weight:700; font-family:sans-serif; color:var(--grafite-dk); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px solid var(--cinza-suave); }
+    .sm-status-col { min-width:220px; flex:1; background:var(--off-white); border-radius:10px; padding:10px; border:1px solid var(--cinza); }
+    .sm-status-col-header { font-size:.72rem; font-weight:700; font-family:sans-serif; color:var(--grafite-dk); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px solid var(--cinza); }
 
     .brief-card-meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
     .brief-arte-badge { background: rgba(139,94,60,0.1); color: var(--escrit-cor); border-radius: 8px; padding: 2px 8px; font-size: 0.68rem; font-family: sans-serif; font-weight: 700; }
@@ -400,7 +400,6 @@
     main { max-width: 1400px; margin: 0 auto; padding: 28px 24px; }
     .screen { display: none !important; }
     .screen.active { display: block !important; }
-    /* Garantia extra para mobile */
     @media (max-width: 9999px) {
       .screen { display: none !important; }
       .screen.active { display: block !important; }
@@ -439,6 +438,13 @@
       cursor: pointer; color: var(--grafite); padding: 4px 8px; border-radius: 6px;
     }
     .btn-small-close:hover { background: var(--cinza); }
+    .btn-small {
+      padding: 5px 10px; font-size: 0.75rem; font-family: sans-serif; font-weight: 700;
+      border-radius: 6px; border: 1.5px solid var(--cinza); background: var(--off-white);
+      cursor: pointer; transition: all 0.2s; color: var(--grafite-dk);
+    }
+    .btn-small:hover { background: var(--escrit-cor); color: white; border-color: var(--escrit-cor); }
+    .btn-small.danger:hover { background: var(--vermelho); border-color: var(--vermelho); }
 
     /* ═══ DASHBOARD ═══ */
     .greeting { font-size: 1rem; color: var(--grafite); margin-top: 4px; }
@@ -527,7 +533,6 @@
     .habit-info { flex: 1; }
     .habit-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
     .habit-desc { font-size: 0.8rem; color: var(--grafite); font-family: sans-serif; margin-bottom: 10px; }
-    .habit-idea-link { font-size: 0.75rem; color: var(--dourado); font-family: sans-serif; cursor: pointer; }
     .habit-streak { background: var(--dourado); color: var(--branco); border-radius: 20px; padding: 4px 12px; font-size: 0.78rem; font-weight: 700; font-family: sans-serif; white-space: nowrap; }
     .habit-week { display: flex; gap: 4px; margin-top: 10px; }
     .habit-day-btn { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--cinza); background: var(--off-white); cursor: pointer; font-size: 0.7rem; font-family: sans-serif; font-weight: 700; color: var(--grafite); transition: all 0.2s; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1px; }
@@ -615,6 +620,23 @@
     .font-btn { background: var(--off-white); border: 1.5px solid var(--cinza); border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 700; padding: 6px 12px; transition: all 0.2s; }
     .font-btn:hover { border-color: var(--dourado); color: var(--dourado); }
 
+    /* ═══ ASSESS ITEMS (Transcrições) ═══ */
+    .assess-item {
+      background: var(--branco);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+      border-left: 3px solid var(--escrit-cor);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .assess-item-info { flex: 1; }
+    .assess-item-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+    .assess-item-meta { font-size: 0.72rem; color: var(--grafite); font-family: sans-serif; margin-bottom: 6px; }
+    .assess-item-actions { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; }
+
     /* ═══ MODAIS ═══ */
     .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.55); z-index: 500; align-items: center; justify-content: center; padding: 20px; }
     .modal.open { display: flex; }
@@ -654,7 +676,6 @@
       .kanban-board { grid-template-columns: repeat(2, 1fr); }
       .frentes-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    /* ═══ MENU HAMBURGUER (mobile) ═══ */
     .topnav-hamburger {
       display: none;
       background: transparent;
@@ -702,26 +723,20 @@
       margin: 8px 0;
     }
 
-    /* ═══ RESPONSIVO GERAL ═══ */
     @media (max-width: 768px) {
-      /* Nav — esconde links da topnav, mostra hamburguer */
       .topnav { padding: 0 16px; }
       .topnav > .topnav-link { display: none; }
       .topnav-hamburger { display: flex; }
       .topnav-logo { font-size: 1.05rem; }
       .topnav > div[style*="width:1px"] { display: none; }
-      .topnav-divider { display: none; }
-      /* Botões dentro do mobile-menu DEVEM aparecer */
       .mobile-menu .topnav-link { display: block !important; }
 
       .app-container { padding: 14px 12px; }
       main { padding: 14px 12px; }
 
-      /* Headers */
       .screen-header { flex-direction: column; align-items: flex-start; }
       .screen-header h1 { font-size: 1.3rem; }
 
-      /* Grids */
       .frentes-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .kanban-board { grid-template-columns: 1fr; }
       .colab-board-grid { grid-template-columns: 1fr 1fr; }
@@ -730,30 +745,25 @@
       .brief-cards-grid { grid-template-columns: 1fr; }
       .prompts-grid { grid-template-columns: 1fr; }
 
-      /* Teleprompter */
       .teleprompter-wrapper { min-height: 280px; padding: 20px 14px; }
       .teleprompter-text { font-size: 1.2rem !important; }
       .teleprompter-controls { gap: 8px; }
       .tp-tabs { flex-wrap: wrap; }
       .tp-tab { flex: 1; text-align: center; padding: 10px 10px; font-size: 0.82rem; }
 
-      /* Agenda nav */
       .agenda-nav { gap: 6px; }
       #current-date-display { font-size: 0.9rem; min-width: unset; }
       .agenda-tabs { gap: 2px; padding: 4px; }
       .agenda-tab { padding: 8px 12px; font-size: 0.8rem; }
 
-      /* Colab headers */
       .colab-header { padding: 16px; }
       .colab-header h1 { font-size: 1.3rem; }
       .colab-header > div:last-child { width: 100%; }
       .colab-header > div:last-child button { flex: 1; font-size: 0.78rem; padding: 8px 10px; }
 
-      /* Socias header */
       .socias-header { padding: 16px; }
       .socias-header h1 { font-size: 1.3rem; }
 
-      /* Modais — ocupam tela toda no mobile */
       .modal { padding: 0; align-items: flex-end; }
       .modal-content {
         max-width: 100%;
@@ -765,18 +775,14 @@
       .modal-large { max-width: 100%; }
       .modal-buttons { flex-direction: column; }
 
-      /* Brief row */
       .brief-row { grid-template-columns: 1fr; }
 
-      /* Filtros scroll horizontal */
       .ideias-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
       .filter-btn { white-space: nowrap; flex-shrink: 0; }
 
-      /* Pauta */
       .pauta-item { flex-wrap: wrap; }
       .pauta-item > div:last-child { width: 100%; display: flex; gap: 6px; margin-top: 8px; }
 
-      /* Assessoria board */
       #aj-board { grid-template-columns: 1fr 1fr; }
     }
 
@@ -790,8 +796,6 @@
       .cal-day { min-height: 50px; }
       .cal-day-num { font-size: 0.72rem; }
       .cal-event-dot { display: none; }
-
-      /* Botões touch — maior área de toque */
       .btn-primary, .btn-secondary, .btn-danger { padding: 12px 18px; font-size: 0.9rem; }
       .control-btn { padding: 12px 16px; }
       .task-check { width: 22px; height: 22px; }
@@ -855,7 +859,6 @@
     .btn-rascunho-salvar:hover { background: rgba(255,220,100,0.3); }
 
     .rascunho-lista { display: flex; flex-direction: column; gap: 10px; }
-
     .rascunho-card {
       background: var(--branco);
       border-radius: var(--radius);
@@ -868,53 +871,19 @@
       transition: all 0.2s;
     }
     .rascunho-card:hover { box-shadow: var(--shadow-hover); }
-
-    .rascunho-card-texto {
-      font-size: 0.95rem;
-      color: var(--grafite-dk);
-      line-height: 1.6;
-      white-space: pre-wrap;
-    }
-    .rascunho-card-meta {
-      font-size: 0.72rem;
-      font-family: sans-serif;
-      color: var(--grafite);
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .rascunho-card-frente-badge {
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 0.68rem;
-      font-family: sans-serif;
-      font-weight: 700;
-    }
+    .rascunho-card-texto { font-size: 0.95rem; color: var(--grafite-dk); line-height: 1.6; white-space: pre-wrap; }
+    .rascunho-card-meta { font-size: 0.72rem; font-family: sans-serif; color: var(--grafite); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .rascunho-card-frente-badge { padding: 2px 10px; border-radius: 20px; font-size: 0.68rem; font-family: sans-serif; font-weight: 700; }
     .rascunho-card-frente-badge.jenifer    { background: rgba(196,169,107,0.15); color: var(--dourado-dk); }
     .rascunho-card-frente-badge.elizangela { background: rgba(123,82,160,0.12); color: var(--elizangela-cor); }
     .rascunho-card-frente-badge.escritorio { background: rgba(139,94,60,0.12); color: var(--escrit-cor); }
-    .rascunho-card-frente-badge.socias-gs  { background: rgba(92,58,30,0.12); color: var(--escrit-dk); }
+    .rascunho-card-frente-badge.sociasg    { background: rgba(92,58,30,0.12); color: var(--escrit-dk); }
     .rascunho-card-frente-badge.geral      { background: var(--off-white); color: var(--grafite); }
-
-    .rascunho-card-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .rascunho-card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn-transformar {
-      flex: 1;
-      padding: 8px 12px;
-      background: var(--dourado);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-family: sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
+      flex: 1; padding: 8px 12px; background: var(--dourado); color: white; border: none;
+      border-radius: 8px; font-family: sans-serif; font-size: 0.8rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap;
     }
     .btn-transformar:hover { background: var(--dourado-dk); }
     .btn-transformar.elizangela { background: var(--elizangela-cor); }
@@ -922,39 +891,13 @@
     .btn-transformar.escritorio { background: var(--escrit-cor); }
     .btn-transformar.escritorio:hover { background: var(--escrit-dk); }
     .btn-transformar.socias { background: var(--escrit-dk); }
-
-    .btn-rascunho-del {
-      padding: 8px 12px;
-      background: transparent;
-      border: 1.5px solid var(--cinza);
-      border-radius: 8px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      color: var(--grafite);
-      transition: all 0.2s;
-    }
+    .btn-rascunho-del { padding: 8px 12px; background: transparent; border: 1.5px solid var(--cinza); border-radius: 8px; font-size: 0.8rem; cursor: pointer; color: var(--grafite); transition: all 0.2s; }
     .btn-rascunho-del:hover { border-color: var(--vermelho); color: var(--vermelho); }
+    .rascunho-empty { text-align: center; padding: 32px 20px; color: var(--grafite); font-family: sans-serif; font-size: 0.88rem; background: var(--off-white); border-radius: var(--radius); border: 2px dashed var(--cinza); }
+    .rascunho-section-title { font-size: 0.78rem; font-family: sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--grafite); margin-bottom: 12px; }
 
-    .rascunho-empty {
-      text-align: center;
-      padding: 32px 20px;
-      color: var(--grafite);
-      font-family: sans-serif;
-      font-size: 0.88rem;
-      background: var(--off-white);
-      border-radius: var(--radius);
-      border: 2px dashed var(--cinza);
-    }
-
-    .rascunho-section-title {
-      font-size: 0.78rem;
-      font-family: sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--grafite);
-      margin-bottom: 12px;
-    }
+    /* ═══ APRESENTADOR FULLSCREEN ═══ */
+    #apresentador-fullscreen { background: rgba(0,0,0,0.95); justify-content: center; align-items: center; padding: 0; }
   </style>
 </head>
 <body>
@@ -970,10 +913,8 @@
       <button class="topnav-link topnav-escrit" data-screen="social-media">📱 Social Media</button>
       <button class="topnav-link topnav-escrit" data-screen="assessoria">⚖️ Assessoria</button>
       <button class="topnav-link topnav-socias" data-screen="socias">🤝 Sócias</button>
-      <button class="topnav-link topnav-escrit" data-screen="assessoria-transcrever">📄 Transcrições</button>
       <div style="width:1px;background:rgba(255,255,255,0.15);height:24px;margin:0 6px;"></div>
       <button class="topnav-link" data-screen="rascunho" style="color:rgba(255,220,100,0.9);">⚡ Rascunho</button>
-      <!-- Hamburguer mobile -->
       <button class="topnav-hamburger" id="hamburger-btn" onclick="app.toggleMobileMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -1004,7 +945,6 @@
             <p id="greeting" class="greeting"></p>
           </div>
         </div>
-
         <div class="frentes-grid">
           <div class="frente-card jenifer" onclick="app.goTo('ideias'); app.filterByFrente('jenifer')">
             <div class="frente-icon">👤</div>
@@ -1021,7 +961,7 @@
           <div class="frente-card escritorio" onclick="app.goTo('ideias'); app.filterByFrente('escritorio')">
             <div class="frente-icon">⚖️</div>
             <h3>Escritório</h3>
-            <p class="frente-desc">Giacomini &amp; Silva — Alinhamentos e Apresentações</p>
+            <p class="frente-desc">Giacomini &amp; Silva</p>
             <div class="frente-stats" id="stats-escritorio">0 ideias</div>
           </div>
           <div class="frente-card" style="border-left-color:var(--escrit-dk);" onclick="app.goTo('socias')">
@@ -1031,18 +971,17 @@
             <div class="frente-stats" id="stats-socias" style="color:var(--escrit-dk);">0 ideias</div>
           </div>
         </div>
-
         <section class="dashboard-section">
           <h2>📌 Hoje — <span id="today-label"></span></h2>
           <div id="today-events" class="events-list"><p class="empty-state">Nenhuma tarefa para hoje</p></div>
         </section>
-
         <section class="dashboard-section">
           <h2>🔥 Ideias Recentes</h2>
           <div id="recent-ideas" class="ideas-preview">
             <p class="empty-state">Nenhuma ideia ainda. <a href="#" onclick="app.goTo('ideias'); return false;">Criar a primeira →</a></p>
           </div>
         </section>
+      </div>
       </section>
 
       <!-- ══ AGENDA ══ -->
@@ -1089,6 +1028,7 @@
             <div class="cal-grid" id="month-calendar-grid"></div>
           </div>
         </div>
+      </div>
       </section>
 
       <!-- ══ BANCO DE IDEIAS ══ -->
@@ -1131,7 +1071,6 @@
             <div class="column-cards" id="col-publicado"></div>
           </div>
         </div>
-        <!-- SUB-SEÇÃO SÓCIAS GS -->
         <div style="margin-top:40px;padding-top:28px;border-top:2px solid var(--cinza);">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
             <h2 style="font-size:1.3rem;margin:0;">🤝 Sócias GS</h2>
@@ -1139,9 +1078,10 @@
           </div>
           <div class="socias-board" id="socias-gs-board"></div>
         </div>
+      </div>
       </section>
 
-      <!-- ══ TELEPROMPTER (duas sócias) ══ -->
+      <!-- ══ TELEPROMPTER ══ -->
       <section id="teleprompter" class="screen" style="background:#F2EDE8;">
       <div class="app-container">
         <div class="screen-header">
@@ -1150,14 +1090,10 @@
             <p>Roteiros individuais por sócia</p>
           </div>
         </div>
-
-        <!-- Abas das sócias -->
         <div class="tp-tabs">
           <button class="tp-tab active jenifer" onclick="app.switchTpTab('jenifer')">👤 Jenifer Giacomini</button>
           <button class="tp-tab elizangela" onclick="app.switchTpTab('elizangela')">👤 Elizângela Silva</button>
         </div>
-
-        <!-- Painel Jenifer -->
         <div id="tp-jenifer" class="tp-panel active">
           <div class="teleprompter-toolbar">
             <select id="script-select-jenifer" class="script-selector" onchange="app.loadScript(this.value,'jenifer')">
@@ -1179,8 +1115,6 @@
             <button class="control-btn" onclick="app.toggleFullscreen('tp-container-jenifer')">⛶ Fullscreen</button>
           </div>
         </div>
-
-        <!-- Painel Elizângela -->
         <div id="tp-elizangela" class="tp-panel">
           <div class="teleprompter-toolbar">
             <select id="script-select-elizangela" class="script-selector" onchange="app.loadScript(this.value,'elizangela')">
@@ -1202,8 +1136,8 @@
             <button class="control-btn" onclick="app.toggleFullscreen('tp-container-elizangela')">⛶ Fullscreen</button>
           </div>
         </div>
+      </div>
       </section>
-
 
       <!-- ══ RASCUNHO RÁPIDO ══ -->
       <section id="rascunho" class="screen" style="background:#F2EDE8;">
@@ -1214,8 +1148,6 @@
             <p>Capture a ideia agora · transforme em ideia oficial com um clique</p>
           </div>
         </div>
-
-        <!-- Caixa de captura rápida -->
         <div class="rascunho-capture">
           <textarea id="rascunho-input" placeholder="Digite sua ideia agora... pode ser qualquer coisa 💡" rows="3"></textarea>
           <div class="rascunho-capture-footer">
@@ -1229,22 +1161,18 @@
             <button class="btn-rascunho-salvar" onclick="app.salvarRascunho()">⚡ Salvar Rascunho</button>
           </div>
         </div>
-
-        <!-- Lista de rascunhos -->
         <div class="rascunho-section-title">📋 Seus Rascunhos</div>
         <div class="rascunho-lista" id="rascunho-lista"></div>
+      </div>
       </section>
 
-
-
-
-    <!-- ══ SOCIAL MEDIA ══ -->
-    <section id="social-media" class="screen" style="background:#F2EDE8;">
+      <!-- ══ SOCIAL MEDIA ══ -->
+      <section id="social-media" class="screen" style="background:#F2EDE8;">
       <div class="app-container">
         <div class="colab-header escrit">
           <div>
             <h1>📱 Social Media</h1>
-            <p>Giacomini &amp; Silva · Briefings de conteúdo por perfil · Empresa terceirizada acessa aqui</p>
+            <p>Giacomini &amp; Silva · Briefings de conteúdo por perfil</p>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <button class="btn-primary" style="background:var(--escrit-cor);" onclick="app.novoBriefSM('escritorio-geral')">+ Brief Escritório</button>
@@ -1252,30 +1180,34 @@
             <button class="btn-primary" style="background:var(--elizangela-cor);" onclick="app.novoBriefSM('socia-elizangela')">+ Brief Elizângela</button>
           </div>
         </div>
-
         <div class="colab-stats-row" style="margin-bottom:28px;">
           <div class="colab-stat-card escrit"><div class="colab-stat-num" id="sm-total">0</div><div class="colab-stat-lbl">Total Briefs</div></div>
           <div class="colab-stat-card escrit"><div class="colab-stat-num" id="sm-bruto">0</div><div class="colab-stat-lbl">Em Criação</div></div>
           <div class="colab-stat-card escrit"><div class="colab-stat-num" id="sm-gravar">0</div><div class="colab-stat-lbl">Para Produzir</div></div>
           <div class="colab-stat-card escrit"><div class="colab-stat-num" id="sm-publicado">0</div><div class="colab-stat-lbl">Publicados</div></div>
         </div>
-
         <div id="sm-perfis-container"></div>
-
         <div class="prompts-section">
           <div class="prompts-section-header">
             <div>
               <div class="prompts-section-title">📋 Prompts — Social Media</div>
-              <div style="font-size:0.78rem;color:var(--grafite);font-family:sans-serif;margin-top:3px;">Prompts prontos para criar conteúdo · clique para copiar</div>
+              <div style="font-size:0.78rem;color:var(--grafite);font-family:sans-serif;margin-top:3px;">Prompts prontos para criar conteúdo</div>
             </div>
             <button class="btn-primary" onclick="app.abrirModalPrompt('social-media')">+ Novo Prompt</button>
           </div>
           <div class="prompts-grid" id="prompts-social-media"></div>
         </div>
       </div>
-    </section>
+      </section>
 
-  
+      <!-- ══ ASSESSORIA ══ -->
+      <section id="assessoria" class="screen" style="background:#F2EDE8;">
+      <div class="app-container">
+        <div class="colab-header escrit">
+          <div>
+            <h1>⚖️ Assessoria Jurídica</h1>
+            <p>Giacomini &amp; Silva · Alinhamentos mensais com as Sócias</p>
+          </div>
           <button class="btn-primary" style="background:rgba(58,90,138,0.9);" onclick="app.exportarPautaAlinhamento()">📊 Exportar Pauta</button>
         </div>
         <div class="colab-stats-row">
@@ -1295,21 +1227,65 @@
         </div>
         <div style="font-weight:700;font-size:1rem;margin-bottom:14px;">📁 Todas as Pautas</div>
         <div class="colab-board-grid" id="aj-board"></div>
+
+        <!-- ══ BLOCO: TRANSCRIÇÕES & SLIDES ══ -->
+        <div style="margin-top:40px;padding-top:28px;border-top:2px solid var(--cinza);">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+            <div>
+              <h2 style="font-size:1.2rem;margin:0;color:var(--grafite-dk);">📄 Transcrições &amp; Slides</h2>
+              <p style="font-size:0.82rem;color:var(--grafite);font-family:sans-serif;margin-top:4px;">Armazene transcrições de reuniões e apresente slides em fullscreen</p>
+            </div>
+          </div>
+
+          <!-- Abas internas -->
+          <div class="agenda-tabs" style="margin-bottom:20px;">
+            <button class="agenda-tab active" id="tab-transc-btn" onclick="app.switchTranscTab('transcricoes',event)">📄 Transcrições</button>
+            <button class="agenda-tab" id="tab-slides-btn" onclick="app.switchTranscTab('slides',event)">🎬 Slides</button>
+          </div>
+
+          <!-- Aba Transcrições -->
+          <div id="transc-transcricoes" class="agenda-tab-content active">
+            <div class="assessoria-pauta">
+              <strong style="display:block;font-size:1rem;margin-bottom:12px;">📄 Cole a Transcrição</strong>
+              <input type="text" id="transc-autor" placeholder="Seu nome (opcional)" style="width:100%;padding:10px 14px;border:1.5px solid var(--cinza);border-radius:8px;margin-bottom:10px;font-family:inherit;">
+              <textarea id="transc-texto" placeholder="Cole a transcrição da vídeoconferência aqui..." style="width:100%;padding:14px;border:1.5px solid var(--cinza);border-radius:8px;font-family:monospace;font-size:0.85rem;min-height:120px;margin-bottom:12px;resize:vertical;"></textarea>
+              <button class="btn-primary" style="background:var(--escrit-cor);" onclick="app.salvarTranscricao()">💾 Salvar Transcrição</button>
+            </div>
+            <div id="transc-lista"></div>
+          </div>
+
+          <!-- Aba Slides -->
+          <div id="transc-slides" class="agenda-tab-content">
+            <div class="assessoria-pauta">
+              <strong style="display:block;font-size:1rem;margin-bottom:8px;">🎬 Upload de Slides</strong>
+              <p style="font-size:0.82rem;color:var(--grafite);font-family:sans-serif;margin-bottom:14px;">PowerPoint (.pptx) ou PDF</p>
+              <label for="slide-file" style="display:inline-block;background:var(--dourado);color:white;padding:10px 20px;border-radius:8px;font-weight:700;font-family:sans-serif;font-size:0.88rem;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='var(--dourado-dk)'" onmouseout="this.style.background='var(--dourado)'">📁 Selecionar arquivo</label>
+              <input type="file" id="slide-file" accept=".pptx,.pdf" onchange="app.handleSlideFile(event)" style="display:none;">
+              <span id="slide-file-label" style="font-size:0.82rem;color:var(--grafite);margin-left:12px;font-family:sans-serif;"></span>
+              <input type="text" id="slide-titulo" placeholder="Título da apresentação" style="width:100%;padding:10px 14px;border:1.5px solid var(--cinza);border-radius:8px;margin:14px 0 10px 0;font-family:inherit;">
+              <input type="text" id="slide-autor" placeholder="Seu nome (opcional)" style="width:100%;padding:10px 14px;border:1.5px solid var(--cinza);border-radius:8px;margin-bottom:14px;font-family:inherit;">
+              <button class="btn-primary" style="background:var(--escrit-cor);" onclick="app.salvarSlide()">💾 Salvar Slide</button>
+            </div>
+            <div id="transc-slides-lista"></div>
+          </div>
+        </div>
+        <!-- FIM BLOCO TRANSCRIÇÕES & SLIDES -->
+
         <div class="prompts-section">
           <div class="prompts-section-header">
             <div>
               <div class="prompts-section-title">📋 Prompts — Assessoria Jurídica</div>
-              <div style="font-size:0.78rem;color:var(--grafite);font-family:sans-serif;margin-top:3px;">Prompts para análises, pareceres e apresentações · clique para copiar</div>
+              <div style="font-size:0.78rem;color:var(--grafite);font-family:sans-serif;margin-top:3px;">Prompts para análises, pareceres e apresentações</div>
             </div>
             <button class="btn-primary" style="background:var(--escrit-cor);" onclick="app.abrirModalPrompt('assessoria')">+ Novo Prompt</button>
           </div>
           <div class="prompts-grid" id="prompts-assessoria"></div>
         </div>
       </div>
-    </section>
+      </section>
 
-    <!-- ══ SÓCIAS ══ -->
-    <section id="socias" class="screen" style="background:#F2EDE8;">
+      <!-- ══ SÓCIAS ══ -->
+      <section id="socias" class="screen" style="background:#F2EDE8;">
       <div class="app-container">
         <div class="socias-header">
           <div>
@@ -1336,166 +1312,11 @@
         </div>
         <div class="socias-board" id="sc-board"></div>
       </div>
-    </section>
+      </section>
 
     </main>
-  // ════════════════════════════════════════════════════════════
-    // ──── TRANSCRIÇÕES & SLIDES
-    // ════════════════════════════════════════════════════════════
 
-    app.switchTranscTab = function(aba) {
-      document.querySelectorAll('#assessoria-transcrever .agenda-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('#assessoria-transcrever .agenda-tab-content').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active');
-      document.getElementById('transc-' + aba).classList.add('active');
-    };
-
-    app.salvarTranscricao = function() {
-      const texto = document.getElementById('transc-texto').value.trim();
-      const autor = document.getElementById('transc-autor').value.trim() || 'Anônimo';
-      if (!texto) { app.toast('✏️ Cole a transcrição'); return; }
-      if (!app.data.transcricoes) app.data.transcricoes = [];
-      app.data.transcricoes.push({ id: app.uid(), texto, autor, data: app.formatDate(new Date()) });
-      document.getElementById('transc-texto').value = '';
-      document.getElementById('transc-autor').value = '';
-      app.renderTranscricoes();
-      app.toast('✅ Transcrição salva!');
-      app.save();
-    };
-
-    app.renderTranscricoes = function() {
-      const el = document.getElementById('transc-lista');
-      if (!app.data.transcricoes || app.data.transcricoes.length === 0) {
-        el.innerHTML = '<p style="color:var(--grafite);font-family:sans-serif;padding:12px;">Nenhuma transcrição</p>';
-        return;
-      }
-      el.innerHTML = app.data.transcricoes.map(t => `
-        <div class="assess-item">
-          <div class="assess-item-info">
-            <div class="assess-item-title">📄 Transcrição</div>
-            <div class="assess-item-meta">Por: ${t.autor} | ${t.data}</div>
-            <div style="margin-top:10px;padding:10px;background:#f0f0f0;border-radius:4px;max-height:80px;overflow-y:auto;">
-              ${t.texto.substring(0, 200)}${t.texto.length > 200 ? '...' : ''}
-            </div>
-          </div>
-          <div class="assess-item-actions">
-            <button class="btn-small" onclick="app.copiarLinkTransc('${t.id}')">🔗 Link</button>
-            <button class="btn-small danger" onclick="app.deletarTransc('${t.id}')">🗑</button>
-          </div>
-        </div>`).join('');
-    };
-
-    app.copiarLinkTransc = function(id) {
-      const link = window.location.href.split('?')[0] + '?transc=' + id;
-      navigator.clipboard.writeText(link).then(() => app.toast('✅ Link copiado!')).catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = link; document.body.appendChild(ta); ta.select(); document.execCommand('copy');
-        document.body.removeChild(ta); app.toast('✅ Link copiado!');
-      });
-    };
-
-    app.deletarTransc = function(id) {
-      if (!confirm('Deletar?')) return;
-      app.data.transcricoes = (app.data.transcricoes || []).filter(t => t.id !== id);
-      app.renderTranscricoes();
-      app.save();
-    };
-
-    app.handleSlideFile = function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        app.slideBase64 = ev.target.result;
-        document.getElementById('slide-file-label').textContent = '✅ ' + file.name;
-      };
-      reader.readAsDataURL(file);
-    };
-
-    app.salvarSlide = function() {
-      const titulo = document.getElementById('slide-titulo').value.trim();
-      const autor = document.getElementById('slide-autor').value.trim() || 'Anônimo';
-      if (!titulo || !app.slideBase64) { app.toast('⚠️ Título e arquivo obrigatórios'); return; }
-      if (!app.data.slides) app.data.slides = [];
-      app.data.slides.push({ id: app.uid(), titulo, autor, data: app.formatDate(new Date()), conteudo: app.slideBase64 });
-      document.getElementById('slide-titulo').value = '';
-      document.getElementById('slide-autor').value = '';
-      document.getElementById('slide-file').value = '';
-      document.getElementById('slide-file-label').textContent = '';
-      app.slideBase64 = null;
-      app.renderSlides();
-      app.toast('✅ Slide salvo!');
-      app.save();
-    };
-
-    app.renderSlides = function() {
-      const el = document.getElementById('transc-slides-lista');
-      if (!app.data.slides || app.data.slides.length === 0) {
-        el.innerHTML = '<p style="color:var(--grafite);font-family:sans-serif;padding:12px;">Nenhum slide</p>';
-        return;
-      }
-      el.innerHTML = app.data.slides.map(s => `
-        <div class="assess-item">
-          <div class="assess-item-info">
-            <div class="assess-item-title">🎬 ${s.titulo}</div>
-            <div class="assess-item-meta">Por: ${s.autor} | ${s.data}</div>
-          </div>
-          <div class="assess-item-actions">
-            <button class="btn-small" onclick="app.abrirSlide('${s.id}')">▶ Apresentar</button>
-            <button class="btn-small danger" onclick="app.deletarSlide('${s.id}')">🗑</button>
-          </div>
-        </div>`).join('');
-    };
-
-    app.abrirSlide = function(id) {
-      const slide = (app.data.slides || []).find(s => s.id === id);
-      if (!slide) return;
-      app.timerSeconds = 0;
-      document.getElementById('apresentador-fullscreen').classList.add('open');
-      document.getElementById('slide-container').innerHTML = '<iframe src="' + slide.conteudo + '" style="width:100%;height:100%;border:none;"></iframe>';
-    };
-
-    app.fecharApresentador = function() {
-      document.getElementById('apresentador-fullscreen').classList.remove('open');
-      if (app.timerInterval) clearInterval(app.timerInterval);
-      app.timerSeconds = 0;
-      document.getElementById('timer-apresentador').textContent = '00:00';
-    };
-
-    app.toggleTimer = function() {
-      if (app.timerInterval) {
-        clearInterval(app.timerInterval);
-        app.timerInterval = null;
-      } else {
-        app.timerInterval = setInterval(() => {
-          app.timerSeconds++;
-          const m = Math.floor(app.timerSeconds / 60);
-          const s = app.timerSeconds % 60;
-          document.getElementById('timer-apresentador').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
-        }, 1000);
-      }
-    };
-
-    app.toggleZoom = function() {
-      const el = document.getElementById('slide-container');
-      el.style.transform = el.style.transform === 'scale(1.2)' ? 'scale(1)' : 'scale(1.2)';
-    };
-
-    app.slideAnterior = function() { console.log('prev'); };
-    app.proximoSlide = function() { console.log('next'); };
-
-    app.deletarSlide = function(id) {
-      if (!confirm('Deletar?')) return;
-      app.data.slides = (app.data.slides || []).filter(s => s.id !== id);
-      app.renderSlides();
-      app.save();
-    };
-
-    if (!app.data.transcricoes) app.data.transcricoes = [];
-    if (!app.data.slides) app.data.slides = [];
-  </script>
-</html>
-   <!-- ══════════ MODAIS ══════════ -->
+    <!-- ══════════ MODAIS ══════════ -->
 
     <!-- MODAL: Nova/Editar Ideia -->
     <div id="modal-idea" class="modal">
@@ -1508,7 +1329,6 @@
           <input type="hidden" id="idea-id">
           <input type="text" id="idea-titulo" placeholder="Título da ideia" required>
           <textarea id="idea-descricao" placeholder="Descrição ou notas..."></textarea>
-
           <label>Tipo:</label>
           <select id="idea-tipo" required>
             <option value="insight">💭 Insight</option>
@@ -1516,7 +1336,6 @@
             <option value="print">📸 Print/Referência</option>
             <option value="roteiro">📄 Roteiro</option>
           </select>
-
           <label>Frente:</label>
           <select id="idea-frente" required>
             <option value="jenifer">👤 Conteúdo Pessoal — Jenifer Giacomini</option>
@@ -1524,8 +1343,6 @@
             <option value="escritorio">⚖️ Escritório</option>
             <option value="socias-gs">🤝 Sócias — Gestão Estratégica GS</option>
           </select>
-
-          <!-- Categoria de Conteúdo (para Jenifer/Elizangela/Escritório) -->
           <div id="categoria-conteudo-group" style="display:none;">
             <label>Categoria:</label>
             <select id="idea-categoria-conteudo" style="width:100%;">
@@ -1534,11 +1351,8 @@
               <option value="alinhamento">⚖️ Alinhamento Estratégico (→ Assessoria)</option>
             </select>
           </div>
-
           <label>Link (opcional)</label>
           <input type="url" id="idea-link" placeholder="https://...">
-
-          <!-- BRIEFING DE CONTEÚDO (Social Media) -->
           <div class="brief-fields" id="brief-fields-group">
             <legend>📋 Briefing de Conteúdo — Social Media</legend>
             <div class="brief-row">
@@ -1582,8 +1396,6 @@
               </div>
             </div>
           </div>
-
-          <!-- CAMPOS SÓCIAS -->
           <div class="socias-fields" id="socias-fields-group">
             <legend>🤝 Gestão Estratégica — Sócias GS</legend>
             <div class="brief-row">
@@ -1617,13 +1429,11 @@
               </div>
             </div>
           </div>
-
           <label>Thumbnail / Print (opcional)</label>
           <div>
             <input type="file" id="idea-image" accept="image/*" onchange="app.previewImage(this)">
             <div id="idea-image-preview" class="image-preview"></div>
           </div>
-
           <div class="modal-buttons">
             <button type="submit" class="btn-primary" id="form-idea-submit">Criar Ideia</button>
             <button type="button" class="btn-secondary" onclick="app.closeModal('modal-idea')">Cancelar</button>
@@ -1730,11 +1540,24 @@
       </div>
     </div>
 
+    <!-- APRESENTADOR FULLSCREEN -->
+    <div id="apresentador-fullscreen" class="modal" style="background:rgba(0,0,0,0.95);justify-content:center;align-items:center;padding:0;">
+      <div style="width:95vw;height:95vh;background:white;border-radius:8px;display:flex;flex-direction:column;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+        <button style="position:absolute;top:16px;right:16px;background:var(--escrit-cor);color:white;border:none;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer;z-index:10;font-family:sans-serif;" onclick="app.fecharApresentador()">✕ Fechar</button>
+        <div style="position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.7);color:white;padding:10px 16px;border-radius:6px;font-family:monospace;font-weight:bold;font-size:16px;z-index:10;"><span id="timer-apresentador">00:00</span></div>
+        <div id="slide-container" style="flex:1;overflow:auto;display:flex;align-items:center;justify-content:center;background:#f0f0f0;"></div>
+        <div style="background:var(--grafite-dk);color:white;padding:16px;display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;">
+          <button style="background:var(--escrit-cor);color:white;border:none;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer;font-family:sans-serif;" onclick="app.slideAnterior()">⬅ Anterior</button>
+          <button style="background:var(--escrit-cor);color:white;border:none;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer;font-family:sans-serif;" onclick="app.proximoSlide()">Próximo ➡</button>
+          <button style="background:var(--dourado);color:white;border:none;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer;font-family:sans-serif;" onclick="app.toggleTimer()">⏱ Timer</button>
+          <button style="background:var(--dourado);color:white;border:none;padding:8px 16px;border-radius:6px;font-weight:700;cursor:pointer;font-family:sans-serif;" onclick="app.toggleZoom()">🔍 Zoom</button>
+        </div>
+      </div>
+    </div>
+
     <div id="toast" class="toast"></div>
 
-
   </div><!-- #app -->
-
 
   <script>
   /* ═══════════════════════════════════════════════════════
@@ -1749,9 +1572,11 @@
       habits: [],
       dreams: [],
       courses: [],
-      scripts: [],   // { id, titulo, conteudo, socia: 'jenifer'|'elizangela' }
+      scripts: [],
       prompts: [],
-      rascunhos: []  // { id, texto, frente, dataCriacao }
+      rascunhos: [],
+      transcricoes: [],
+      slides: []
     },
 
     currentDate: new Date(),
@@ -1760,12 +1585,14 @@
     currentFilter: 'all',
     scCatFilter: 'all',
     currentTpTab: 'jenifer',
+    slideBase64: null,
+    timerSeconds: 0,
+    timerInterval: null,
     tpState: {
       jenifer:    { interval: null, playing: false, fontSize: 1.6, speed: 1 },
       elizangela: { interval: null, playing: false, fontSize: 1.6, speed: 1 }
     },
 
-    /* ── INIT ── */
     init() {
       this.bindNavigation();
       this.bindAgendaTabs();
@@ -1776,7 +1603,7 @@
       this.renderAgendaDay();
       this.renderScriptSelectors();
       this.renderRascunhos();
-      this.loadData(); // carrega dados salvos e re-renderiza
+      this.loadData();
 
       const frenteEl = document.getElementById('idea-frente');
       if (frenteEl) frenteEl.addEventListener('change', () => this._toggleBriefFields(frenteEl.value));
@@ -1791,14 +1618,10 @@
         this._toggleBriefFields('');
       });
 
-      // Modo colaborador via URL param
-      // Atalho Ctrl+Enter na caixa de rascunho
       document.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.key === 'Enter') {
           const rascunhoInput = document.getElementById('rascunho-input');
-          if (document.activeElement === rascunhoInput) {
-            this.salvarRascunho();
-          }
+          if (document.activeElement === rascunhoInput) this.salvarRascunho();
         }
       });
 
@@ -1807,71 +1630,50 @@
         const colab = params.get('colaborador');
         if (colab === 'social-media') {
           this.goTo('social-media');
-          document.querySelectorAll('[data-screen="dashboard"],[data-screen="agenda"],[data-screen="ideias"],[data-screen="teleprompter"]')
-            .forEach(b => b.style.display = 'none');
+          document.querySelectorAll('[data-screen="dashboard"],[data-screen="agenda"],[data-screen="ideias"],[data-screen="teleprompter"]').forEach(b => b.style.display = 'none');
         } else if (colab === 'assessoria') {
           this.goTo('assessoria');
-          document.querySelectorAll('[data-screen="dashboard"],[data-screen="agenda"],[data-screen="ideias"],[data-screen="teleprompter"]')
-            .forEach(b => b.style.display = 'none');
+          document.querySelectorAll('[data-screen="dashboard"],[data-screen="agenda"],[data-screen="ideias"],[data-screen="teleprompter"]').forEach(b => b.style.display = 'none');
         }
       } catch(e) {}
     },
 
-    /* ── DADOS ── */
-    // ── URL da sua API (Google Apps Script) ──
-    // Cole aqui a URL gerada após implantar o Código.gs como API
     API_URL: 'https://script.google.com/macros/s/AKfycby-R6gNkzagnipv66eT6FPl_ZiIOfmJbCuck1jACapwGvR6etBAJUQpSTjW6RbetKc1vg/exec',
     API_KEY: 'GS@2026',
 
-
-    // ── API via Cloudflare Worker (resolve CORS) ──
     _api(url) {
       const WORKER_URL = 'https://shiny-feather-8fbd.juridico-d48.workers.dev';
       const params = url.includes('?') ? url.split('?')[1] : '';
       const finalUrl = WORKER_URL + (params ? '?' + params : '');
-
-      // Se URL muito longa (>2000 chars), usar POST para evitar truncamento
       if (finalUrl.length > 2000) {
         const paramObj = {};
         new URLSearchParams(params).forEach((v, k) => { paramObj[k] = v; });
-        return fetch(WORKER_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(paramObj)
-        })
-        .then(r => r.json())
-        .catch(e => { throw new Error('Erro ao conectar: ' + e.message); });
+        return fetch(WORKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(paramObj) }).then(r => r.json()).catch(e => { throw new Error('Erro: ' + e.message); });
       }
-
-      return fetch(finalUrl)
-        .then(r => r.json())
-        .catch(e => { throw new Error('Erro ao conectar: ' + e.message); });
+      return fetch(finalUrl).then(r => r.json()).catch(e => { throw new Error('Erro: ' + e.message); });
     },
 
     loadData() {
-      // 1. Carrega localStorage para resposta imediata
       try {
         const saved = localStorage.getItem('gs-app-v1');
         if (saved) this.data = { ...this.data, ...JSON.parse(saved) };
       } catch(e) {}
+      if (!this.data.transcricoes) this.data.transcricoes = [];
+      if (!this.data.slides) this.data.slides = [];
       this.refresh();
 
-      // 2. Busca dados do GAS — GAS é a fonte de verdade
       if (this.API_URL) {
         this._mostrarSincStatus('🔄 Sincronizando...');
         this._api(`${this.API_URL}?acao=getAllData&key=${this.API_KEY}`)
           .then(d => {
             if (d && !d.error) {
-              // Merge inteligente: usar o maior conjunto de dados
               const merged = {};
               const arrays = ['ideas','habits','dreams','courses','scripts','prompts','rascunhos'];
               arrays.forEach(k => {
                 const local = this.data[k] || [];
                 const remote = d[k] || [];
-                // Usar o que tiver mais dados
                 merged[k] = remote.length >= local.length ? remote : local;
               });
-              // Tasks: merge por data
               const localTasks = this.data.tasks || {};
               const remoteTasks = d.tasks || {};
               const allDates = new Set([...Object.keys(localTasks), ...Object.keys(remoteTasks)]);
@@ -1881,6 +1683,8 @@
                 const rt = remoteTasks[date] || [];
                 merged.tasks[date] = rt.length >= lt.length ? rt : lt;
               });
+              merged.transcricoes = this.data.transcricoes || [];
+              merged.slides = this.data.slides || [];
               this.data = { ...this.data, ...merged };
               this.saveLocal();
               this.refresh();
@@ -1911,7 +1715,6 @@
     save() {
       this.saveLocal();
       if (!this.API_URL) return;
-      // Salva cada seção separadamente para evitar limite de URL/propriedade
       this._saveSection('prompts',   this.data.prompts   || []);
       this._saveSection('ideas',     this.data.ideas     || []);
       this._saveSection('tasks',     this.data.tasks     || {});
@@ -1923,21 +1726,12 @@
     },
 
     _saveSection(secao, dados) {
-      // SEMPRE usar POST pelo Worker — nunca GET para salvar
       const WORKER_URL = 'https://shiny-feather-8fbd.juridico-d48.workers.dev';
       fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          acao: 'saveSection',
-          key: this.API_KEY,
-          secao: secao,
-          dados: JSON.stringify(dados)
-        })
-      })
-      .then(r => r.json())
-      .then(d => { if (d && d.success) this._mostrarSincStatus('💾 Salvo!'); })
-      .catch(() => this._mostrarSincStatus('📴 Salvo localmente'));
+        body: JSON.stringify({ acao: 'saveSection', key: this.API_KEY, secao, dados: JSON.stringify(dados) })
+      }).then(r => r.json()).then(d => { if (d && d.success) this._mostrarSincStatus('💾 Salvo!'); }).catch(() => this._mostrarSincStatus('📴 Salvo localmente'));
     },
 
     refresh() {
@@ -1945,16 +1739,12 @@
       this.renderKanban();
       this.renderAgendaDay();
       this.renderScriptSelectors();
-      // Atualiza telas abertas
       const screens = ['social-media','assessoria','socias','rascunho'];
       screens.forEach(s => {
-        if (document.getElementById(s)?.classList.contains('active')) {
-          this.goTo(s);
-        }
+        if (document.getElementById(s)?.classList.contains('active')) this.goTo(s);
       });
     },
 
-    /* ── NAVEGAÇÃO ── */
     bindNavigation() {
       document.querySelectorAll('.topnav-link').forEach(btn => {
         btn.addEventListener('click', () => this.goTo(btn.dataset.screen));
@@ -1972,14 +1762,13 @@
       if (screen === 'agenda')       this.renderAgendaDay();
       if (screen === 'teleprompter') this.renderScriptSelectors();
       if (screen === 'social-media') { this.renderSocialMedia(); this.renderPrompts('social-media','prompts-social-media'); }
-      if (screen === 'assessoria')   { this.renderAssessoria(); this.renderPrompts('assessoria','prompts-assessoria'); }
+      if (screen === 'assessoria')   { this.renderAssessoria(); this.renderPrompts('assessoria','prompts-assessoria'); this.renderTranscricoes(); this.renderSlides(); }
       if (screen === 'socias')       this.renderSocias();
       if (screen === 'rascunho')     this.renderRascunhos();
     },
 
     toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('open');
+      document.getElementById('mobile-menu').classList.toggle('open');
     },
 
     closeMobileMenu() {
@@ -1992,7 +1781,6 @@
       this.renderKanban();
     },
 
-    /* ── MODAIS ── */
     openModal(id) {
       document.getElementById(id)?.classList.add('open');
       if (id === 'modal-idea') {
@@ -2013,7 +1801,6 @@
       setTimeout(() => el.classList.remove('show'), 3000);
     },
 
-    /* ── DASHBOARD ── */
     updateGreeting() {
       const h = new Date().getHours();
       const g = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
@@ -2026,7 +1813,6 @@
     renderDashboard() {
       const counts = { jenifer: 0, elizangela: 0, escritorio: 0, 'socias-gs': 0 };
       this.data.ideas.forEach(i => { if (counts[i.frente] !== undefined) counts[i.frente]++; });
-
       const el = (id, txt) => { const e = document.getElementById(id); if (e) e.textContent = txt; };
       el('stats-jenifer',    `${counts['jenifer']} ${counts['jenifer']===1?'ideia':'ideias'}`);
       el('stats-elizangela', `${counts['elizangela']} ${counts['elizangela']===1?'ideia':'ideias'}`);
@@ -2042,28 +1828,22 @@
           todayEl.innerHTML = '<p class="empty-state">Nenhuma tarefa para hoje</p>';
         } else {
           todayEl.innerHTML = [
-            ...ideaTasksToday.slice(0,3).map(i => `<div class="event-item"><span class="event-time">🎥</span><span class="event-text">${i.titulo} <span style="font-size:0.72rem;color:var(--grafite);font-family:sans-serif;">(${this.frenteLabel(i.frente)})</span></span></div>`),
+            ...ideaTasksToday.slice(0,3).map(i => `<div class="event-item"><span class="event-time">🎥</span><span class="event-text">${i.titulo}</span></div>`),
             ...todayTasks.slice(0,3).map(t => `<div class="event-item"><span class="event-time">${t.hora||'—'}</span><span class="event-text">${t.titulo}</span></div>`)
           ].join('');
         }
       }
-
       const recentEl = document.getElementById('recent-ideas');
       if (recentEl) {
         const recent = [...this.data.ideas].reverse().slice(0,6);
         if (recent.length === 0) {
           recentEl.innerHTML = '<p class="empty-state">Nenhuma ideia ainda. <a href="#" onclick="app.goTo(\'ideias\'); return false;">Criar a primeira →</a></p>';
         } else {
-          recentEl.innerHTML = recent.map(i => `
-            <div class="idea-preview-card" onclick="app.showIdeaDetail('${i.id}')">
-              <div class="idea-preview-title">${i.titulo}</div>
-              <div class="idea-preview-meta">${this.tipoLabel(i.tipo)} · ${this.frenteLabel(i.frente)} · ${i.status}</div>
-            </div>`).join('');
+          recentEl.innerHTML = recent.map(i => `<div class="idea-preview-card" onclick="app.showIdeaDetail('${i.id}')"><div class="idea-preview-title">${i.titulo}</div><div class="idea-preview-meta">${this.tipoLabel(i.tipo)} · ${this.frenteLabel(i.frente)}</div></div>`).join('');
         }
       }
     },
 
-    /* ── KANBAN ── */
     bindFilters() {
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2093,7 +1873,6 @@
           : ideas.map(i => this.renderIdeaCard(i)).join('');
       });
 
-      // Sócias board
       const sociasBoard = document.getElementById('socias-gs-board');
       if (sociasBoard) {
         const sociasIdeas = this.data.ideas.filter(i => i.frente === 'socias-gs');
@@ -2106,20 +1885,7 @@
           return `<div class="socias-col">
             <div class="socias-col-header"><span>${s.label}</span><span style="background:var(--escrit-cor);color:white;border-radius:20px;padding:1px 8px;font-size:0.68rem;">${ideas.length}</span></div>
             ${ideas.length === 0 ? `<p style="color:var(--grafite);font-size:0.78rem;font-family:sans-serif;text-align:center;padding:14px;opacity:0.6;">Nenhuma</p>`
-              : ideas.map(i => `
-                <div class="socias-card" onclick="app.showIdeaDetail('${i.id}')">
-                  <div class="socias-card-title">${i.titulo}</div>
-                  ${i.descricao ? `<div class="socias-card-desc">${i.descricao.substring(0,90)}${i.descricao.length>90?'…':''}</div>` : ''}
-                  ${i.impacto ? `<div class="socias-card-desc" style="font-style:italic;color:var(--dourado-dk);">${i.impacto.substring(0,80)}${i.impacto.length>80?'…':''}</div>` : ''}
-                  <div class="socias-card-footer">
-                    ${i.categoria ? `<span class="cat-badge">${this.catLabel(i.categoria)}</span>` : ''}
-                    <span style="font-size:0.68rem;font-family:sans-serif;color:var(--grafite);">${i.responsavel?this.respLabel(i.responsavel):''}</span>
-                    <span style="font-size:0.65rem;font-family:sans-serif;color:var(--grafite);margin-left:auto;">${i.dataCriacao||''}</span>
-                  </div>
-                  <div style="display:flex;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid var(--cinza);" onclick="event.stopPropagation()">
-                    ${sociasStatuses.map(st => `<button style="flex:1;padding:3px 4px;font-size:0.62rem;font-family:sans-serif;font-weight:700;border-radius:5px;border:1px solid ${i.status===st.key?'var(--escrit-cor)':'var(--cinza)'};background:${i.status===st.key?'var(--escrit-cor)':'var(--off-white)'};color:${i.status===st.key?'white':'var(--grafite)'};cursor:pointer;" onclick="app.changeIdeaStatus('${i.id}','${st.key}');app.renderKanban();">${st.label.split(' ')[1]||st.label}</button>`).join('')}
-                  </div>
-                </div>`).join('')}
+              : ideas.map(i => `<div class="socias-card" onclick="app.showIdeaDetail('${i.id}')"><div class="socias-card-title">${i.titulo}</div>${i.descricao?`<div class="socias-card-desc">${i.descricao.substring(0,90)}…</div>`:''}<div class="socias-card-footer">${i.categoria?`<span class="cat-badge">${this.catLabel(i.categoria)}</span>`:''}<span style="font-size:0.65rem;font-family:sans-serif;color:var(--grafite);margin-left:auto;">${i.dataCriacao||''}</span></div></div>`).join('')}
           </div>`;
         }).join('');
       }
@@ -2129,25 +1895,22 @@
       const l = {'negocio':'💼 Negócio','melhoria':'🔧 Melhoria','estrategia':'🎯 Estratégia','financeiro':'💰 Financeiro','captacao':'📣 Captação','rh':'👥 RH','tecnologia':'💻 Tecnologia','outro':'📌 Outro'};
       return l[cat] || cat;
     },
-    respLabel(r) {
-      return r === 'jenifer' ? '👤 Jenifer' : r === 'elizangela' ? '👤 Elizângela' : r;
-    },
+    respLabel(r) { return r === 'jenifer' ? '👤 Jenifer' : r === 'elizangela' ? '👤 Elizângela' : r; },
 
     renderIdeaCard(idea) {
       const frenteBadge = `<span class="badge badge-${this.frenteClass(idea.frente)}">${this.frenteLabel(idea.frente)}</span>`;
       const tipoBadge   = `<span class="badge badge-tipo">${this.tipoLabel(idea.tipo)}</span>`;
       const imgTag = idea.image ? `<img src="${idea.image}" class="idea-card-image" alt="">` : '';
-      return `
-        <div class="idea-card frente-${idea.frente}" onclick="app.showIdeaDetail('${idea.id}')">
-          ${imgTag}
-          <div class="idea-card-title">${idea.titulo}</div>
-          <div class="idea-card-badges">${frenteBadge}${tipoBadge}</div>
-          ${idea.descricao ? `<div class="idea-card-desc">${idea.descricao.substring(0,80)}${idea.descricao.length>80?'…':''}</div>` : ''}
-          <div class="idea-card-footer">
-            <span class="idea-card-date">${idea.dataCriacao||''}</span>
-            ${idea.link ? `<a class="idea-card-link" href="${idea.link}" target="_blank" onclick="event.stopPropagation()">🔗</a>` : ''}
-          </div>
-        </div>`;
+      return `<div class="idea-card frente-${idea.frente}" onclick="app.showIdeaDetail('${idea.id}')">
+        ${imgTag}
+        <div class="idea-card-title">${idea.titulo}</div>
+        <div class="idea-card-badges">${frenteBadge}${tipoBadge}</div>
+        ${idea.descricao ? `<div class="idea-card-desc">${idea.descricao.substring(0,80)}${idea.descricao.length>80?'…':''}</div>` : ''}
+        <div class="idea-card-footer">
+          <span class="idea-card-date">${idea.dataCriacao||''}</span>
+          ${idea.link ? `<a class="idea-card-link" href="${idea.link}" target="_blank" onclick="event.stopPropagation()">🔗</a>` : ''}
+        </div>
+      </div>`;
     },
 
     showIdeaDetail(id) {
@@ -2185,7 +1948,7 @@
         const key = this.dateKey(new Date());
         if (!this.data.tasks[key]) this.data.tasks[key] = [];
         if (!this.data.tasks[key].some(t => t.ideaId === id)) {
-          this.data.tasks[key].push({ id: this.uid(), titulo: `🎥 Gravar: ${idea.titulo}`, hora: '', prioridade: 'ALTA', nota: `Frente: ${this.frenteLabel(idea.frente)}`, done: false, ideaId: id });
+          this.data.tasks[key].push({ id: this.uid(), titulo: `🎥 Gravar: ${idea.titulo}`, hora: '', prioridade: 'ALTA', nota: '', done: false, ideaId: id });
           this.toast('📅 Tarefa adicionada à agenda de hoje!');
         }
       }
@@ -2241,16 +2004,12 @@
       if (g)   g.classList.toggle('visible', isSM);
       if (gs)  gs.classList.toggle('visible', isSocias);
       if (ccg) ccg.style.display = isSM ? 'block' : 'none';
-
-      // Auto-preenche Perfil conforme frente selecionada
       const perfilEl = document.getElementById('idea-perfil');
       if (perfilEl && !perfilEl.value) {
         if (frente === 'jenifer')    perfilEl.value = 'socia-jenifer';
         if (frente === 'elizangela') perfilEl.value = 'socia-elizangela';
         if (frente === 'escritorio') perfilEl.value = 'escritorio-geral';
       }
-
-      // Auto-preenche Categoria de Conteudo
       const catEl = document.getElementById('idea-categoria-conteudo');
       if (catEl && !catEl.value) {
         if (frente === 'jenifer' || frente === 'elizangela') catEl.value = 'conteudo';
@@ -2293,20 +2052,14 @@
         responsavel:  document.getElementById('idea-responsavel').value     || null,
         impacto:      document.getElementById('idea-impacto').value.trim()  || null,
       };
-
       if (existingId) {
         const idx = this.data.ideas.findIndex(i => i.id === existingId);
-        if (idx >= 0) {
-          idea.status = this.data.ideas[idx].status;
-          idea.dataPublicacao = this.data.ideas[idx].dataPublicacao;
-          this.data.ideas[idx] = idea;
-        }
+        if (idx >= 0) { idea.status = this.data.ideas[idx].status; idea.dataPublicacao = this.data.ideas[idx].dataPublicacao; this.data.ideas[idx] = idea; }
         this.toast('✅ Ideia atualizada!');
       } else {
         this.data.ideas.push(idea);
         this.toast('💡 Ideia criada!');
       }
-
       this._pendingImage = null;
       this.save();
       this.closeModal('modal-idea');
@@ -2346,31 +2099,24 @@
       const idea = this.data.ideas.find(i => i.id === id);
       if (!idea) return;
       this.currentIdeaId = id;
-      const perfilLabels = {'escritorio-geral':'🏛️ Escritório Geral','socia-jenifer':'👤 Sócia Jenifer','socia-elizangela':'👤 Sócia Elizângela',''  :'—'};
-      const tipoArteLabels = {'carrossel':'🖼️ Carrossel','reels':'🎬 Reels','story':'📱 Story','feed':'🖼️ Post Feed','video':'🎥 Vídeo','lives':'📡 Lives','destaques':'⭐ Destaques',''  :'-'};
+      const perfilLabels = {'escritorio-geral':'🏛️ Escritório Geral','socia-jenifer':'👤 Sócia Jenifer','socia-elizangela':'👤 Sócia Elizângela','':  '—'};
+      const tipoArteLabels = {'carrossel':'🖼️ Carrossel','reels':'🎬 Reels','story':'📱 Story','feed':'🖼️ Post Feed','video':'🎥 Vídeo','lives':'📡 Lives','destaques':'⭐ Destaques','':'-'};
       const statusLabels = {bruto:'📝 Em Criação',roteiro:'✍️ Em Roteiro',gravar:'🎥 Para Gravar',gravado:'📹 Gravado',edicao:'✂️ Em Edição',publicado:'✅ Publicado'};
       const field = (label, val) => val ? `<div class="brief-detail-field"><div class="brief-detail-label">${label}</div><div class="brief-detail-value">${val}</div></div>` : '';
       document.getElementById('brief-detail-content').innerHTML = `
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
           ${field('Título', idea.titulo)}
           ${field('Status', statusLabels[idea.status]||idea.status)}
-          ${field('Perfil / Conta', perfilLabels[idea.perfil||''])}
-          ${field('Frente', this.frenteLabel(idea.frente))}
-          ${field('Tipo de Arte', tipoArteLabels[idea.tipoArte||''])}
-          ${field('Nº de Artes', idea.numArtes)}
-          ${field('Data Criação', idea.dataCriacao)}
-          ${idea.link ? field('Link', `<a href="${idea.link}" target="_blank">${idea.link}</a>`) : ''}
+          ${field('Perfil', perfilLabels[idea.perfil||''])}
+          ${field('Tipo Arte', tipoArteLabels[idea.tipoArte||''])}
+          ${field('Nº Artes', idea.numArtes)}
+          ${field('Criação', idea.dataCriacao)}
         </div>
-        ${field('Legenda / Texto do Post', idea.legenda)}
+        ${field('Legenda', idea.legenda)}
         ${field('Hashtags', idea.hashtags)}
         ${idea.descricao ? field('Notas', idea.descricao) : ''}
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;">
-          ${['bruto','roteiro','gravar','gravado','edicao','publicado'].map(s => `
-            <button class="btn-brief-action status ${idea.status===s?'active':''}"
-              style="${idea.status===s?'background:var(--escrit-cor);color:white;':''}"
-              onclick="app.changeBriefStatus('${idea.id}','${s}')">
-              ${statusLabels[s]}
-            </button>`).join('')}
+          ${['bruto','roteiro','gravar','gravado','edicao','publicado'].map(s => `<button class="btn-brief-action status ${idea.status===s?'active':''}" onclick="app.changeBriefStatus('${idea.id}','${s}')">${statusLabels[s]}</button>`).join('')}
         </div>`;
       document.getElementById('modal-brief-detail').classList.add('open');
     },
@@ -2381,7 +2127,6 @@
       this.renderSocialMedia();
     },
 
-    /* ── AGENDA ── */
     renderAgendaDay() {
       const key = this.dateKey(this.currentDate);
       const tasks = this.data.tasks[key] || [];
@@ -2392,13 +2137,13 @@
       if (ideaEl) {
         ideaEl.innerHTML = ideaTasks.length === 0
           ? '<p style="color:var(--grafite);font-size:0.82rem;font-family:sans-serif;padding:8px;">Nenhuma ideia em "Para Gravar"</p>'
-          : ideaTasks.map(i => `<div class="task-item"><div class="task-body"><div class="task-title">🎥 ${i.titulo}</div><div class="task-meta">${this.frenteLabel(i.frente)} · ${i.dataCriacao||''}</div><span class="idea-task-badge">💡 Do Banco de Ideias</span></div><span class="task-priority priority-ALTA">GRAVAR</span></div>`).join('');
+          : ideaTasks.map(i => `<div class="task-item"><div class="task-body"><div class="task-title">🎥 ${i.titulo}</div><div class="task-meta">${this.frenteLabel(i.frente)}</div><span class="idea-task-badge">💡 Do Banco de Ideias</span></div><span class="task-priority priority-ALTA">GRAVAR</span></div>`).join('');
       }
       const listEl = document.getElementById('day-tasks-list');
       if (listEl) {
         listEl.innerHTML = tasks.length === 0
           ? '<p style="color:var(--grafite);font-size:0.82rem;font-family:sans-serif;padding:8px;">Nenhuma tarefa para este dia</p>'
-          : tasks.map(t => `<div class="task-item"><div class="task-check ${t.done?'done':''}" onclick="app.toggleTask('${key}','${t.id}')"></div><div class="task-body"><div class="task-title ${t.done?'done':''}">${t.titulo}</div>${t.hora?`<div class="task-meta">🕐 ${t.hora}</div>`:''} ${t.nota?`<div class="task-meta">${t.nota}</div>`:''}</div><span class="task-priority priority-${t.prioridade}">${t.prioridade}</span></div>`).join('');
+          : tasks.map(t => `<div class="task-item"><div class="task-check ${t.done?'done':''}" onclick="app.toggleTask('${key}','${t.id}')"></div><div class="task-body"><div class="task-title ${t.done?'done':''}">${t.titulo}</div>${t.hora?`<div class="task-meta">🕐 ${t.hora}</div>`:''}</div><span class="task-priority priority-${t.prioridade}">${t.prioridade}</span></div>`).join('');
       }
       this.renderAgendaWeek();
       this.renderAgendaMonth();
@@ -2423,12 +2168,12 @@
     },
 
     bindAgendaTabs() {
-      document.querySelectorAll('.agenda-tab').forEach(btn => {
+      document.querySelectorAll('.agenda-tab[data-tab]').forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelectorAll('.agenda-tab').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.agenda-tab[data-tab]').forEach(b => b.classList.remove('active'));
           document.querySelectorAll('.agenda-tab-content').forEach(c => c.classList.remove('active'));
           btn.classList.add('active');
-          document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+          document.getElementById(`tab-${btn.dataset.tab}`)?.classList.add('active');
           if (btn.dataset.tab === 'semana') this.renderAgendaWeek();
           if (btn.dataset.tab === 'mes')    this.renderAgendaMonth();
         });
@@ -2471,33 +2216,24 @@
         const pd = new Date(first); pd.setDate(first.getDate()-(startDay-i));
         html += `<div class="cal-day other-month"><div class="cal-day-num">${pd.getDate()}</div></div>`;
       }
-      const publishedByDate = {};
-      this.data.ideas.filter(i => i.status==='publicado' && i.dataPublicacao).forEach(i => { if (!publishedByDate[i.dataPublicacao]) publishedByDate[i.dataPublicacao]=[]; publishedByDate[i.dataPublicacao].push(i); });
       for (let n=1; n<=last.getDate(); n++) {
         const dt = new Date(d.getFullYear(), d.getMonth(), n);
         const key = this.dateKey(dt);
         const tasks = this.data.tasks[key]||[];
-        const published = publishedByDate[key]||[];
         const isToday = key===todayKey;
-        const pubDots = published.map(i=>`<div class="cal-event-dot" style="background:rgba(58,112,64,0.15);color:#3A7040;" title="${i.titulo}">✅ ${i.titulo.substring(0,14)}${i.titulo.length>14?'…':''}</div>`).join('');
-        html += `<div class="cal-day ${isToday?'today':''}" onclick="app.currentDate=new Date(${dt.getTime()});app.renderAgendaDay();document.querySelectorAll('.agenda-tab').forEach(b=>b.classList.remove('active'));document.querySelector('[data-tab=dia]').classList.add('active');document.querySelectorAll('.agenda-tab-content').forEach(c=>c.classList.remove('active'));document.getElementById('tab-dia').classList.add('active');"><div class="cal-day-num">${n}</div>${pubDots}${tasks.slice(0,2).map(t=>`<div class="cal-event-dot">${t.titulo.substring(0,16)}${t.titulo.length>16?'…':''}</div>`).join('')}${tasks.length>2?`<div class="cal-event-dot">+${tasks.length-2} mais</div>`:''}</div>`;
+        html += `<div class="cal-day ${isToday?'today':''}" onclick="app.currentDate=new Date(${dt.getTime()});app.renderAgendaDay();document.querySelectorAll('.agenda-tab[data-tab]').forEach(b=>b.classList.remove('active'));document.querySelector('[data-tab=dia]').classList.add('active');document.querySelectorAll('.agenda-tab-content').forEach(c=>c.classList.remove('active'));document.getElementById('tab-dia').classList.add('active');"><div class="cal-day-num">${n}</div>${tasks.slice(0,2).map(t=>`<div class="cal-event-dot">${t.titulo.substring(0,16)}…</div>`).join('')}</div>`;
       }
       grid.innerHTML = html;
     },
 
     changeMonth(delta) { this.currentViewMonth = new Date(this.currentViewMonth.getFullYear(), this.currentViewMonth.getMonth()+delta, 1); this.renderAgendaMonth(); },
 
-    /* ══ TELEPROMPTER — DOIS PAINEIS ══ */
     switchTpTab(socia) {
       this.currentTpTab = socia;
       document.querySelectorAll('.tp-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tp-panel').forEach(p => p.classList.remove('active'));
-      // ativar tab
       document.querySelectorAll('.tp-tab').forEach(t => {
-        if ((socia==='jenifer' && t.textContent.includes('Jenifer')) ||
-            (socia==='elizangela' && t.textContent.includes('Eliz'))) {
-          t.classList.add('active');
-        }
+        if ((socia==='jenifer' && t.textContent.includes('Jenifer')) || (socia==='elizangela' && t.textContent.includes('Eliz'))) t.classList.add('active');
       });
       document.getElementById(`tp-${socia}`).classList.add('active');
     },
@@ -2517,31 +2253,17 @@
         const sel = document.getElementById(`script-select-${socia}`);
         if (!sel) return;
         const scripts = this.data.scripts.filter(s => s.socia===socia);
-        const ideaScripts = this.data.ideas.filter(i => (i.frente===socia) && i.tipo==='roteiro' && (i.status==='gravar'||i.status==='roteiro'))
-          .map(i => ({id:`idea_${i.id}`, titulo:`[Ideia] ${i.titulo}`, conteudo: i.descricao||i.titulo, socia}));
-        const all = [...scripts, ...ideaScripts];
         const label = socia==='jenifer' ? 'Jenifer' : 'Elizângela';
         sel.innerHTML = `<option value="">Selecione um roteiro de ${label}...</option>`;
-        all.forEach(s => { sel.innerHTML += `<option value="${s.id}">${s.titulo}</option>`; });
+        scripts.forEach(s => { sel.innerHTML += `<option value="${s.id}">${s.titulo}</option>`; });
       });
     },
 
     loadScript(id, socia) {
-      if (!id) {
-        document.getElementById(`tp-container-${socia}`).innerHTML = `<div class="teleprompter-empty"><p>📖 Selecione um roteiro</p></div>`;
-        return;
-      }
-      let script;
-      if (id.startsWith('idea_')) {
-        const ideaId = id.replace('idea_','');
-        const idea = this.data.ideas.find(i => i.id===ideaId);
-        script = idea ? {conteudo: idea.descricao||idea.titulo} : null;
-      } else {
-        script = this.data.scripts.find(s => s.id===id);
-      }
+      if (!id) { document.getElementById(`tp-container-${socia}`).innerHTML = `<div class="teleprompter-empty"><p>📖 Selecione um roteiro</p></div>`; return; }
+      const script = this.data.scripts.find(s => s.id===id);
       if (!script) return;
-      document.getElementById(`tp-container-${socia}`).innerHTML =
-        `<div class="teleprompter-text" id="tp-text-${socia}" style="font-size:${this.tpState[socia].fontSize}rem;">${script.conteudo}</div>`;
+      document.getElementById(`tp-container-${socia}`).innerHTML = `<div class="teleprompter-text" id="tp-text-${socia}" style="font-size:${this.tpState[socia].fontSize}rem;">${script.conteudo}</div>`;
     },
 
     togglePlay(socia) {
@@ -2550,10 +2272,7 @@
       st.playing = !st.playing;
       if (st.playing) {
         btn.textContent = '⏸ Pausar';
-        st.interval = setInterval(() => {
-          const w = document.getElementById(`tp-container-${socia}`);
-          if (w) w.scrollTop += st.speed * 1.5;
-        }, 50);
+        st.interval = setInterval(() => { const w = document.getElementById(`tp-container-${socia}`); if (w) w.scrollTop += st.speed * 1.5; }, 50);
       } else {
         btn.textContent = '▶ Play';
         clearInterval(st.interval);
@@ -2581,28 +2300,14 @@
     saveScript(e) {
       e.preventDefault();
       const socia = document.getElementById('script-socia').value;
-      this.data.scripts.push({
-        id: this.uid(),
-        titulo: document.getElementById('script-titulo').value.trim(),
-        conteudo: document.getElementById('script-conteudo').value.trim(),
-        socia
-      });
-      this.save();
-      this.closeModal('modal-script');
-      document.getElementById('form-script').reset();
+      this.data.scripts.push({ id: this.uid(), titulo: document.getElementById('script-titulo').value.trim(), conteudo: document.getElementById('script-conteudo').value.trim(), socia });
+      this.save(); this.closeModal('modal-script'); document.getElementById('form-script').reset();
       this.renderScriptSelectors();
-      this.toast(`📝 Roteiro salvo para ${socia==='jenifer'?'Jenifer':'Elizângela'}!`);
+      this.toast(`📝 Roteiro salvo!`);
     },
 
-    /* ══ SOCIAL MEDIA ══ */
     renderSocialMedia() {
-      // Inclui ideias com perfil definido OU que sejam de frente SM (fallback automático)
-      const base = this.data.ideas.filter(i =>
-        i.frente==='jenifer' || i.frente==='elizangela' ||
-        (i.frente==='escritorio' && i.categoriaConteudo !== 'alinhamento')
-      );
-
-      // Garante que todas tenham perfil definido (fallback)
+      const base = this.data.ideas.filter(i => i.frente==='jenifer' || i.frente==='elizangela' || (i.frente==='escritorio' && i.categoriaConteudo !== 'alinhamento'));
       base.forEach(i => {
         if (!i.perfil) {
           if (i.frente==='jenifer')    i.perfil = 'socia-jenifer';
@@ -2629,14 +2334,12 @@
           <div class="brief-card-meta">
             ${i.tipoArte&&tipoArteLabels[i.tipoArte]?`<span class="brief-arte-badge">${tipoArteLabels[i.tipoArte]}</span>`:''}
             ${i.numArtes?`<span class="brief-num-badge">🖼️ ${i.numArtes} arte${i.numArtes>1?'s':''}</span>`:''}
-            ${i.dataCriacao?`<span style="font-size:0.68rem;color:var(--grafite);font-family:sans-serif;">${i.dataCriacao}</span>`:''}
           </div>
-          ${i.legenda?`<div class="brief-card-legenda">${i.legenda}</div>`:i.descricao?`<div class="brief-card-legenda">${i.descricao}</div>`:''}
+          ${i.legenda?`<div class="brief-card-legenda">${i.legenda}</div>`:''}
           ${i.hashtags?`<div class="brief-card-hashtags">${i.hashtags}</div>`:''}
           <div class="brief-card-actions" onclick="event.stopPropagation()">
             <button class="btn-brief-action" onclick="app.showBriefDetail('${i.id}')">👁 Ver Brief</button>
             <button class="btn-brief-action status" onclick="app._smNextStatus('${i.id}')">▶ Avançar</button>
-            ${i.link?`<a href="${i.link}" target="_blank" class="btn-brief-action" style="text-decoration:none;">🔗</a>`:''}
           </div>
         </div>`;
 
@@ -2645,50 +2348,16 @@
         { key:'socia-jenifer',    label:'👤 Sócia Jenifer',       cls:'jenifer',      addPerfil:'socia-jenifer'    },
         { key:'socia-elizangela', label:'👤 Sócia Elizângela',    cls:'elizangela',   addPerfil:'socia-elizangela' },
       ];
-
+      const smStatuses = [{key:'gravar',label:'🎥 Para Gravar'},{key:'gravado',label:'📹 Gravado'},{key:'edicao',label:'✂️ Em Edição'},{key:'publicado',label:'✅ Publicado'}];
       const container = document.getElementById('sm-perfis-container');
       if (!container) return;
-
-      // Colunas do fluxo de produção
-      const smStatuses = [
-        {key:'gravar',   label:'🎥 Para Gravar'},
-        {key:'gravado',  label:'📹 Gravado'},
-        {key:'edicao',   label:'✂️ Em Edição'},
-        {key:'publicado',label:'✅ Publicado'}
-      ];
-
       container.innerHTML = perfis.map(p => {
-        let cards = base.filter(i => {
-          if (i.perfil === p.key) return true;
-          if (!i.perfil && p.key==='escritorio-geral' && i.frente==='escritorio') return true;
-          return false;
-        });
-
-        // Mostrar colunas por status de produção
+        let cards = base.filter(i => i.perfil === p.key || (!i.perfil && p.key==='escritorio-geral' && i.frente==='escritorio'));
         const colunas = smStatuses.map(s => {
           const col = cards.filter(i => i.status === s.key);
-          return `<div class="sm-status-col">
-            <div class="sm-status-col-header">
-              ${s.label}
-              <span class="column-count">${col.length}</span>
-            </div>
-            ${col.length === 0
-              ? `<p style="color:var(--grafite);font-size:0.75rem;font-family:sans-serif;text-align:center;padding:10px;opacity:0.5;">Vazio</p>`
-              : col.map(i => buildCard(i, p.cls)).join('')
-            }
-          </div>`;
+          return `<div class="sm-status-col"><div class="sm-status-col-header">${s.label}<span class="column-count">${col.length}</span></div>${col.length===0?`<p style="color:var(--grafite);font-size:0.75rem;font-family:sans-serif;text-align:center;padding:10px;opacity:0.5;">Vazio</p>`:col.map(i=>buildCard(i,p.cls)).join('')}</div>`;
         }).join('');
-
-        return `<div class="perfil-section">
-          <div class="perfil-section-header">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span class="perfil-section-title">${p.label}</span>
-              <span class="perfil-badge ${p.cls.includes('geral')?'escrit-geral':p.cls}">${cards.length}</span>
-            </div>
-            <button class="btn-add-brief" onclick="app.novoBriefSM('${p.addPerfil}')">+ Brief</button>
-          </div>
-          <div class="sm-status-board">${colunas}</div>
-        </div>`;
+        return `<div class="perfil-section"><div class="perfil-section-header"><div style="display:flex;align-items:center;gap:10px;"><span class="perfil-section-title">${p.label}</span><span class="perfil-badge ${p.cls.includes('geral')?'escrit-geral':p.cls}">${cards.length}</span></div><button class="btn-primary" style="font-size:0.78rem;padding:6px 14px;" onclick="app.novoBriefSM('${p.addPerfil}')">+ Brief</button></div><div class="sm-status-board">${colunas}</div></div>`;
       }).join('');
     },
 
@@ -2700,7 +2369,6 @@
       if (idx < order.length-1) { this.changeIdeaStatus(id, order[idx+1]); this.renderSocialMedia(); }
     },
 
-    /* ══ SÓCIAS ══ */
     novaSociaIdeia() {
       document.getElementById('form-idea').reset();
       document.getElementById('idea-id').value = '';
@@ -2727,37 +2395,12 @@
       if (!board) return;
       board.innerHTML = statuses.map(s => {
         const col = ideias.filter(i=>i.status===s.key);
-        return `<div class="socias-col">
-          <div class="socias-col-header"><span>${s.label}</span><span style="background:var(--escrit-cor);color:white;border-radius:20px;padding:1px 8px;font-size:0.68rem;">${col.length}</span></div>
-          ${col.length===0 ? `<p style="color:var(--grafite);font-size:0.78rem;font-family:sans-serif;text-align:center;padding:14px;opacity:0.6;">Nenhuma</p>`
-            : col.map(i => `
-              <div class="socias-card" onclick="app.showIdeaDetail('${i.id}')">
-                <div class="socias-card-title">${i.titulo}</div>
-                ${i.descricao?`<div class="socias-card-desc">${i.descricao.substring(0,90)}${i.descricao.length>90?'…':''}</div>`:''}
-                ${i.impacto?`<div class="socias-card-desc" style="font-style:italic;color:var(--dourado-dk);">${i.impacto.substring(0,80)}${i.impacto.length>80?'…':''}</div>`:''}
-                <div class="socias-card-footer">
-                  ${i.categoria?`<span class="cat-badge ${catCls[i.categoria]||'cat-outro'}">${this.catLabel(i.categoria)}</span>`:''}
-                  ${i.responsavel?`<span style="font-size:0.68rem;font-family:sans-serif;color:var(--grafite);">${this.respLabel(i.responsavel)}</span>`:''}
-                  <span style="font-size:0.65rem;font-family:sans-serif;color:var(--grafite);margin-left:auto;">${i.dataCriacao||''}</span>
-                </div>
-                <div style="display:flex;gap:4px;margin-top:8px;padding-top:8px;border-top:1px solid var(--cinza);" onclick="event.stopPropagation()">
-                  ${statuses.map(st=>`<button style="flex:1;padding:3px 4px;font-size:0.62rem;font-family:sans-serif;font-weight:700;border-radius:5px;border:1px solid ${i.status===st.key?'var(--escrit-cor)':'var(--cinza)'};background:${i.status===st.key?'var(--escrit-cor)':'var(--off-white)'};color:${i.status===st.key?'white':'var(--grafite)'};cursor:pointer;" onclick="app.changeIdeaStatus('${i.id}','${st.key}');app.renderSocias();">${st.label.split(' ')[1]||st.label}</button>`).join('')}
-                </div>
-              </div>`).join('')}
-        </div>`;
+        return `<div class="socias-col"><div class="socias-col-header"><span>${s.label}</span><span style="background:var(--escrit-cor);color:white;border-radius:20px;padding:1px 8px;font-size:0.68rem;">${col.length}</span></div>${col.length===0?`<p style="color:var(--grafite);font-size:0.78rem;font-family:sans-serif;text-align:center;padding:14px;opacity:0.6;">Nenhuma</p>`:col.map(i=>`<div class="socias-card" onclick="app.showIdeaDetail('${i.id}')"><div class="socias-card-title">${i.titulo}</div>${i.descricao?`<div class="socias-card-desc">${i.descricao.substring(0,90)}…</div>`:''}<div class="socias-card-footer">${i.categoria?`<span class="cat-badge ${catCls[i.categoria]||'cat-outro'}">${this.catLabel(i.categoria)}</span>`:''}<span style="font-size:0.65rem;font-family:sans-serif;color:var(--grafite);margin-left:auto;">${i.dataCriacao||''}</span></div></div>`).join('')}</div>`;
       }).join('');
     },
 
-    /* ══ ASSESSORIA ══ */
     renderAssessoria() {
-      // Assessoria = Escritório com categoria alinhamento OU sem categoria definida
-      const ideias = this.data.ideas.filter(i =>
-        i.frente === 'escritorio' && (
-          i.categoriaConteudo === 'alinhamento' ||
-          i.tipo === 'alinhamento' ||
-          (!i.categoriaConteudo && !i.perfil)
-        )
-      );
+      const ideias = this.data.ideas.filter(i => i.frente === 'escritorio' && (i.categoriaConteudo === 'alinhamento' || i.tipo === 'alinhamento' || (!i.categoriaConteudo && !i.perfil)));
       const statuses = [{key:'bruto',label:'🆕 Nova Pauta'},{key:'roteiro',label:'🔍 Em Análise'},{key:'gravar',label:'📋 Para Decidir'},{key:'publicado',label:'✅ Encerrada'}];
       const set = (id,v) => { const e=document.getElementById(id); if(e) e.textContent=v; };
       set('aj-total',    ideias.length);
@@ -2776,7 +2419,7 @@
               <div class="pauta-body">
                 <div class="pauta-title">${i.titulo}</div>
                 <div class="pauta-meta">Status: ${i.status==='bruto'?'🆕 Nova':'🔍 Em análise'} · ${i.dataCriacao||''}</div>
-                ${i.descricao?`<div style="font-size:0.8rem;color:var(--grafite-dk);margin-top:4px;">${i.descricao.substring(0,120)}${i.descricao.length>120?'…':''}</div>`:''}
+                ${i.descricao?`<div style="font-size:0.8rem;color:var(--grafite-dk);margin-top:4px;">${i.descricao.substring(0,120)}…</div>`:''}
               </div>
               <div style="display:flex;gap:6px;flex-shrink:0;">
                 <button class="status-btn" style="font-size:0.68rem;padding:4px 10px;" onclick="event.stopPropagation();app.changeIdeaStatus('${i.id}','roteiro');app.renderAssessoria();">Em Análise</button>
@@ -2789,11 +2432,7 @@
       if (!board) return;
       board.innerHTML = statuses.map(s => {
         const col = ideias.filter(i=>i.status===s.key);
-        return `<div class="colab-col">
-          <div class="colab-col-header escrit">${s.label}<span style="background:var(--escrit-cor);color:white;border-radius:20px;padding:1px 8px;font-size:0.68rem;">${col.length}</span></div>
-          ${col.length===0?`<p style="color:var(--grafite);font-size:0.78rem;font-family:sans-serif;text-align:center;padding:12px;"></p>`
-            :col.map(i=>`<div class="colab-card escrit" onclick="app.showIdeaDetail('${i.id}')"><div class="colab-card-title">${i.titulo}</div><div class="colab-card-tipo">${this.tipoLabel(i.tipo)} · ${i.dataCriacao||''}</div>${i.descricao?`<div class="colab-card-desc">${i.descricao.substring(0,80)}${i.descricao.length>80?'…':''}</div>`:''}</div>`).join('')}
-        </div>`;
+        return `<div class="colab-col"><div class="colab-col-header escrit">${s.label}<span style="background:var(--escrit-cor);color:white;border-radius:20px;padding:1px 8px;font-size:0.68rem;">${col.length}</span></div>${col.length===0?`<p style="color:var(--grafite);font-size:0.78rem;font-family:sans-serif;text-align:center;padding:12px;"></p>`:col.map(i=>`<div class="colab-card escrit" onclick="app.showIdeaDetail('${i.id}')"><div class="colab-card-title">${i.titulo}</div><div class="colab-card-tipo">${this.tipoLabel(i.tipo)} · ${i.dataCriacao||''}</div>${i.descricao?`<div class="colab-card-desc">${i.descricao.substring(0,80)}…</div>`:''}</div>`).join('')}</div>`;
       }).join('');
     },
 
@@ -2811,6 +2450,161 @@
       this.toast('📄 Pauta exportada!');
     },
 
+    /* ══ TRANSCRIÇÕES & SLIDES ══ */
+    switchTranscTab(aba, event) {
+      document.querySelectorAll('#tab-transc-btn, #tab-slides-btn').forEach(t => t.classList.remove('active'));
+      document.getElementById('transc-transcricoes').classList.remove('active');
+      document.getElementById('transc-slides').classList.remove('active');
+      if (event && event.target) event.target.classList.add('active');
+      document.getElementById('transc-' + aba).classList.add('active');
+    },
+
+    salvarTranscricao() {
+      const texto = document.getElementById('transc-texto').value.trim();
+      const autor = document.getElementById('transc-autor').value.trim() || 'Anônimo';
+      if (!texto) { this.toast('✏️ Cole a transcrição'); return; }
+      if (!this.data.transcricoes) this.data.transcricoes = [];
+      this.data.transcricoes.push({ id: this.uid(), texto, autor, data: this.formatDate(new Date()) });
+      document.getElementById('transc-texto').value = '';
+      document.getElementById('transc-autor').value = '';
+      this.renderTranscricoes();
+      this.toast('✅ Transcrição salva!');
+      this.saveLocal();
+    },
+
+    renderTranscricoes() {
+      const el = document.getElementById('transc-lista');
+      if (!el) return;
+      if (!this.data.transcricoes || this.data.transcricoes.length === 0) {
+        el.innerHTML = '<p style="color:var(--grafite);font-family:sans-serif;padding:12px;">Nenhuma transcrição salva ainda.</p>';
+        return;
+      }
+      el.innerHTML = this.data.transcricoes.map(t => `
+        <div class="assess-item">
+          <div class="assess-item-info">
+            <div class="assess-item-title">📄 Transcrição</div>
+            <div class="assess-item-meta">Por: ${t.autor} · ${t.data}</div>
+            <div style="margin-top:8px;padding:10px;background:var(--off-white);border-radius:6px;max-height:80px;overflow-y:auto;font-family:monospace;font-size:0.8rem;color:var(--grafite-dk);">
+              ${t.texto.substring(0, 200)}${t.texto.length > 200 ? '…' : ''}
+            </div>
+          </div>
+          <div class="assess-item-actions">
+            <button class="btn-small" onclick="app.copiarLinkTransc('${t.id}')">🔗 Link</button>
+            <button class="btn-small danger" onclick="app.deletarTransc('${t.id}')">🗑</button>
+          </div>
+        </div>`).join('');
+    },
+
+    copiarLinkTransc(id) {
+      const link = window.location.href.split('?')[0] + '?transc=' + id;
+      navigator.clipboard.writeText(link).then(() => this.toast('✅ Link copiado!')).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = link; document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+        document.body.removeChild(ta); this.toast('✅ Link copiado!');
+      });
+    },
+
+    deletarTransc(id) {
+      if (!confirm('Deletar esta transcrição?')) return;
+      this.data.transcricoes = (this.data.transcricoes || []).filter(t => t.id !== id);
+      this.renderTranscricoes();
+      this.saveLocal();
+      this.toast('🗑️ Transcrição deletada');
+    },
+
+    handleSlideFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        this.slideBase64 = ev.target.result;
+        document.getElementById('slide-file-label').textContent = '✅ ' + file.name;
+      };
+      reader.readAsDataURL(file);
+    },
+
+    salvarSlide() {
+      const titulo = document.getElementById('slide-titulo').value.trim();
+      const autor = document.getElementById('slide-autor').value.trim() || 'Anônimo';
+      if (!titulo || !this.slideBase64) { this.toast('⚠️ Título e arquivo obrigatórios'); return; }
+      if (!this.data.slides) this.data.slides = [];
+      this.data.slides.push({ id: this.uid(), titulo, autor, data: this.formatDate(new Date()), conteudo: this.slideBase64 });
+      document.getElementById('slide-titulo').value = '';
+      document.getElementById('slide-autor').value = '';
+      document.getElementById('slide-file').value = '';
+      document.getElementById('slide-file-label').textContent = '';
+      this.slideBase64 = null;
+      this.renderSlides();
+      this.toast('✅ Slide salvo!');
+      this.saveLocal();
+    },
+
+    renderSlides() {
+      const el = document.getElementById('transc-slides-lista');
+      if (!el) return;
+      if (!this.data.slides || this.data.slides.length === 0) {
+        el.innerHTML = '<p style="color:var(--grafite);font-family:sans-serif;padding:12px;">Nenhum slide salvo ainda.</p>';
+        return;
+      }
+      el.innerHTML = this.data.slides.map(s => `
+        <div class="assess-item">
+          <div class="assess-item-info">
+            <div class="assess-item-title">🎬 ${s.titulo}</div>
+            <div class="assess-item-meta">Por: ${s.autor} · ${s.data}</div>
+          </div>
+          <div class="assess-item-actions">
+            <button class="btn-small" onclick="app.abrirSlide('${s.id}')">▶ Apresentar</button>
+            <button class="btn-small danger" onclick="app.deletarSlide('${s.id}')">🗑</button>
+          </div>
+        </div>`).join('');
+    },
+
+    abrirSlide(id) {
+      const slide = (this.data.slides || []).find(s => s.id === id);
+      if (!slide) return;
+      this.timerSeconds = 0;
+      document.getElementById('timer-apresentador').textContent = '00:00';
+      document.getElementById('apresentador-fullscreen').classList.add('open');
+      document.getElementById('slide-container').innerHTML = `<iframe src="${slide.conteudo}" style="width:100%;height:100%;border:none;"></iframe>`;
+    },
+
+    fecharApresentador() {
+      document.getElementById('apresentador-fullscreen').classList.remove('open');
+      if (this.timerInterval) { clearInterval(this.timerInterval); this.timerInterval = null; }
+      this.timerSeconds = 0;
+      document.getElementById('timer-apresentador').textContent = '00:00';
+    },
+
+    toggleTimer() {
+      if (this.timerInterval) {
+        clearInterval(this.timerInterval);
+        this.timerInterval = null;
+      } else {
+        this.timerInterval = setInterval(() => {
+          this.timerSeconds++;
+          const m = Math.floor(this.timerSeconds / 60);
+          const s = this.timerSeconds % 60;
+          document.getElementById('timer-apresentador').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+        }, 1000);
+      }
+    },
+
+    toggleZoom() {
+      const el = document.getElementById('slide-container');
+      el.style.transform = el.style.transform === 'scale(1.2)' ? 'scale(1)' : 'scale(1.2)';
+    },
+
+    slideAnterior() {},
+    proximoSlide() {},
+
+    deletarSlide(id) {
+      if (!confirm('Deletar este slide?')) return;
+      this.data.slides = (this.data.slides || []).filter(s => s.id !== id);
+      this.renderSlides();
+      this.saveLocal();
+      this.toast('🗑️ Slide deletado');
+    },
+
     /* ══ PROMPTS ══ */
     renderPrompts(contexto, elId) {
       const el = document.getElementById(elId);
@@ -2819,13 +2613,9 @@
       const lista = this.data.prompts.filter(p=>p.contexto===contexto);
       if (lista.length===0) { el.innerHTML = `<div class="prompt-empty">Nenhum prompt ainda. Clique em "+ Novo Prompt" para criar! 📋</div>`; return; }
       const cls = contexto==='assessoria' ? 'escrit' : 'social';
-      el.innerHTML = lista.map((p,idx) => `
-        <div class="prompt-card ${cls}" draggable="true"
-          data-id="${p.id}" data-ctx="${contexto}" data-elid="${elId}"
-          ondragstart="app._promptDragStart(event)"
-          ondragover="app._promptDragOver(event)"
-          ondragleave="app._promptDragLeave(event)"
-          ondrop="app._promptDrop(event,'${contexto}','${elId}')">
+      el.innerHTML = lista.map(p => `
+        <div class="prompt-card ${cls}" draggable="true" data-id="${p.id}" data-ctx="${contexto}" data-elid="${elId}"
+          ondragstart="app._promptDragStart(event)" ondragover="app._promptDragOver(event)" ondragleave="app._promptDragLeave(event)" ondrop="app._promptDrop(event,'${contexto}','${elId}')">
           <div class="prompt-title">☰ ${p.titulo}</div>
           <div class="prompt-preview">${p.conteudo}</div>
           <div class="prompt-actions">
@@ -2867,12 +2657,10 @@
       if (!this.data.prompts) this.data.prompts = [];
       const elId = contexto==='assessoria' ? 'prompts-assessoria' : 'prompts-social-media';
       if (editId) {
-        // Editar existente
         const idx = this.data.prompts.findIndex(p=>p.id===editId);
         if (idx>=0) { this.data.prompts[idx].titulo=titulo; this.data.prompts[idx].conteudo=conteudo; }
         this.toast('✅ Prompt atualizado!');
       } else {
-        // Novo prompt
         this.data.prompts.push({ id:this.uid(), titulo, conteudo, contexto, dataCriacao:this.formatDate(new Date()) });
         this.toast('📋 Prompt salvo!');
       }
@@ -2891,18 +2679,9 @@
       });
     },
 
-    // ── Drag & Drop Prompts ──
-    _promptDragStart(e) {
-      e.dataTransfer.setData('promptId', e.currentTarget.dataset.id);
-      e.currentTarget.classList.add('dragging');
-    },
-    _promptDragOver(e) {
-      e.preventDefault();
-      e.currentTarget.classList.add('drag-over');
-    },
-    _promptDragLeave(e) {
-      e.currentTarget.classList.remove('drag-over');
-    },
+    _promptDragStart(e) { e.dataTransfer.setData('promptId', e.currentTarget.dataset.id); e.currentTarget.classList.add('dragging'); },
+    _promptDragOver(e) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); },
+    _promptDragLeave(e) { e.currentTarget.classList.remove('drag-over'); },
     _promptDrop(e, contexto, elId) {
       e.preventDefault();
       const fromId = e.dataTransfer.getData('promptId');
@@ -2925,19 +2704,13 @@
       this.save(); this.renderPrompts(contexto, elId);
     },
 
-
     /* ══ RASCUNHO RÁPIDO ══ */
     salvarRascunho() {
       const texto = document.getElementById('rascunho-input').value.trim();
       if (!texto) { this.toast('✏️ Digite algo antes de salvar!'); return; }
       const frente = document.getElementById('rascunho-frente').value;
       if (!this.data.rascunhos) this.data.rascunhos = [];
-      this.data.rascunhos.unshift({
-        id: this.uid(),
-        texto,
-        frente,
-        dataCriacao: this.formatDate(new Date())
-      });
+      this.data.rascunhos.unshift({ id: this.uid(), texto, frente, dataCriacao: this.formatDate(new Date()) });
       document.getElementById('rascunho-input').value = '';
       document.getElementById('rascunho-frente').value = 'geral';
       this.save();
@@ -2949,107 +2722,55 @@
       const lista = document.getElementById('rascunho-lista');
       if (!lista) return;
       if (!this.data.rascunhos) this.data.rascunhos = [];
-
       if (this.data.rascunhos.length === 0) {
-        lista.innerHTML = `<div class="rascunho-empty">
-          Nenhum rascunho ainda.<br>
-          <span style="font-size:1.5rem;margin-top:8px;display:block;">⚡</span>
-          Use a caixa acima para capturar sua próxima ideia!
-        </div>`;
+        lista.innerHTML = `<div class="rascunho-empty">Nenhum rascunho ainda.<br><span style="font-size:1.5rem;margin-top:8px;display:block;">⚡</span></div>`;
         return;
       }
-
-      const frenteLabels = {
-        jenifer:    '👤 Jenifer',
-        elizangela: '👤 Elizângela',
-        escritorio: '⚖️ Escritório',
-        'socias-gs':'🤝 Sócias GS',
-        geral:      '⚡ Geral'
-      };
-
+      const frenteLabels = { jenifer:'👤 Jenifer', elizangela:'👤 Elizângela', escritorio:'⚖️ Escritório', 'socias-gs':'🤝 Sócias GS', geral:'⚡ Geral' };
       lista.innerHTML = this.data.rascunhos.map(r => {
         const frente = r.frente || 'geral';
-        const btnCls = frente === 'elizangela' ? 'elizangela'
-                     : frente === 'escritorio' ? 'escritorio'
-                     : frente === 'socias-gs'  ? 'socias'
-                     : '';
-
-        // Botões de transformar — se frente definida, mostra direto; senão, mostra todas as opções
+        const btnCls = frente === 'elizangela' ? 'elizangela' : frente === 'escritorio' ? 'escritorio' : frente === 'socias-gs' ? 'socias' : '';
         const btnsTransformar = frente !== 'geral'
-          ? `<button class="btn-transformar ${btnCls}" onclick="app.transformarRascunho('${r.id}','${frente}')">
-               ✨ Transformar em Ideia — ${frenteLabels[frente]}
-             </button>`
+          ? `<button class="btn-transformar ${btnCls}" onclick="app.transformarRascunho('${r.id}','${frente}')">✨ Transformar em Ideia — ${frenteLabels[frente]}</button>`
           : `<button class="btn-transformar" onclick="app.transformarRascunho('${r.id}','jenifer')">👤 Jenifer</button>
              <button class="btn-transformar elizangela" onclick="app.transformarRascunho('${r.id}','elizangela')">👤 Elizângela</button>
              <button class="btn-transformar escritorio" onclick="app.transformarRascunho('${r.id}','escritorio')">⚖️ Escritório</button>
              <button class="btn-transformar socias" onclick="app.transformarRascunho('${r.id}','socias-gs')">🤝 Sócias GS</button>`;
-
-        return `
-          <div class="rascunho-card" id="rascunho-${r.id}">
-            <div class="rascunho-card-texto">${r.texto}</div>
-            <div class="rascunho-card-meta">
-              <span class="rascunho-card-frente-badge ${frente.replace('-gs','').replace('-','')}">${frenteLabels[frente]||frente}</span>
-              <span>${r.dataCriacao || ''}</span>
-            </div>
-            <div class="rascunho-card-actions">
-              ${btnsTransformar}
-              <button class="btn-rascunho-del" onclick="app.deletarRascunho('${r.id}')">🗑️</button>
-            </div>
-          </div>`;
+        return `<div class="rascunho-card">
+          <div class="rascunho-card-texto">${r.texto}</div>
+          <div class="rascunho-card-meta">
+            <span class="rascunho-card-frente-badge ${frente.replace('-gs','').replace('-','')}">${frenteLabels[frente]||frente}</span>
+            <span>${r.dataCriacao || ''}</span>
+          </div>
+          <div class="rascunho-card-actions">${btnsTransformar}<button class="btn-rascunho-del" onclick="app.deletarRascunho('${r.id}')">🗑️</button></div>
+        </div>`;
       }).join('');
     },
 
     transformarRascunho(rascunhoId, frente) {
       const r = this.data.rascunhos?.find(r => r.id === rascunhoId);
       if (!r) return;
-
-      // Cria ideia oficial a partir do rascunho
-      const perfilAuto = frente === 'jenifer'    ? 'socia-jenifer'
-                       : frente === 'elizangela' ? 'socia-elizangela'
-                       : frente === 'escritorio' ? 'escritorio-geral'
-                       : null;
-
-      const catAuto = frente === 'socias-gs' ? null : 'conteudo';
-
       const novaIdeia = {
-        id:               this.uid(),
-        titulo:           r.texto.length > 80 ? r.texto.substring(0, 80) + '…' : r.texto,
-        descricao:        r.texto,
-        tipo:             'insight',
-        frente:           frente,
-        categoriaConteudo: frente === 'escritorio' ? 'conteudo' : catAuto,
-        link:             null,
-        image:            null,
-        status:           'bruto',
-        dataCriacao:      this.formatDate(new Date()),
-        perfil:           perfilAuto,
-        numArtes:         null,
-        tipoArte:         null,
-        hashtags:         null,
-        legenda:          null,
-        categoria:        null,
-        responsavel:      null,
-        impacto:          null,
+        id: this.uid(), titulo: r.texto.length > 80 ? r.texto.substring(0, 80) + '…' : r.texto,
+        descricao: r.texto, tipo: 'insight', frente,
+        categoriaConteudo: frente === 'socias-gs' ? null : 'conteudo',
+        link: null, image: null, status: 'bruto', dataCriacao: this.formatDate(new Date()),
+        perfil: frente === 'jenifer' ? 'socia-jenifer' : frente === 'elizangela' ? 'socia-elizangela' : frente === 'escritorio' ? 'escritorio-geral' : null,
+        numArtes: null, tipoArte: null, hashtags: null, legenda: null, categoria: null, responsavel: null, impacto: null,
       };
-
       this.data.ideas.push(novaIdeia);
-
-      // Remove o rascunho
       this.data.rascunhos = this.data.rascunhos.filter(r => r.id !== rascunhoId);
-
       this.save();
       this.renderRascunhos();
       this.renderDashboard();
       this.renderKanban();
-      this.toast(`✨ Ideia criada no quadro de ${this.frenteLabel(frente)}!`);
+      this.toast(`✨ Ideia criada em ${this.frenteLabel(frente)}!`);
     },
 
     deletarRascunho(id) {
       if (!confirm('Apagar este rascunho?')) return;
       this.data.rascunhos = this.data.rascunhos.filter(r => r.id !== id);
-      this.save();
-      this.renderRascunhos();
-      this.toast('🗑️ Rascunho apagado');
+      this.save(); this.renderRascunhos(); this.toast('🗑️ Rascunho apagado');
     },
 
     /* ── UTILITÁRIOS ── */
