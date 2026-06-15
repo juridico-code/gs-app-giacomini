@@ -10,23 +10,43 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Georgia',serif;background:var(--bege);color:var(--grafite-dk);min-height:100vh;font-size:15px}
 #app{background:var(--bege)!important;min-height:100vh}
-main{background:var(--bege)!important;min-height:50vh;max-width:1400px;margin:0 auto;padding:28px 24px}
+main{background:var(--bege)!important;min-height:50vh;padding:28px 24px}
 .screen.active{background:var(--bege)}
 a{color:var(--dourado);text-decoration:none}a:hover{text-decoration:underline}
-.topnav{background:var(--preto);display:flex;align-items:center;padding:0 24px;height:54px;gap:4px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.3)}
-.topnav-logo{color:var(--dourado);font-size:1.2rem;font-weight:bold;margin-right:12px;letter-spacing:0.05em;white-space:nowrap}
-.topnav-link{color:rgba(255,255,255,0.65);background:transparent;border:none;padding:8px 15px;cursor:pointer;border-radius:8px;font-size:0.88rem;font-family:sans-serif;font-weight:600;transition:all 0.2s;white-space:nowrap}
-.topnav-link:hover{background:rgba(196,169,107,0.15);color:var(--dourado)}
-.topnav-link.active{background:rgba(196,169,107,0.2);color:var(--dourado)}
-.topnav-escrit{color:rgba(140,170,210,0.85)}
-.topnav-escrit:hover,.topnav-escrit.active{background:rgba(58,90,138,0.25);color:#a0c0e0}
-.topnav-socias{color:rgba(210,180,140,0.9)}
-.topnav-socias:hover,.topnav-socias.active{background:rgba(139,94,60,0.25);color:#f0dcc0}
-.sync-pill{margin-left:auto;padding:4px 12px;border-radius:20px;font-size:0.7rem;font-family:sans-serif;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);transition:all 0.2s;display:flex;align-items:center;gap:6px}
+/* ═══ LAYOUT COM NAV-SIDEBAR ═══ */
+#app{display:flex;min-height:100vh;background:var(--bege)}
+.nav-sidebar{width:168px;min-height:100vh;height:100vh;background:linear-gradient(180deg,#1a0804 0%,#2a1008 55%,#3D2418 100%);display:flex;flex-direction:column;padding:14px 8px;position:sticky;top:0;overflow-y:auto;border-right:1px solid rgba(196,169,107,0.15);flex-shrink:0;z-index:300}
+.nav-sidebar-logo{font-family:sans-serif;font-size:0.82rem;font-weight:800;color:var(--dourado);letter-spacing:0.04em;padding:0 6px 12px;border-bottom:1px solid rgba(196,169,107,0.2);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.nav-link{color:rgba(255,255,255,0.5);background:transparent;border:none;padding:8px 8px;cursor:pointer;border-radius:7px;font-size:0.78rem;font-family:sans-serif;font-weight:600;transition:all 0.18s;text-align:left;width:100%;display:flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden}
+.nav-link:hover{background:rgba(196,169,107,0.12);color:var(--dourado)}
+.nav-link.active{background:rgba(196,169,107,0.18);color:var(--dourado);box-shadow:inset 2px 0 0 var(--dourado)}
+.nav-link.escrit{color:rgba(160,190,220,0.75)}
+.nav-link.escrit:hover,.nav-link.escrit.active{background:rgba(58,90,138,0.18);color:#a0c0e0}
+.nav-link.socias{color:rgba(210,180,140,0.85)}
+.nav-link.socias:hover,.nav-link.socias.active{background:rgba(139,94,60,0.2);color:#f0dcc0}
+.nav-link.rascunho{color:rgba(255,220,100,0.85)}
+.nav-link.rascunho:hover,.nav-link.rascunho.active{background:rgba(255,220,100,0.08);color:#ffe566}
+.nav-link.como-usar{color:rgba(196,169,107,0.45);font-size:0.72rem}
+.nav-divider{height:1px;background:rgba(255,255,255,0.07);margin:5px 2px}
+.nav-section-label{font-family:sans-serif;font-size:0.54rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(196,169,107,0.3);padding:5px 8px 2px}
+.conteudo-wrapper{flex:1;min-width:0}
+.sync-pill{padding:4px 8px;border-radius:20px;font-size:0.62rem;font-family:sans-serif;font-weight:600;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);transition:all 0.2s;display:flex;align-items:center;gap:5px;margin:8px 6px 4px}
 .sync-pill.ok{background:rgba(58,112,64,0.25);color:#b0e0a0}
 .sync-pill.sync{background:rgba(196,169,107,0.2);color:var(--dourado)}
 .sync-pill.offline{background:rgba(192,68,42,0.2);color:#f5a090}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.sync-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+/* Hamburguer mobile */
+.nav-hamburger{display:none;background:linear-gradient(135deg,#1a0804,#2a1008);border:none;padding:12px 16px;cursor:pointer;align-items:center;gap:8px;color:var(--dourado);font-family:sans-serif;font-size:0.85rem;font-weight:700;position:sticky;top:0;z-index:200;width:100%;border-bottom:1px solid rgba(196,169,107,0.15)}
+.nav-hamburger span{display:block;width:18px;height:2px;background:var(--dourado);border-radius:2px}
+.nav-drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:349}
+.nav-drawer-overlay.open{display:block}
+@media(max-width:768px){
+  .nav-sidebar{position:fixed;top:0;left:0;bottom:0;transform:translateX(-100%);transition:transform 0.25s ease;z-index:350}
+  .nav-sidebar.open{transform:translateX(0)}
+  .nav-hamburger{display:flex!important}
+  .conteudo-wrapper{width:100%}
+  main{padding:14px 12px}
+}
 .colab-header{border-radius:var(--radius);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .colab-header.escrit{background:linear-gradient(135deg,#2a1408 0%,#4a2610 100%);color:#f0dcc0}
 .colab-header h1{font-size:1.6rem;color:inherit}
@@ -374,12 +394,6 @@ a{color:var(--dourado);text-decoration:none}a:hover{text-decoration:underline}
 .btn-rascunho-del:hover{border-color:var(--vermelho);color:var(--vermelho)}
 .rascunho-empty{text-align:center;padding:32px 20px;color:var(--grafite);font-family:sans-serif;font-size:0.88rem;background:var(--off-white);border-radius:var(--radius);border:2px dashed var(--cinza)}
 .rascunho-section-title{font-size:0.78rem;font-family:sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--grafite);margin-bottom:12px}
-.topnav-hamburger{display:none;background:transparent;border:none;cursor:pointer;padding:8px;margin-left:auto;flex-direction:column;gap:5px}
-.topnav-hamburger span{display:block;width:22px;height:2px;background:var(--dourado);border-radius:2px;transition:all 0.3s}
-.mobile-menu{display:none;position:fixed;top:54px;left:0;right:0;bottom:0;background:var(--preto);z-index:199;flex-direction:column;padding:16px;gap:4px;overflow-y:auto}
-.mobile-menu.open{display:flex}
-.mobile-menu .topnav-link{padding:14px 18px;font-size:1rem;border-radius:10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.06)}
-.mobile-menu-divider{height:1px;background:rgba(255,255,255,0.1);margin:8px 0}
 @media(max-width:1300px){.kanban-board{grid-template-columns:repeat(3,1fr)}.colab-board-grid{grid-template-columns:repeat(3,1fr)}.socias-board{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:1100px){.kanban-board{grid-template-columns:repeat(2,1fr)}.frentes-grid{grid-template-columns:repeat(2,1fr)}.colab-board-grid{grid-template-columns:repeat(2,1fr)}.colab-stats-row{grid-template-columns:repeat(2,1fr)}.socias-board{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){.topnav{padding:0 16px}.topnav>.topnav-link{display:none}.topnav>a.topnav-link{display:none}.topnav-hamburger{display:flex}.topnav-logo{font-size:1.05rem}.topnav>div[style*="width:1px"]{display:none}.sync-pill{font-size:0.62rem;padding:3px 8px}.mobile-menu .topnav-link{display:block!important}.app-container{padding:14px 12px}main{padding:14px 12px}.screen-header{flex-direction:column;align-items:flex-start}.screen-header h1{font-size:1.3rem}.frentes-grid{grid-template-columns:1fr 1fr;gap:10px}.kanban-board{grid-template-columns:1fr}.colab-board-grid{grid-template-columns:1fr 1fr}.colab-stats-row{grid-template-columns:repeat(2,1fr)}.week-grid{grid-template-columns:repeat(3,1fr)}.prompts-grid{grid-template-columns:1fr}.teleprompter-wrapper{min-height:280px;padding:20px 14px}.teleprompter-text{font-size:1.2rem!important}.tp-tabs{flex-wrap:wrap}.tp-tab{flex:1;text-align:center;padding:10px 10px;font-size:0.82rem}.agenda-nav{gap:6px}#current-date-display{font-size:0.9rem;min-width:unset}.agenda-tabs{gap:2px;padding:4px}.agenda-tab{padding:8px 12px;font-size:0.8rem}.colab-header{padding:16px}.colab-header h1{font-size:1.3rem}.socias-header{padding:16px}.socias-header h1{font-size:1.3rem}.modal{padding:0;align-items:flex-end}.modal-content{max-width:100%;width:100%;border-radius:20px 20px 0 0;max-height:92vh;padding:20px 16px}.modal-large{max-width:100%}.modal-buttons{flex-direction:column}.ideias-filters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}.filter-btn{white-space:nowrap;flex-shrink:0}.pauta-item{flex-wrap:wrap}#aj-board{grid-template-columns:1fr 1fr}.perfil-tabs{gap:4px}.perfil-tab{flex:1;padding:8px 10px;font-size:0.78rem}.arte-card{padding:14px}.arte-card-header{gap:6px}.pacote-row{grid-template-columns:1fr 80px;gap:4px}.pacote-row .pacote-bar{grid-column:1/-1}.pacote-row .pacote-pct{display:none}}
@@ -388,37 +402,36 @@ a{color:var(--dourado);text-decoration:none}a:hover{text-decoration:underline}
 </head>
 <body>
 <div id="app">
-<nav class="topnav">
-<span class="topnav-logo">⚡ GS App</span>
-<button class="topnav-link active" data-screen="dashboard">📊 Dashboard</button>
-<button class="topnav-link" data-screen="agenda">📅 Agenda</button>
-<button class="topnav-link" data-screen="ideias">💡 Ideias</button>
-<button class="topnav-link" data-screen="roteiros">📝 Roteiros</button>
-<button class="topnav-link" data-screen="teleprompter">📖 Teleprompter</button>
-<div style="width:1px;background:rgba(255,255,255,0.15);height:24px;margin:0 6px;"></div>
-<button class="topnav-link topnav-escrit" data-screen="social-media">🎨 Social Media</button>
-<a href="planejamento-app.html" class="topnav-link topnav-escrit" style="text-decoration:none;display:inline-flex;align-items:center;">📋 Planejamento</a>
-<button class="topnav-link topnav-escrit" data-screen="assessoria">⚖️ Assessoria</button>
-<button class="topnav-link topnav-socias" data-screen="socias">🤝 Sócias</button>
-<div style="width:1px;background:rgba(255,255,255,0.15);height:24px;margin:0 6px;"></div>
-<button class="topnav-link" data-screen="rascunho" style="color:rgba(255,220,100,0.9);">⚡ Rascunho</button>
-<span class="sync-pill" id="sync-status"><span class="sync-dot"></span><span id="sync-status-text">Carregando…</span></span>
-<button class="topnav-hamburger" id="hamburger-btn" onclick="app.toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+
+<!-- NAV SIDEBAR -->
+<nav class="nav-sidebar" id="nav-sidebar">
+  <div class="nav-sidebar-logo">⚡ GS App</div>
+  <div class="nav-section-label">Principal</div>
+  <button class="nav-link active" data-screen="dashboard">📊 Dashboard</button>
+  <button class="nav-link" data-screen="agenda">📅 Agenda</button>
+  <button class="nav-link" data-screen="ideias">💡 Ideias</button>
+  <button class="nav-link" data-screen="roteiros">📝 Roteiros</button>
+  <button class="nav-link" data-screen="teleprompter">📖 Teleprompter</button>
+  <div class="nav-divider"></div>
+  <div class="nav-section-label">Escritório</div>
+  <button class="nav-link escrit" data-screen="social-media">🎨 Social Media</button>
+  <button class="nav-link escrit" data-screen="assessoria">⚖️ Assessoria</button>
+  <button class="nav-link socias" data-screen="socias">🤝 Sócias</button>
+  <div class="nav-divider"></div>
+  <button class="nav-link rascunho" data-screen="rascunho">⚡ Rascunho</button>
+  <button class="nav-link como-usar" data-screen="como-usar">❓ Como Usar</button>
+  <div class="nav-divider"></div>
+  <span class="sync-pill" id="sync-status"><span class="sync-dot"></span><span id="sync-status-text">Carregando…</span></span>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
-<button class="topnav-link active" data-screen="dashboard" onclick="app.goTo('dashboard');app.closeMobileMenu()">📊 Dashboard</button>
-<button class="topnav-link" data-screen="agenda" onclick="app.goTo('agenda');app.closeMobileMenu()">📅 Agenda</button>
-<button class="topnav-link" data-screen="ideias" onclick="app.goTo('ideias');app.closeMobileMenu()">💡 Ideias</button>
-<button class="topnav-link" data-screen="roteiros" onclick="app.goTo('roteiros');app.closeMobileMenu()">📝 Roteiros</button>
-<button class="topnav-link" data-screen="teleprompter" onclick="app.goTo('teleprompter');app.closeMobileMenu()">📖 Teleprompter</button>
-<div class="mobile-menu-divider"></div>
-<button class="topnav-link topnav-escrit" data-screen="social-media" onclick="app.goTo('social-media');app.closeMobileMenu()">🎨 Social Media</button>
-<a href="planejamento-app.html" class="topnav-link topnav-escrit" style="text-decoration:none;" onclick="app.closeMobileMenu()">📋 Planejamento</a>
-<button class="topnav-link topnav-escrit" data-screen="assessoria" onclick="app.goTo('assessoria');app.closeMobileMenu()">⚖️ Assessoria</button>
-<button class="topnav-link topnav-socias" data-screen="socias" onclick="app.goTo('socias');app.closeMobileMenu()">🤝 Sócias</button>
-<div class="mobile-menu-divider"></div>
-<button class="topnav-link" data-screen="rascunho" style="color:rgba(255,220,100,0.9);" onclick="app.goTo('rascunho');app.closeMobileMenu()">⚡ Rascunho Rápido</button>
-</div>
+
+<div class="nav-drawer-overlay" id="nav-overlay" onclick="app.closeMobileMenu()"></div>
+
+<!-- CONTEÚDO -->
+<div class="conteudo-wrapper">
+<button class="nav-hamburger" id="hamburger-btn" onclick="app.toggleMobileMenu()">
+  <span></span><span></span><span></span>
+  <span style="font-weight:700;margin-left:4px;">Menu</span>
+</button>
 <main>
 <section id="dashboard" class="screen active"><div class="app-container">
 <div class="screen-header"><div><h1>📊 Dashboard</h1><p id="greeting" class="greeting"></p></div>
@@ -462,11 +475,23 @@ a{color:var(--dourado);text-decoration:none}a:hover{text-decoration:underline}
 <div class="teleprompter-toolbar"><select id="script-select-jenifer" class="script-selector" onchange="app.loadScript(this.value,'jenifer')"><option value="">Selecione um roteiro de Jenifer...</option></select><button class="btn-primary" style="background:var(--jenifer-cor);" onclick="app.openScriptModal('jenifer')">+ Novo Roteiro</button></div>
 <div id="tp-container-jenifer" class="teleprompter-wrapper"><div class="teleprompter-empty"><p>📖 Selecione um roteiro de Jenifer</p></div></div>
 <div class="teleprompter-controls"><button id="play-pause-jenifer" class="control-btn" onclick="app.togglePlay('jenifer')">▶ Play</button><div class="teleprompter-font-controls"><button class="font-btn" onclick="app.changeFontSize(-0.2,'jenifer')">A−</button><button class="font-btn" onclick="app.changeFontSize(0.2,'jenifer')">A+</button></div><input type="range" id="speed-slider-jenifer" min="0.5" max="4" step="0.1" value="1" class="speed-slider" oninput="app.updateSpeed(this.value,'jenifer')"><span id="speed-value-jenifer">1x</span><button class="control-btn" onclick="app.toggleFullscreen('tp-container-jenifer')">⛶ Fullscreen</button></div>
+<div id="tp-gravado-jenifer" style="display:none;margin-top:12px;background:rgba(58,112,64,0.1);border:1.5px solid var(--verde);border-radius:var(--radius);padding:14px 18px;display:none;">
+<div style="font-family:sans-serif;font-size:0.82rem;font-weight:700;color:var(--verde);margin-bottom:10px;">🎬 Gravação concluída?</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+<button class="btn-primary" style="background:var(--verde);flex:1;" onclick="app.marcarComoGravado('jenifer')">✅ Marcar como Gravado → Edição</button>
+</div>
+</div>
 </div>
 <div id="tp-elizangela" class="tp-panel">
 <div class="teleprompter-toolbar"><select id="script-select-elizangela" class="script-selector" onchange="app.loadScript(this.value,'elizangela')"><option value="">Selecione um roteiro de Elizângela...</option></select><button class="btn-primary" style="background:var(--elizangela-cor);" onclick="app.openScriptModal('elizangela')">+ Novo Roteiro</button></div>
 <div id="tp-container-elizangela" class="teleprompter-wrapper"><div class="teleprompter-empty"><p>📖 Selecione um roteiro de Elizângela</p></div></div>
 <div class="teleprompter-controls"><button id="play-pause-elizangela" class="control-btn" onclick="app.togglePlay('elizangela')">▶ Play</button><div class="teleprompter-font-controls"><button class="font-btn" onclick="app.changeFontSize(-0.2,'elizangela')">A−</button><button class="font-btn" onclick="app.changeFontSize(0.2,'elizangela')">A+</button></div><input type="range" id="speed-slider-elizangela" min="0.5" max="4" step="0.1" value="1" class="speed-slider" oninput="app.updateSpeed(this.value,'elizangela')"><span id="speed-value-elizangela">1x</span><button class="control-btn" onclick="app.toggleFullscreen('tp-container-elizangela')">⛶ Fullscreen</button></div>
+<div id="tp-gravado-elizangela" style="display:none;margin-top:12px;background:rgba(58,112,64,0.1);border:1.5px solid var(--verde);border-radius:var(--radius);padding:14px 18px;">
+<div style="font-family:sans-serif;font-size:0.82rem;font-weight:700;color:var(--verde);margin-bottom:10px;">🎬 Gravação concluída?</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+<button class="btn-primary" style="background:var(--verde);flex:1;" onclick="app.marcarComoGravado('elizangela')">✅ Marcar como Gravado → Edição</button>
+</div>
+</div>
 </div>
 </div></section>
 <section id="roteiros" class="screen"><div class="app-container">
@@ -518,20 +543,84 @@ a{color:var(--dourado);text-decoration:none}a:hover{text-decoration:underline}
 <div class="socias-board" id="sc-board"></div>
 </div></section>
 </main>
-<div id="modal-idea" class="modal"><div class="modal-content modal-large"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h2 id="modal-idea-title">💡 Nova Ideia</h2><button class="btn-small-close" onclick="app.closeModal('modal-idea')">✕</button></div><form id="form-idea" onsubmit="app.saveIdea(event)"><input type="hidden" id="idea-id"><input type="text" id="idea-titulo" placeholder="Título da ideia" required><textarea id="idea-descricao" placeholder="Descrição ou notas..."></textarea><label>Tipo:</label><select id="idea-tipo" required><option value="insight">💭 Insight</option><option value="link">🔗 Link</option><option value="print">📸 Print/Referência</option><option value="roteiro">📄 Roteiro</option></select><label>Frente:</label><select id="idea-frente" required onchange="app._filtrarDestinos()"><option value="jenifer">👤 Jenifer Giacomini</option><option value="elizangela">👤 Elizângela Silva</option><option value="escritorio">⚖️ Escritório</option><option value="socias-gs">🤝 Sócias GS</option></select><label>Destino — onde essa ideia vai?</label><select id="idea-destino" required onchange="app._toggleRoteiroField()"><option value="roteiro">📄 Roteiro/Reels — vai pra Teleprompter quando "Para Gravar"</option><option value="arte">🎨 Arte/Carrossel — vai pra Social Media</option><option value="pauta-juridica">⚖️ Pauta Jurídica — vai pra Assessoria</option><option value="decisao">🤝 Decisão Estratégica — vai pra Sócias GS</option></select><div id="campo-roteiro-wrapper" style="display:flex;flex-direction:column;gap:6px;"><label>📝 Roteiro completo (será usado no Teleprompter)</label><textarea id="idea-roteiro" placeholder="Cole ou escreva aqui o roteiro completo..." style="min-height:140px;"></textarea></div><label>Link (opcional)</label><input type="url" id="idea-link" placeholder="https://..."><div class="modal-buttons"><button type="submit" class="btn-primary" id="form-idea-submit">Criar Ideia</button><button type="button" class="btn-secondary" onclick="app.closeModal('modal-idea')">Cancelar</button></div></form></div></div>
+<div id="modal-idea" class="modal"><div class="modal-content modal-large"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h2 id="modal-idea-title">💡 Nova Ideia</h2><button class="btn-small-close" onclick="app.closeModal('modal-idea')">✕</button></div><form id="form-idea" onsubmit="app.saveIdea(event)"><input type="hidden" id="idea-id"><input type="text" id="idea-titulo" placeholder="Título da ideia" required><textarea id="idea-descricao" placeholder="Descrição ou notas..."></textarea><label>Tipo:</label><select id="idea-tipo" required><option value="insight">💭 Insight</option><option value="link">🔗 Link</option><option value="print">📸 Print/Referência</option><option value="roteiro">📄 Roteiro</option></select><label>Frente:</label><select id="idea-frente" required onchange="app._filtrarDestinos()"><option value="jenifer">👤 Jenifer Giacomini</option><option value="elizangela">👤 Elizângela Silva</option><option value="escritorio">⚖️ Escritório</option><option value="socias-gs">🤝 Sócias GS</option></select><label>Destino — onde essa ideia vai?</label><select id="idea-destino" required onchange="app._toggleRoteiroField()"><option value="roteiro">📄 Roteiro/Reels — vai pra Teleprompter quando "Para Gravar"</option><option value="arte">🎨 Arte/Carrossel — vai pra Social Media</option><option value="pauta-juridica">⚖️ Pauta Jurídica — vai pra Assessoria</option><option value="decisao">🤝 Decisão Estratégica — vai pra Sócias GS</option></select><div id="campo-roteiro-wrapper" style="display:none;flex-direction:column;gap:8px;background:rgba(196,169,107,0.06);border:1.5px solid rgba(196,169,107,0.3);border-radius:12px;padding:16px;margin-top:4px;">
+<div style="font-family:sans-serif;font-size:0.8rem;font-weight:800;color:var(--dourado-dk);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">📄 Roteiro · será usado no Teleprompter</div>
+<label style="margin-bottom:-4px;">📌 Capa / Título de Impacto</label>
+<input type="text" id="idea-roteiro-capa" placeholder="Ex: VOCÊ ESTÁ PERDENDO DINHEIRO ASSIM — chamada curta e impactante">
+<label style="margin-bottom:-4px;">✍️ Legenda do Post</label>
+<textarea id="idea-roteiro-legenda" placeholder="Texto completo para publicar — com call to action, perguntas e hashtags..." style="min-height:90px;"></textarea>
+<label style="margin-bottom:-4px;">🎙️ Roteiro Completo</label>
+<textarea id="idea-roteiro" placeholder="Cole ou escreva aqui o roteiro completo que vai aparecer no Teleprompter..." style="min-height:140px;font-family:'Georgia',serif;font-size:0.95rem;line-height:1.6;"></textarea>
+<div style="font-size:0.72rem;color:var(--grafite);font-family:sans-serif;">💡 Ao mover para 🎥 Para Gravar, o roteiro aparece automaticamente no Teleprompter</div>
+</div><label>Link (opcional)</label><input type="url" id="idea-link" placeholder="https://..."><div class="modal-buttons"><button type="submit" class="btn-primary" id="form-idea-submit">Criar Ideia</button><button type="button" class="btn-secondary" onclick="app.closeModal('modal-idea')">Cancelar</button></div></form></div></div>
 <div id="modal-idea-detail" class="modal"><div class="modal-content modal-large"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h2>📋 Detalhes da Ideia</h2><button class="btn-small-close" onclick="app.closeModal('modal-idea-detail')">✕</button></div><div id="idea-detail-content"></div><div class="modal-buttons" style="margin-top:16px;"><button type="button" class="btn-primary" onclick="app.editCurrentIdea()">✏️ Editar</button><button type="button" class="btn-danger" onclick="app.deleteCurrentIdea()">🗑️ Deletar</button><button type="button" class="btn-secondary" onclick="app.closeModal('modal-idea-detail')">Fechar</button></div></div></div>
 <div id="modal-script" class="modal"><div class="modal-content"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h2 id="modal-script-title">📝 Novo Roteiro</h2><button class="btn-small-close" onclick="app.closeModal('modal-script')">✕</button></div><form id="form-script" onsubmit="app.saveScript(event)"><input type="hidden" id="script-socia"><input type="hidden" id="script-id"><input type="text" id="script-titulo" placeholder="Título do roteiro" required><textarea id="script-conteudo" placeholder="Cole ou digite o roteiro aqui..." required style="min-height:150px;"></textarea><label>Status</label><select id="script-status"><option value="roteiro">✍️ Em Roteiro (rascunho)</option><option value="gravar" selected>🎥 Para Gravar (pronto)</option><option value="editar">✂️ Em Edição</option><option value="publicado">✅ Publicado</option></select><div class="modal-buttons"><button type="submit" class="btn-primary" id="script-submit-btn">Salvar</button><button type="button" class="btn-secondary" onclick="app.closeModal('modal-script')">Cancelar</button></div></form></div></div>
 <div id="modal-task" class="modal"><div class="modal-content"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h2>✅ Nova Tarefa</h2><button class="btn-small-close" onclick="app.closeModal('modal-task')">✕</button></div><form id="form-task" onsubmit="app.saveTask(event)"><input type="text" id="task-titulo" placeholder="Descrição da tarefa" required><label>Horário (opcional)</label><input type="time" id="task-hora"><label>Prioridade:</label><select id="task-prioridade"><option value="BAIXA">📗 Baixa</option><option value="MÉDIA" selected>📙 Média</option><option value="ALTA">📕 Alta</option></select><textarea id="task-nota" placeholder="Notas (opcional)"></textarea><div class="modal-buttons"><button type="submit" class="btn-primary">Criar Tarefa</button><button type="button" class="btn-secondary" onclick="app.closeModal('modal-task')">Cancelar</button></div></form></div></div>
 <div id="modal-socia" class="modal"><div class="modal-content modal-large"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h2 id="modal-socia-title">🤝 Nova Ideia Estratégica</h2><button class="btn-small-close" onclick="app.closeModal('modal-socia')">✕</button></div><form id="form-socia" onsubmit="app.saveSociaIdeia(event)"><input type="hidden" id="socia-id"><input type="text" id="socia-titulo" placeholder="Título da ideia" required><textarea id="socia-descricao" placeholder="Descrição..."></textarea><label>Categoria</label><select id="socia-categoria"><option value="negocio">💼 Ideia de Negócio</option><option value="melhoria">🔧 Melhoria</option><option value="estrategia">🎯 Estratégia</option><option value="financeiro">💰 Financeiro</option><option value="captacao">📣 Captação</option><option value="rh">👥 RH</option><option value="tecnologia">💻 Tecnologia</option><option value="outro">📌 Outro</option></select><label>Responsável</label><select id="socia-responsavel"><option value="">— Ambas —</option><option value="jenifer">👤 Jenifer</option><option value="elizangela">👤 Elizângela</option></select><label>Impacto / Observações</label><textarea id="socia-impacto" placeholder="Impacto esperado, prazo, recursos..."></textarea><div class="modal-buttons"><button type="submit" class="btn-primary" style="background:var(--escrit-cor);">Salvar</button><button type="button" class="btn-secondary" onclick="app.closeModal('modal-socia')">Cancelar</button></div></form></div></div>
 <div id="modal-prompt" class="modal"><div class="modal-content modal-large"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;"><h2>📋 Novo Prompt</h2><button class="btn-small-close" onclick="app.closeModal('modal-prompt')">✕</button></div><form id="form-prompt" onsubmit="app.savePrompt(event)"><input type="hidden" id="prompt-contexto"><input type="text" id="prompt-titulo" placeholder="Título do prompt" required><label>Prompt completo</label><textarea id="prompt-conteudo" placeholder="Cole ou escreva o prompt aqui..." required style="min-height:160px;font-family:monospace;font-size:0.85rem;"></textarea><div class="modal-buttons"><button type="submit" class="btn-primary">Salvar Prompt</button><button type="button" class="btn-secondary" onclick="app.closeModal('modal-prompt')">Cancelar</button></div></form></div></div>
-<div id="toast" class="toast"></div>
+<section id="como-usar" class="screen"><div class="app-container">
+<div style="background:linear-gradient(135deg,#1a0804 0%,#3D2418 100%);border-radius:14px;padding:28px 32px;margin-bottom:32px;color:#f0dcc0;">
+<h1 style="font-size:1.7rem;margin-bottom:6px;">❓ Como Usar o GS App</h1>
+<p style="opacity:0.8;font-size:0.9rem;">Guia rápido da lógica do sistema · do cadastro ao conteúdo publicado</p>
 </div>
+<div style="background:#fff;border-radius:14px;padding:24px 28px;box-shadow:var(--shadow);margin-bottom:20px;">
+<div style="font-family:sans-serif;font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:var(--dourado-dk);margin-bottom:16px;">🔄 O Fluxo do Conteúdo</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px;">
+<div style="background:rgba(196,169,107,0.1);border-radius:8px;padding:10px 16px;font-family:sans-serif;font-size:0.85rem;font-weight:700;color:var(--dourado-dk);">💡 Ideia</div>
+<div style="color:var(--grafite);font-size:1.2rem;">→</div>
+<div style="background:rgba(139,94,60,0.1);border-radius:8px;padding:10px 16px;font-family:sans-serif;font-size:0.85rem;font-weight:700;color:var(--escrit-cor);">✍️ Roteiro</div>
+<div style="color:var(--grafite);font-size:1.2rem;">→</div>
+<div style="background:rgba(192,68,42,0.08);border-radius:8px;padding:10px 16px;font-family:sans-serif;font-size:0.85rem;font-weight:700;color:var(--vermelho);">🎥 Para Gravar</div>
+<div style="color:var(--grafite);font-size:1.2rem;">→</div>
+<div style="background:rgba(58,90,138,0.08);border-radius:8px;padding:10px 16px;font-family:sans-serif;font-size:0.85rem;font-weight:700;color:var(--azul);">✂️ Em Edição</div>
+<div style="color:var(--grafite);font-size:1.2rem;">→</div>
+<div style="background:rgba(58,112,64,0.1);border-radius:8px;padding:10px 16px;font-family:sans-serif;font-size:0.85rem;font-weight:700;color:var(--verde);">✅ Publicado</div>
+</div>
+</div>
+<div style="background:#fff;border-radius:14px;padding:24px 28px;box-shadow:var(--shadow);margin-bottom:20px;">
+<div style="font-family:sans-serif;font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:var(--dourado-dk);margin-bottom:16px;">💡 Como Cadastrar uma Ideia</div>
+<ol style="font-family:sans-serif;font-size:0.88rem;color:var(--grafite-dk);line-height:1.9;padding-left:20px;">
+<li>Vá até <strong>💡 Ideias</strong> e clique em <strong>+ Nova Ideia</strong></li>
+<li>Preencha o Título e escolha o <strong>Tipo</strong>: Insight, Link, Print ou Roteiro</li>
+<li>Escolha a <strong>Frente</strong>: Jenifer, Elizângela, Escritório ou Sócias GS</li>
+<li>Escolha o <strong>Destino</strong>: Roteiro/Reels, Arte/Carrossel, Pauta Jurídica ou Decisão Estratégica</li>
+<li>Se for <strong>Roteiro</strong>: preencha Capa, Legenda e Roteiro completo nos campos que aparecem</li>
+<li>Salve — a ideia aparece no Kanban na coluna <strong>Ideia Bruta</strong></li>
+</ol>
+</div>
+<div style="background:#fff;border-radius:14px;padding:24px 28px;box-shadow:var(--shadow);margin-bottom:20px;">
+<div style="font-family:sans-serif;font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:var(--dourado-dk);margin-bottom:16px;">📋 Colunas do Kanban</div>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(196,169,107,0.06);border-radius:8px;border-left:3px solid var(--dourado);"><div style="min-width:110px;font-family:sans-serif;font-size:0.78rem;font-weight:800;color:var(--dourado-dk);">📝 Ideia Bruta</div><div style="font-family:sans-serif;font-size:0.85rem;color:var(--grafite-dk);line-height:1.5;">Recém cadastrada, ainda sem forma definida.</div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(139,94,60,0.06);border-radius:8px;border-left:3px solid var(--escrit-cor);"><div style="min-width:110px;font-family:sans-serif;font-size:0.78rem;font-weight:800;color:var(--escrit-cor);">✍️ Em Roteiro</div><div style="font-family:sans-serif;font-size:0.85rem;color:var(--grafite-dk);line-height:1.5;">Conteúdo sendo escrito. Use <strong>📝 Roteiros</strong> para escrever e revisar.</div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(192,68,42,0.05);border-radius:8px;border-left:3px solid var(--vermelho);"><div style="min-width:110px;font-family:sans-serif;font-size:0.78rem;font-weight:800;color:var(--vermelho);">🎥 Para Gravar</div><div style="font-family:sans-serif;font-size:0.85rem;color:var(--grafite-dk);line-height:1.5;">Roteiro aprovado. Aparece no Teleprompter automaticamente.</div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(58,90,138,0.06);border-radius:8px;border-left:3px solid var(--azul);"><div style="min-width:110px;font-family:sans-serif;font-size:0.78rem;font-weight:800;color:var(--azul);">✂️ Em Edição</div><div style="font-family:sans-serif;font-size:0.85rem;color:var(--grafite-dk);line-height:1.5;">Gravação feita. Ao clicar "Marcar como Gravado" no Teleprompter, a ideia vem aqui.</div></div>
+<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(58,112,64,0.07);border-radius:8px;border-left:3px solid var(--verde);"><div style="min-width:110px;font-family:sans-serif;font-size:0.78rem;font-weight:800;color:var(--verde);">✅ Publicado</div><div style="font-family:sans-serif;font-size:0.85rem;color:var(--grafite-dk);line-height:1.5;">Conteúdo publicado nas redes.</div></div>
+</div>
+</div>
+<div style="background:#fff;border-radius:14px;padding:24px 28px;box-shadow:var(--shadow);margin-bottom:20px;">
+<div style="font-family:sans-serif;font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:var(--dourado-dk);margin-bottom:16px;">📖 Como Usar o Teleprompter</div>
+<ol style="font-family:sans-serif;font-size:0.88rem;color:var(--grafite-dk);line-height:1.9;padding-left:20px;">
+<li>Vá até <strong>📖 Teleprompter</strong> e escolha o perfil: Jenifer ou Elizângela</li>
+<li>No dropdown, selecione a ideia — só aparecem as em <strong>🎥 Para Gravar</strong></li>
+<li>O roteiro carrega automaticamente. Ajuste velocidade e fonte se precisar</li>
+<li>Clique em <strong>▶ Play</strong> para iniciar</li>
+<li>Após gravar, clique em <strong>✅ Marcar como Gravado</strong> — a ideia vai para <strong>✂️ Em Edição</strong></li>
+</ol>
+</div>
+</div></section>
+
+<div id="toast" class="toast"></div>
+</main>
+</div><!-- /conteudo-wrapper -->
+</div><!-- /app -->
 <script>
 const app={
 API_URL:'https://shiny-feather-8fbd.juridico-d48.workers.dev/',API_KEY:'GS@2026',SAVE_DEBOUNCE_MS:1500,POLL_INTERVAL_MS:30000,STORAGE_KEY:'gs-app-v2',BACKUP_KEY:'gs-app-v2-backup',
 data:{ideas:[],tasks:{},habits:[],dreams:[],courses:[],scripts:[],prompts:[],rascunhos:[],artes:[],pacotes:{}},
 currentDate:new Date(),currentViewMonth:new Date(),currentIdeaId:null,currentSociaId:null,currentFilter:'all',scCatFilter:'all',currentTpTab:'jenifer',currentSmTab:'pauta',currentArtesPerfil:'escritorio',
 tpState:{jenifer:{interval:null,playing:false,fontSize:1.6,speed:1},elizangela:{interval:null,playing:false,fontSize:1.6,speed:1}},
+_tpCurrentId:{},
 _saveTimer:null,_pollTimer:null,_isOnline:false,_lastSyncAt:null,pautaFilter:'all',rotFilter:'all',
 _pacotePadrao:{escritorio:{simples:12,carrossel:2},jenifer:{simples:5,carrossel:1},elizangela:{simples:5,carrossel:1}},
 _destinosPermitidos:{'jenifer':['roteiro','arte'],'elizangela':['roteiro','arte'],'escritorio':['arte','pauta-juridica'],'socias-gs':['decisao']},
@@ -546,10 +635,10 @@ _cacheLocal(){try{const atual=localStorage.getItem(this.STORAGE_KEY);if(atual){t
 save(){this._cacheLocal();this._syncStatus('sync','💾 Salvando…');if(this._saveTimer)clearTimeout(this._saveTimer);this._saveTimer=setTimeout(()=>this._pushToCloud(),this.SAVE_DEBOUNCE_MS);},
 _pushToCloud(){if(this._contarItens(this.data)===0){this._syncStatus('offline','⚠️ Nada para salvar');return;}fetch(this.API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'saveAllData',key:this.API_KEY,data:this.data})}).then(r=>r.json()).then(d=>{if(d&&d.success){this._isOnline=true;this._lastSyncAt=new Date();this._syncStatus('ok','☁️ Salvo na nuvem');}else this._syncStatus('offline','⚠️ Erro · '+(d.error||'tente de novo'));}).catch(()=>{this._isOnline=false;this._syncStatus('offline','📴 Offline · só local');});},
 refresh(){this.renderDashboard();this.renderKanban();this.renderAgendaDay();this.renderScriptSelectors();this.renderRascunhos();if(document.getElementById('roteiros')?.classList.contains('active'))this.renderRoteiros();if(document.getElementById('social-media')?.classList.contains('active')){const tab=this.currentSmTab||'pauta';if(tab==='pauta')this.renderPautaSM();if(tab==='artes')this.renderArtes();if(tab==='edicao')this.renderEdicao();}if(document.getElementById('assessoria')?.classList.contains('active')){this.renderAssessoria();this.renderPrompts('assessoria','prompts-assessoria');}if(document.getElementById('socias')?.classList.contains('active'))this.renderSocias();},
-bindNavigation(){document.querySelectorAll('.topnav-link').forEach(btn=>{if(btn.tagName==='BUTTON'&&btn.dataset.screen)btn.addEventListener('click',()=>this.goTo(btn.dataset.screen));});},
-goTo(screen){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.topnav-link').forEach(b=>b.classList.remove('active'));document.getElementById(screen)?.classList.add('active');document.querySelectorAll(`[data-screen="${screen}"]`).forEach(b=>b.classList.add('active'));if(screen==='dashboard')this.renderDashboard();if(screen==='ideias')this.renderKanban();if(screen==='agenda')this.renderAgendaDay();if(screen==='teleprompter')this.renderScriptSelectors();if(screen==='roteiros')this.renderRoteiros();if(screen==='social-media'){const tab=this.currentSmTab||'pauta';this.switchSmTab(tab);this.renderPrompts('social-media','prompts-social-media');}if(screen==='assessoria'){this.renderAssessoria();this.renderPrompts('assessoria','prompts-assessoria');}if(screen==='socias')this.renderSocias();if(screen==='rascunho')this.renderRascunhos();},
-toggleMobileMenu(){document.getElementById('mobile-menu').classList.toggle('open');},
-closeMobileMenu(){document.getElementById('mobile-menu')?.classList.remove('open');},
+bindNavigation(){document.querySelectorAll('.nav-link[data-screen]').forEach(btn=>{btn.addEventListener('click',()=>{this.goTo(btn.dataset.screen);this.closeMobileMenu();});});},
+goTo(screen){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));document.getElementById(screen)?.classList.add('active');document.querySelector(`.nav-link[data-screen="${screen}"]`)?.classList.add('active');if(screen==='dashboard')this.renderDashboard();if(screen==='ideias')this.renderKanban();if(screen==='agenda')this.renderAgendaDay();if(screen==='teleprompter')this.renderScriptSelectors();if(screen==='roteiros')this.renderRoteiros();if(screen==='social-media'){const tab=this.currentSmTab||'pauta';this.switchSmTab(tab);this.renderPrompts('social-media','prompts-social-media');}if(screen==='assessoria'){this.renderAssessoria();this.renderPrompts('assessoria','prompts-assessoria');}if(screen==='socias')this.renderSocias();if(screen==='rascunho')this.renderRascunhos();},
+toggleMobileMenu(){document.getElementById('nav-sidebar')?.classList.toggle('open');document.getElementById('nav-overlay')?.classList.toggle('open');},
+closeMobileMenu(){document.getElementById('nav-sidebar')?.classList.remove('open');document.getElementById('nav-overlay')?.classList.remove('open');},
 filterByFrente(f){this.currentFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.filter===f));this.renderKanban();},
 openModal(id){document.getElementById(id)?.classList.add('open');if(id==='modal-idea'){document.getElementById('modal-idea-title').textContent='💡 Nova Ideia';document.getElementById('form-idea-submit').textContent='Criar Ideia';document.getElementById('idea-id').value='';document.getElementById('form-idea').reset();this._filtrarDestinos();}},
 closeModal(id){document.getElementById(id)?.classList.remove('open');},
@@ -566,11 +655,11 @@ salvarRoteiroIdeia(id){const idea=this.data.ideas.find(i=>i.id===id);if(!idea)re
 copiarRoteiroIdeia(id){const i=this.data.ideas.find(i=>i.id===id);if(i&&i.roteiro)this._copiarTexto(i.roteiro);},
 abrirNoTeleprompter(id){const idea=this.data.ideas.find(i=>i.id===id);if(!idea||!idea.roteiro)return;this.closeModal('modal-idea-detail');this.goTo('teleprompter');setTimeout(()=>{const socia=idea.frente==='jenifer'?'jenifer':idea.frente==='elizangela'?'elizangela':'jenifer';this.switchTpTab(socia);this.renderScriptSelectors();const sel=document.getElementById(`script-select-${socia}`);if(sel){sel.value=`idea_${id}`;this.loadScript(`idea_${id}`,socia);}},200);},
 changeIdeaStatus(id,newStatus){const idea=this.data.ideas.find(i=>i.id===id);if(!idea)return;idea.status=newStatus;if(newStatus==='gravar'){const key=this.dateKey(new Date());if(!this.data.tasks[key])this.data.tasks[key]=[];if(!this.data.tasks[key].some(t=>t.ideaId===id)){this.data.tasks[key].push({id:this.uid(),titulo:`🎥 Gravar: ${idea.titulo}`,hora:'',prioridade:'ALTA',nota:`Frente: ${this.frenteLabel(idea.frente)}`,done:false,ideaId:id});this.toast('📅 Tarefa adicionada à agenda!');}}if(newStatus==='editar'){idea.dataGravacao=this.dateKey(new Date());this.toast('✂️ Movido para Edição!');}if(newStatus==='publicado'){idea.dataPublicacao=this.dateKey(new Date());this.toast('✅ Publicado!');}this.save();this.showIdeaDetail(id);this.renderKanban();this.renderDashboard();},
-editCurrentIdea(){const idea=this.data.ideas.find(i=>i.id===this.currentIdeaId);if(!idea)return;this.closeModal('modal-idea-detail');document.getElementById('modal-idea-title').textContent='✏️ Editar Ideia';document.getElementById('form-idea-submit').textContent='Salvar';document.getElementById('idea-id').value=idea.id;document.getElementById('idea-titulo').value=idea.titulo;document.getElementById('idea-descricao').value=idea.descricao||'';document.getElementById('idea-tipo').value=idea.tipo;document.getElementById('idea-frente').value=idea.frente;document.getElementById('idea-destino').value=idea.destino||'roteiro';document.getElementById('idea-roteiro').value=idea.roteiro||'';document.getElementById('idea-link').value=idea.link||'';this._filtrarDestinos();document.getElementById('modal-idea').classList.add('open');},
+editCurrentIdea(){const idea=this.data.ideas.find(i=>i.id===this.currentIdeaId);if(!idea)return;this.closeModal('modal-idea-detail');document.getElementById('modal-idea-title').textContent='✏️ Editar Ideia';document.getElementById('form-idea-submit').textContent='Salvar';document.getElementById('idea-id').value=idea.id;document.getElementById('idea-titulo').value=idea.titulo;document.getElementById('idea-descricao').value=idea.descricao||'';document.getElementById('idea-tipo').value=idea.tipo;document.getElementById('idea-frente').value=idea.frente;document.getElementById('idea-destino').value=idea.destino||'roteiro';document.getElementById('idea-roteiro').value=idea.roteiro||'';if(document.getElementById('idea-roteiro-capa'))document.getElementById('idea-roteiro-capa').value=idea.roteiroCapa||'';if(document.getElementById('idea-roteiro-legenda'))document.getElementById('idea-roteiro-legenda').value=idea.roteiroLegenda||'';document.getElementById('idea-link').value=idea.link||'';this._filtrarDestinos();document.getElementById('modal-idea').classList.add('open');},
 _toggleRoteiroField(){const dest=document.getElementById('idea-destino')?.value;const wrap=document.getElementById('campo-roteiro-wrapper');if(!wrap)return;wrap.style.display=(dest==='roteiro')?'flex':'none';},
 _filtrarDestinos(){const fSel=document.getElementById('idea-frente');const dSel=document.getElementById('idea-destino');if(!fSel||!dSel)return;const frente=fSel.value;const permitidos=this._destinosPermitidos[frente]||['roteiro','arte','pauta-juridica','decisao'];Array.from(dSel.options).forEach(opt=>{const ok=permitidos.includes(opt.value);opt.disabled=!ok;opt.style.display=ok?'':'none';});if(!permitidos.includes(dSel.value))dSel.value=permitidos[0];this._toggleRoteiroField();},
 deleteCurrentIdea(){if(!confirm('Deletar esta ideia?'))return;this.data.ideas=this.data.ideas.filter(i=>i.id!==this.currentIdeaId);this.save();this.closeModal('modal-idea-detail');this.renderKanban();this.renderDashboard();this.toast('🗑️ Ideia deletada');},
-saveIdea(e){e.preventDefault();const existingId=document.getElementById('idea-id').value;const idea={id:existingId||this.uid(),titulo:document.getElementById('idea-titulo').value.trim(),descricao:document.getElementById('idea-descricao').value.trim(),tipo:document.getElementById('idea-tipo').value,frente:document.getElementById('idea-frente').value,destino:document.getElementById('idea-destino').value,roteiro:document.getElementById('idea-roteiro').value.trim(),link:document.getElementById('idea-link').value.trim(),status:'bruto',dataCriacao:this.formatDate(new Date())};if(existingId){const idx=this.data.ideas.findIndex(i=>i.id===existingId);if(idx>=0){idea.status=this.data.ideas[idx].status;idea.dataPublicacao=this.data.ideas[idx].dataPublicacao;this.data.ideas[idx]=idea;}this.toast('✅ Ideia atualizada!');}else{this.data.ideas.push(idea);this.toast('💡 Ideia criada!');}this.save();this.closeModal('modal-idea');this.renderKanban();this.renderDashboard();},
+saveIdea(e){e.preventDefault();const existingId=document.getElementById('idea-id').value;const idea={id:existingId||this.uid(),titulo:document.getElementById('idea-titulo').value.trim(),descricao:document.getElementById('idea-descricao').value.trim(),tipo:document.getElementById('idea-tipo').value,frente:document.getElementById('idea-frente').value,destino:document.getElementById('idea-destino').value,roteiro:document.getElementById('idea-roteiro').value.trim(),roteiroCapa:document.getElementById('idea-roteiro-capa')?.value.trim()||null,roteiroLegenda:document.getElementById('idea-roteiro-legenda')?.value.trim()||null,link:document.getElementById('idea-link').value.trim(),status:'bruto',dataCriacao:this.formatDate(new Date())};if(existingId){const idx=this.data.ideas.findIndex(i=>i.id===existingId);if(idx>=0){idea.status=this.data.ideas[idx].status;idea.dataPublicacao=this.data.ideas[idx].dataPublicacao;this.data.ideas[idx]=idea;}this.toast('✅ Ideia atualizada!');}else{this.data.ideas.push(idea);this.toast('💡 Ideia criada!');}this.save();this.closeModal('modal-idea');this.renderKanban();this.renderDashboard();},
 renderAgendaDay(){const key=this.dateKey(this.currentDate);const tasks=this.data.tasks[key]||[];const ideaTasks=this.data.ideas.filter(i=>i.status==='gravar');const displayEl=document.getElementById('current-date-display');if(displayEl)displayEl.textContent=this.formatDate(this.currentDate,true);const ideaEl=document.getElementById('day-idea-tasks');if(ideaEl)ideaEl.innerHTML=ideaTasks.length===0?'<p style="color:var(--grafite);font-size:0.82rem;font-family:sans-serif;padding:8px;">Nenhuma ideia em "Para Gravar"</p>':ideaTasks.map(i=>`<div class="task-item"><div class="task-body"><div class="task-title">🎥 ${this._esc(i.titulo)}</div><div class="task-meta">${this.frenteLabel(i.frente)} · ${this._esc(i.dataCriacao||'')}</div><span class="idea-task-badge">💡 Do Banco de Ideias</span></div><span class="task-priority priority-ALTA">GRAVAR</span></div>`).join('');const listEl=document.getElementById('day-tasks-list');if(listEl)listEl.innerHTML=tasks.length===0?'<p style="color:var(--grafite);font-size:0.82rem;font-family:sans-serif;padding:8px;">Nenhuma tarefa para este dia</p>':tasks.map(t=>`<div class="task-item"><div class="task-check ${t.done?'done':''}" onclick="app.toggleTask('${key}','${t.id}')"></div><div class="task-body"><div class="task-title ${t.done?'done':''}">${this._esc(t.titulo)}</div>${t.hora?`<div class="task-meta">🕐 ${this._esc(t.hora)}</div>`:''} ${t.nota?`<div class="task-meta">${this._esc(t.nota)}</div>`:''}</div><span class="task-priority priority-${t.prioridade}">${t.prioridade}</span></div>`).join('');this.renderAgendaWeek();this.renderAgendaMonth();},
 changeDay(d){this.currentDate=new Date(this.currentDate);this.currentDate.setDate(this.currentDate.getDate()+d);this.renderAgendaDay();},
 goToToday(){this.currentDate=new Date();this.renderAgendaDay();},
@@ -583,7 +672,8 @@ changeMonth(delta){this.currentViewMonth=new Date(this.currentViewMonth.getFullY
 switchTpTab(socia){this.currentTpTab=socia;document.querySelectorAll('.tp-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tp-panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tp-tab').forEach(t=>{if((socia==='jenifer'&&t.textContent.includes('Jenifer'))||(socia==='elizangela'&&t.textContent.includes('Eliz')))t.classList.add('active');});document.getElementById(`tp-${socia}`).classList.add('active');},
 openScriptModal(socia,scriptId){document.getElementById('script-socia').value=socia;document.getElementById('script-id').value=scriptId||'';if(scriptId){const s=this.data.scripts.find(x=>x.id===scriptId);if(s){document.getElementById('modal-script-title').textContent='✏️ Editar Roteiro';document.getElementById('script-titulo').value=s.titulo;document.getElementById('script-conteudo').value=s.conteudo;document.getElementById('script-status').value=s.status||'gravar';}}else{document.getElementById('modal-script-title').textContent=socia==='jenifer'?'📝 Novo Roteiro — Jenifer':'📝 Novo Roteiro — Elizângela';document.getElementById('script-titulo').value='';document.getElementById('script-conteudo').value='';document.getElementById('script-status').value='gravar';}const btn=document.getElementById('script-submit-btn');if(btn)btn.style.background=socia==='jenifer'?'var(--jenifer-cor)':'var(--elizangela-cor)';this.openModal('modal-script');},
 renderScriptSelectors(){['jenifer','elizangela'].forEach(socia=>{const sel=document.getElementById(`script-select-${socia}`);if(!sel)return;const scripts=this.data.scripts.filter(s=>s.socia===socia&&s.status!=='publicado');const ideaScripts=this.data.ideas.filter(i=>i.frente===socia&&(i.destino||'roteiro')==='roteiro'&&(i.roteiro||'').trim().length>0&&i.status!=='publicado').map(i=>({id:`idea_${i.id}`,titulo:`[${this._statusLabel(i.status)}] ${i.titulo}`,conteudo:i.roteiro,socia}));const all=[...ideaScripts,...scripts];const label=socia==='jenifer'?'Jenifer':'Elizângela';sel.innerHTML=`<option value="">Selecione um roteiro de ${label}...</option>`;all.forEach(s=>{sel.innerHTML+=`<option value="${s.id}">${this._esc(s.titulo)}</option>`;});});},
-loadScript(id,socia){if(!id){document.getElementById(`tp-container-${socia}`).innerHTML=`<div class="teleprompter-empty"><p>📖 Selecione um roteiro</p></div>`;return;}let script;if(id.startsWith('idea_')){const ideaId=id.replace('idea_','');const idea=this.data.ideas.find(i=>i.id===ideaId);script=idea?{conteudo:idea.roteiro||idea.descricao||idea.titulo}:null;}else{script=this.data.scripts.find(s=>s.id===id);}if(!script)return;document.getElementById(`tp-container-${socia}`).innerHTML=`<div class="teleprompter-text" id="tp-text-${socia}" style="font-size:${this.tpState[socia].fontSize}rem;">${this._esc(script.conteudo)}</div>`;},
+loadScript(id,socia){const blocoGravado=document.getElementById(`tp-gravado-${socia}`);if(blocoGravado)blocoGravado.style.display='none';if(!id){document.getElementById(`tp-container-${socia}`).innerHTML=`<div class="teleprompter-empty"><p>📖 Selecione um roteiro de ${socia==='jenifer'?'Jenifer':'Elizângela'}</p></div>`;return;}let script;if(id.startsWith('idea_')){const ideaId=id.replace('idea_','');const idea=this.data.ideas.find(i=>i.id===ideaId);script=idea?{conteudo:idea.roteiro||idea.descricao||idea.titulo,ideaId}:null;}else{script=this.data.scripts.find(s=>s.id===id);}if(!script)return;this._tpCurrentId={[socia]:id};document.getElementById(`tp-container-${socia}`).innerHTML=`<div class="teleprompter-text" id="tp-text-${socia}" style="font-size:${this.tpState[socia].fontSize}rem;">${this._esc(script.conteudo)}</div>`;if(blocoGravado)blocoGravado.style.display='block';},
+marcarComoGravado(socia){const id=this._tpCurrentId?.[socia];if(!id){this.toast('⚠️ Selecione um roteiro primeiro');return;}if(id.startsWith('idea_')){const ideaId=id.replace('idea_','');const idea=this.data.ideas.find(i=>i.id===ideaId);if(idea){idea.status='editar';idea.dataGravacao=this.formatDate(new Date());this.save();this.toast('✅ Movido para ✂️ Em Edição!');const blocoGravado=document.getElementById(`tp-gravado-${socia}`);if(blocoGravado)blocoGravado.style.display='none';this.renderScriptSelectors();this.renderKanban();document.getElementById(`script-select-${socia}`).value='';document.getElementById(`tp-container-${socia}`).innerHTML=`<div class="teleprompter-empty"><p>📖 Selecione um roteiro</p></div>`;}}else{this.changeAvulsoStatus(id,'editar');const blocoGravado=document.getElementById(`tp-gravado-${socia}`);if(blocoGravado)blocoGravado.style.display='none';document.getElementById(`script-select-${socia}`).value='';document.getElementById(`tp-container-${socia}`).innerHTML=`<div class="teleprompter-empty"><p>📖 Selecione um roteiro</p></div>`;}},
 togglePlay(socia){const st=this.tpState[socia];const btn=document.getElementById(`play-pause-${socia}`);st.playing=!st.playing;if(st.playing){btn.textContent='⏸ Pausar';st.interval=setInterval(()=>{const w=document.getElementById(`tp-container-${socia}`);if(w)w.scrollTop+=st.speed*1.5;},50);}else{btn.textContent='▶ Play';clearInterval(st.interval);}},
 updateSpeed(v,socia){this.tpState[socia].speed=parseFloat(v);document.getElementById(`speed-value-${socia}`).textContent=`${parseFloat(v).toFixed(1)}x`;},
 changeFontSize(delta,socia){const st=this.tpState[socia];st.fontSize=Math.max(0.8,Math.min(4,st.fontSize+delta));const el=document.getElementById(`tp-text-${socia}`);if(el)el.style.fontSize=`${st.fontSize}rem`;},
